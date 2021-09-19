@@ -80,6 +80,12 @@
 		let weight = formData.weight || 0;
 		let age = formData.age || 0;
 
+		console.log("line1", formData);
+
+		if (formData.hasOwnProperty('meconium') && formData.meconium) {
+			retStr += "MECONIUM-STAINED ";
+		}
+
 		if (formData.hasOwnProperty("membrane")) {
 			if (formData.membrane) {
 				retStr += formData.membrane.toUpperCase();
@@ -227,28 +233,24 @@
 	};
 
 	const getValue = function (arr, name) {
-		let f = arr.find(function (obj) {
+		//get the value in an array of form objects {name: "" ,value: ""}
+		let ret = false;
+		
+		let found = arr.find(function (obj) {
 			return obj.name === name;
 		});
-		if (f && f.hasOwnProperty("value")) {
-			return f.value;
+
+		if (found && found.hasOwnProperty("value")) {
+			ret = found.value;
 		}
-		return f;
+
+		// did not find
+		return ret;
 	};
 
 	const setGestationalParams = function ($form) {
 		buildInputText("Gestation", [{name: "weeks", display: "Weeks"}, {name: "days", display: "Days"}]).appendTo($form);
 		buildInputText("Weight", [{name: "weight", display: "Weight (grams)"}]).appendTo($form);
-	};
-
-	const findName = function (obj, look) {
-		let retObj = obj.find(function (val) {
-			return val.name === look;
-		});
-		if (retObj) {
-			return retObj.value;
-		}
-		return "";
 	};
 
 	const copyFunction = function ($textArea) {
@@ -305,18 +307,20 @@
 
 				// build lines
 				console.log(resp);
-				let $header = buildHeader(findName(resp, "weeks") * 1, findName(resp, "days") * 1, findName(resp, "surgery"));
+				let $header = buildHeader(getValue(resp, "weeks") * 1, getValue(resp, "days") * 1, getValue(resp, "surgery"));
 				let $line1;
 				if (gests === gestationOptions[0]) {
 					$line1 = line1build({
-						weight: findName(resp, "weight") * 1,
-						age: findName(resp, "weeks") * 1,
+						weight: getValue(resp, "weight") * 1,
+						age: getValue(resp, "weeks") * 1,
+						meconium: getValue(resp, "mstaining") === "Present"
 					}, data);
 				} else {
 					$line1 = line1build({
-						weight: findName(resp, "weight") * 1,
-						age: findName(resp, "weeks") * 1,
-						membrane: findName(resp, "membrane"),
+						weight: getValue(resp, "weight") * 1,
+						age: getValue(resp, "weeks") * 1,
+						membrane: getValue(resp, "membrane"),
+						meconium: getValue(resp, "mstaining") === "Present"
 					}, data);
 				}
 
@@ -469,93 +473,7 @@
 			});
 			$optRow.appendTo($ret);
 
-			return; 
-
-		/*
-			//collapse label
-				if (item.collapsed) {
-					$optRow = buildCollapse($optRow, item);
-				} else if (item.input === "radio") {
-					if (!item.select) {
-						// make holder for radios
-						$optRow = $('<div>', {class: "form-check optBuild depth-" + depth})
-							.change(radioChange)
-							.appendTo($optRow);
-						$('<div>', {class: "opt" + depth, html: item.label}).appendTo($optRow);
-					} else {
-						let tid = randomID();
-						$('<input>', {
-							class: "form-check-input",
-							type: "radio",
-							label: item.label,
-							name: item.name,
-							id: tid
-						}).appendTo($optRow);
-						$("<label>", {
-							class: "form-check-label",
-							for: tid,
-							html: item.label
-						}).appendTo($optRow);
-					}
-				} else if (item.input === "check") {
-					if (!item.select) {
-						$optRow = $('<div>', {class: "form-check optBuild depth-" + depth})
-							.appendTo($optRow);
-						$('<div>', {class: "opt" + depth, html: item.label}).appendTo($optRow);
-					} else {
-						let tid = randomID();
-						$('<input>', {
-							class: "form-check-input depth-" + (depth - 1),
-							type: "checkbox",
-							label: item.label,
-							name: item.name,
-							id: tid
-						}).appendTo($optRow);
-						$("<label>", {
-							class: "form-check-label",
-							for: tid,
-							html: item.label
-						}).appendTo($optRow);
-					}
-				} else if (item.input === "switch") {
-					if (item.select) {
-						let $switch = $('<div>', {class: "form-check form-switch optBuild opt" + depth})
-							.appendTo($optRow);
-
-						let tid = randomID();
-						$('<input>', {
-							class: "form-check-input depth-" + (depth - 1),
-							type: "checkbox",
-							label: item.label,
-							name: item.name,
-							id: tid
-						}).appendTo($switch);
-						$("<label>", {
-							class: "form-check-label",
-							for: tid,
-							html: item.label
-						}).appendTo($switch);
-
-						$optRow = $('<div>', {
-							class: "form-check optBuild depth-" + depth,
-							style: "margin-left:2.5em;"
-						}).appendTo($optRow);
-					}
-				} else if (item.label && item.label.length) {
-					$('<div>', {class: "opt" + depth, html: item.label}).appendTo($optRow);
-				}
-
-				// add description
-				if (item.description && item.description.length) {
-					$('<p>', {html: item.description}).appendTo($optRow);
-				}
-
-				if (item.options && item.options.length) {
-					buildOptions(item.options, depth + 1).appendTo($optRow); 
-				}
-
-				// $optRow.append($('<p>', {height:15, text: "test text"}));
-		*/
+			return;
 		});
 		return $ret;
 	};
@@ -616,21 +534,25 @@
 		// add in other options area
 		let $otherOpts = $("<div>").appendTo($form);
 
-		//add in response area
+		//build response area
 		$('<hr>', {class: "col-sm-12"}).appendTo($main);
-		let $response = $('<div>', {style: 'white-space: pre-wrap;font-weight: bold;', id: "responseText"}).appendTo($main);
+		let $response = $('<div>', {style: 'white-space: pre-wrap;font-weight: bold;', id: "responseText"})
+
+		// copy button
+		$("<button>", {class: "btn btn-success", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
+			$('<div>').appendTo($main)
+		);
+		$('<hr>', {class: "col-sm-12"}).appendTo($main);
+
+		//add in response area
+		$response.appendTo($main);
 
 		// set up response to changes
 		let respFunc = respondToChanges(data, $form, $otherOpts, $response);
 		$form.change(respFunc);
 		$form.keyup(respFunc);
 		respFunc();
-
-		// copy button
-		$('<hr>', {class: "col-sm-12"}).appendTo($main);
-		$("<button>", {class: "btn btn-primary", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
-			$('<div>').appendTo($main)
-		);
+		
 	};
 
 	fetch("./page.json")
