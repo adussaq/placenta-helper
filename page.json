@@ -2383,26 +2383,26 @@
 							"options":[
 								
 							]
-						},
+						}
+					]
+				}, 
+				{
+					"label":"Comment",
+					"name":"b846a359-b6cb-4faa-8c06-0320e81558a4",
+					"description":"",
+					"input":false,
+					"select":false,
+					"collapsed":false,
+					"options":[
 						{
-							"label":"Comment",
+							"label":"Amniotic fluid infection associated with extreme preterm delivery in mid-gestation raises concern for cervical incompetence. Clinical correlation may be helpful in this regard.",
 							"name":"b846a359-b6cb-4faa-8c06-0320e81558a4",
 							"description":"",
-							"input":false,
-							"select":false,
+							"input":"checkbox",
+							"select":true,
 							"collapsed":false,
 							"options":[
-								{
-									"label":"Amniotic fluid infection associated with extreme preterm delivery in mid-gestation raises concern for cervical incompetence. Clinical correlation may be helpful in this regard.",
-									"name":"b846a359-b6cb-4faa-8c06-0320e81558a4",
-									"description":"",
-									"input":"checkbox",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								}
+								
 							]
 						}
 					]
