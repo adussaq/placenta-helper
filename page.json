@@ -2385,14 +2385,24 @@
 							]
 						},
 						{
-							"label":"Comment: Amniotic fluid infection associated with extreme preterm delivery in mid-gestation raises concern for cervical incompetence. Clinical correlation may be helpful in this regard.",
+							"label":"Comment",
 							"name":"b846a359-b6cb-4faa-8c06-0320e81558a4",
 							"description":"",
-							"input":"checkbox",
-							"select":true,
+							"input":false,
+							"select":false,
 							"collapsed":false,
 							"options":[
-								
+								{
+									"label":"Amniotic fluid infection associated with extreme preterm delivery in mid-gestation raises concern for cervical incompetence. Clinical correlation may be helpful in this regard.",
+									"name":"b846a359-b6cb-4faa-8c06-0320e81558a4",
+									"description":"",
+									"input":"checkbox",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								}
 							]
 						}
 					]
@@ -2876,50 +2886,39 @@
 									]
 								}
 							]
-						},
-						{
-							"label":"Comment",
-							"name":"a333a1a7-193a-4f3f-bb04-04e3e0c57c74",
-							"description":"",
-							"input":false,
-							"select":false,
-							"collapsed":false,
-							"options":[
-								{
-									"label":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
-									"name":"7e690ef6-a29c-4322-a003-b4215680e9d1",
-									"description":"",
-									"input":"checkbox",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								},
-								{
-									"label":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
-									"name":"7968d667-aa4b-4782-ae38-cd4d752bf92e",
-									"description":"",
-									"input":"checkbox",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								}
-							]
 						}
 					]
 				},
 				{
-					"label":"",
-					"name":"aa63665d-64cb-43f2-a3e1-8d31af719220",
+					"label":"Comment",
+					"name":"a333a1a7-193a-4f3f-bb04-04e3e0c57c74",
 					"description":"",
 					"input":false,
 					"select":false,
 					"collapsed":false,
 					"options":[
-						
+						{
+							"label":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
+							"name":"7e690ef6-a29c-4322-a003-b4215680e9d1",
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
+							"label":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
+							"name":"7968d667-aa4b-4782-ae38-cd4d752bf92e",
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						}
 					]
 				}
 			]
