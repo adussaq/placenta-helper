@@ -156,7 +156,7 @@
 			}
 			retStr += trimesterStr + " TRIMESTER PLACENTA, " + weightStr + " GRAMS " + "([#] PERCENTILE FOR GESTATIONAL AGE)";
 		}
-		return retStr;
+		return retStr + "\n";
 	};
 
 	const buildHeader = function (age, days, type) {
@@ -265,6 +265,328 @@
 		};
 	};
 
+	const filterUUIDNames = function (obj) {
+		return obj.name.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+	};
+
+	let serializeData = function (data) {
+		// copy it
+		let returnArr = JSON.parse(JSON.stringify(data.options));
+		let movementArr = JSON.parse(JSON.stringify(data.options));
+
+		// define recursive function
+		const returnOptions = function (arr) {
+			let miniRet = arr;
+			arr.forEach(function (obj) {
+				if (obj.hasOwnProperty("options") && obj.options.length > 0) {
+					miniRet = miniRet.concat(returnOptions(obj.options));
+				}
+			});
+			// console.log(miniRet, arr);
+			return miniRet;
+		};
+
+		//start recurive loop
+		returnArr = returnArr.concat(returnOptions(movementArr));
+
+		//done once redefine this function
+		serializeData = function () {
+			return returnArr;
+		}
+
+		//return the arr for the first time
+		return returnArr;
+	};
+
+	const findObj = function (id) {
+		return function (elem) {
+			return elem.name === id;
+		};
+	};
+
+	const getCommands = function (data, id) {
+
+		// find that id
+		let obj = data.find(findObj(id));
+		let cmdArr = [];
+
+		// get the commands
+		if (obj.hasOwnProperty("report") && obj.report.length > 0) {
+			cmdArr = obj.report.map(function (cmd) {
+				let retVal = cmd;
+				if (cmd.type === "build") {
+					retVal = {
+						type: "build",
+						value: cmd.value,
+						cmds: getCommands(data, cmd.value)
+					}
+				}
+				return retVal;
+			});
+		}
+
+		return cmdArr;
+	};
+
+	const orderCMDs = function (commands) {
+		return commands.map(function (cmds) {
+			let end = [];
+			let out = [];
+			cmds.forEach(function (cmd, i) {
+				if (cmd.hasOwnProperty("order") && cmd.order === "last") {
+					end.push(cmd);
+				} else {
+					out.push(cmd)
+				}
+			});
+			return out.concat(end);
+		});
+	};
+
+	const linearize = function (arr) {
+		let out = [];
+		arr.forEach(function (item) {
+			if (Array.isArray(item)) {
+				out = out.concat(linearize(item));
+			} else {
+				out.push(item);
+			}
+		});
+		return out;
+	};
+
+	const executeCommands = function (arr) {
+		let currentIndent = 1;
+		let str = "";
+		arr.forEach(function (cmd) {
+			switch (cmd.type) {
+				case "text":
+					for (let i = 0; i < currentIndent; i += 1) {
+						str += "&#9;";
+					}
+					str += "--&#9;" + cmd.value + "\n";
+					break;
+				case "format":
+					switch (cmd.value) {
+						case "indent":
+							currentIndent += 1;
+							break;
+						case "outdent":
+							currentIndent -= 1;
+							break;
+					}
+					break;
+				case "replace":
+					let regex = new RegExp(cmd.value.replace.replace(/([^\w\s])/ig, "\\$1"));
+					str = str.replace(regex, cmd.value.replaceStr);
+					break;
+			}
+		});
+		return str;
+	};
+
+	const flattenOne = function (arr) {
+		let retArr = [];
+		arr.forEach(function (row) {
+			if (Array.isArray(row)) {
+				retArr = retArr.concat(row);
+			} else {
+				retArr.push(row);
+			}
+			retArr.push({"spec": "end"});
+		});
+		return retArr;
+	};
+
+	const cmdRecurse = function (list) {
+		let outList = [];
+		let found = {};
+		let current;
+		let lasts = {};
+		let recurse = 0;
+
+		console.log("in", JSON.parse(JSON.stringify(list)));
+
+		//merge lists
+		list.forEach(function (item) {
+			if(item.type === "build") {
+				if (!found.hasOwnProperty(item.value)) {
+					outList.push(item);
+					found[item.value] = 1;
+				} else {
+					outList.pop();
+				}
+			} else {
+				outList.push(item);
+			}
+		});
+
+		//flatten on cmds
+		for (let i = 0; i < outList.length; i += 1) {
+			if(outList[i].type === "build") {
+				console.log(outList[i]);
+				let args = [i, 1].concat(outList[i].cmds);
+				i += outList[i].cmds.length - 1;
+				Array.prototype.splice.apply(outList, args);
+				recurse = 1;
+			}
+		}
+
+		if (recurse) {
+			outList = cmdRecurse(outList);
+		}
+
+		console.log("out", JSON.parse(JSON.stringify(outList)));
+		return outList;
+
+		let target = "main";
+		let targetPush = function (val) {
+			if (target === "main") {
+				if (Array.isArray(val)) {
+					retObj.order = retObj.order.concat(val);
+				} else {
+					retObj.order.push(val);
+				}
+			} else {
+				if (Array.isArray(val)) {
+					retObj.builds[target] = retObj.builds[target].concat(val);
+				} else {
+					retObj.builds[target].push(val);
+				}
+			}
+		};
+		
+		list.forEach(function (cmd) {
+			if (cmd.type === "build") {
+				// if this is not in builds
+				if (!retObj.builds.hasOwnProperty(cmd.value)) {
+					retObj.builds[cmd.value] = [];
+					targetPush({spec: cmd.value});
+
+					//reassign target
+					target = cmd.value;
+
+					// recurse here again
+					if (!BUILT.hasOwnProperty(cmd.value)) {
+						let conv = cmdRecurse(cmd.cmds);
+
+						// add keys to builds
+						// console.log("Adding:\n", JSON.parse(JSON.stringify(conv)), "\nTo:\n", JSON.parse(JSON.stringify(retObj)));
+						Object.keys(conv.builds).forEach(function (id) {
+							if(retObj.builds.hasOwnProperty(id)) {
+								retObj.builds[id] = retObj.builds[id].concat(conv.builds[id]);
+							} else {
+								retObj.builds[id] = conv.builds[id];
+							}
+						});
+
+						// add list to orders
+						targetPush(conv.order);
+
+						BUILT[cmd.value] = 1;
+					}
+				}
+			} else {
+				//simple just add to list
+				targetPush(cmd);
+			}
+		});
+
+		return retObj;
+	};
+
+	const clearDups = function (id, arr) {
+		let out = [];
+		arr.forEach(function (row) {
+			if(!row.hasOwnProperty('spec') && row.spec !== id) {
+				out.push(row);
+			}
+		});
+		return out;
+	};
+
+	const collapseCommands = function (commands) {
+		// let builds = {};
+		// let buildOrder = [];
+
+		// console.log(cmdRecurse(commands.map(function (cmd) {
+		// 	return {type: "build", name: "0", cmds: cmd};
+		// })));
+
+		let outcommands = cmdRecurse(flattenOne(commands));
+
+		// move through to move down 'last commands'
+		let moveDown = [];
+		for (let i = 0; i < outcommands.length; i += 1) {
+			if (outcommands[i].hasOwnProperty('order') && outcommands[i].order === "last") {
+				moveDown = moveDown.concat(outcommands.splice(i, 1));
+				i -= 1;
+			} else if (outcommands[i].hasOwnProperty('spec') && outcommands[i].spec === "end") {
+				let cmdArr = [i, 1].concat(moveDown);
+				Array.prototype.splice.apply(outcommands, cmdArr);
+				i += moveDown.length - 1;
+				moveDown = [];
+			}
+		}
+
+
+		// commands.forEach(function (cmdList) {
+		// 	// recurse here 
+		// 	let conv = cmdRecurse(cmdList);
+
+		// 	// add keys to builds
+		// 	console.log(
+		// 		"Adding:\n",
+		// 		JSON.parse(JSON.stringify(conv)),
+		// 		"\nTo:\n",
+		// 		JSON.parse(JSON.stringify({builds: builds, order: buildOrder}))
+		// 	);
+
+		// 	Object.keys(conv.builds).forEach(function (id) {
+		// 		if(builds.hasOwnProperty(id)) {
+		// 			buildOrder = clearDups(id, buildOrder);
+		// 			builds[id] = builds[id].concat(conv.builds[id]);
+		// 		} else {
+		// 			builds[id] = conv.builds[id];
+		// 		}
+		// 	});
+
+		// 	// add list to orders
+		// 	buildOrder = buildOrder.concat(conv.order);
+		// });
+
+		// console.log(commands, builds, buildOrder);
+
+		console.log(outcommands);
+
+		return outcommands;
+	};
+
+	const buildSpecFindings = function (data, formObj) {
+		let findData = serializeData(data);
+		let commands = [];
+
+		console.log(findData, formObj);
+
+		//get command list
+		formObj.forEach(function (idobj) {
+			commands.push(getCommands(findData, idobj.name));
+		});
+
+		// flatten command list
+		let commandsCollapsed = collapseCommands(commands); // recurrsive
+		// return;
+		// console.log(commandsCollapsed, commands, "collapsed");
+		// commandsCollapsed = orderCMDs(commandsCollapsed);
+		// console.log(commandsCollapsed, "ordered");
+		// commandsCollapsed = linearize(commandsCollapsed);
+		// console.log(commandsCollapsed, "linerized");
+
+		// make the text
+		return executeCommands(commandsCollapsed);
+		
+	};
+
 	const respondToChanges = function (data, $form, $addOpts, $response) {
 		let last = [];
 		let change = function () {
@@ -324,9 +646,12 @@
 					}, data);
 				}
 
-				//append lines
+				//append starter lines
 				$response.append($header);
 				$response.append($line1);
+
+				//build lines for specFindings
+				$response.append(buildSpecFindings(data, resp.filter(filterUUIDNames)));
 			}
 		};
 		return change;

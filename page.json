@@ -2145,6 +2145,11 @@
 	"options":[
 		{
 			"label":"Amniotic Fluid Infection Sequence",
+			"report": [
+				{"type": "text", "value": "INFLAMMATION CHARACTERISTIC OF AMNIOTIC FLUID INFECTION"},
+				{"type": "format", "value": "indent"},
+				{"type": "format", "value": "outdent", "order": "last"}
+			],
 			"name":"8b822665-f9c9-435e-afff-0cc060f97300",
 			"input":false,
 			"collapsed":true,
@@ -2153,6 +2158,10 @@
 			"options":[
 				{
 					"label":"Maternal Inflammatory Response",
+					"report": [
+						{"type": "build", "value": "8b822665-f9c9-435e-afff-0cc060f97300"},
+						{"type": "text", "value": "MATERNAL RESPONSE STAGE [#STAGE#], GRADE [#GRADE#]"}
+					],
 					"name":"e91bb146-84b4-4405-a1d9-d0d1f37b553d",
 					"description":"",
 					"input":false,
@@ -2180,6 +2189,10 @@
 							"options":[
 								{
 									"label":"(1) Early",
+									"report": [
+										{"type": "build", "value": "e91bb146-84b4-4405-a1d9-d0d1f37b553d"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "1 (EARLY, ACUTE SUBCHORIONITIS OR CHORIONITIS)"}}
+									],
 									"name":"031213bf-18b2-47e5-a980-c92429712f97",
 									"description":"<b>Acute subchorionitis or chorionitis:</b> PMN in subchorionic fibrin and/or membrane trophoblast",
 									"input":"radio",
@@ -2191,6 +2204,10 @@
 								},
 								{
 									"label":"(2) Intermediate",
+									"report": [
+										{"type": "build", "value": "e91bb146-84b4-4405-a1d9-d0d1f37b553d"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "2 (INTERMEDIATE, ACUTE CHORIOAMNIONITIS)"}}
+									],
 									"name":"7a562d51-fb19-422d-b13f-5b38d2934c48",
 									"description":"<b>Acute chorioamnionitis:</b> Diffuse-patchy PMN in the fibrous chorion and/or amnion",
 									"input":"radio",
@@ -2202,6 +2219,10 @@
 								},
 								{
 									"label":"(3) Advanced",
+									"report": [
+										{"type": "build", "value": "e91bb146-84b4-4405-a1d9-d0d1f37b553d"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "3 (ADVANCED, NECROTIZING CHORIOAMNIONITIS)"}}
+									],
 									"name":"3569cdc9-e5d8-4ec1-acfe-437c7f2713d4",
 									"description":"<b>Necrotizing chorioamnionitis:</b> PMN karyorrhexis, amniocyte necrosis, and/or amnion basement membrane thickening/hypereosinophilia",
 									"input":"radio",
@@ -2223,6 +2244,10 @@
 							"options":[
 								{
 									"label":"(1-2) Mild-Moderate",
+									"report": [
+										{"type": "build", "value": "e91bb146-84b4-4405-a1d9-d0d1f37b553d"},
+										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "1 (MILD-MODERATE)"}}
+									],
 									"name":"dd989b25-5556-4e63-9286-7690b956817c",
 									"description":"<b>No special terminology required:</b> Not severe as defined below",
 									"input":"radio",
@@ -2234,6 +2259,10 @@
 								},
 								{
 									"label":"(3) Severe",
+									"report": [
+										{"type": "build", "value": "e91bb146-84b4-4405-a1d9-d0d1f37b553d"},
+										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "2 (SEVERE)"}}
+									],
 									"name":"748c659c-ea45-42c0-8f01-fb7717b70746",
 									"description":"<b>Severe acute chorioamnionitis or with subchorionic microabscesses:</b> Confluemnt PMN (≥10 × 20 cells in extent) between chorion and decidua; ≥3 isolated foci or continuous band</b> Diffuse-patchy PMN in the fibrous chorion and/or amnion",
 									"input":"radio",
@@ -2249,6 +2278,10 @@
 				},
 				{
 					"label":"Fetal Inflammatory Response",
+					"report": [
+						{"type": "build", "value": "8b822665-f9c9-435e-afff-0cc060f97300"},
+						{"type": "text", "value": "FETAL RESPONSE STAGE [#STAGE#], GRADE [#GRADE#]"}
+					],
 					"name":"fd5c5e43-c394-495f-99dc-f28d02035d1c",
 					"description":"",
 					"input":false,
@@ -2276,6 +2309,10 @@
 							"options":[
 								{
 									"label":"(1) Early",
+									"report": [
+										{"type": "build", "value": "fd5c5e43-c394-495f-99dc-f28d02035d1c"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "1 (EARLY, CHORIONIC VASCULITIS OR UMBILICAL PHLEBITIS)"}}
+									],
 									"name":"8d1bbb1d-435c-4612-9777-391758591e11",
 									"description":"<b>With chorionic vasculitis or umbilical phlebitis:</b> Intramural PMN-chorionic vessels and/or umbilical vein",
 									"input":"radio",
@@ -2287,6 +2324,10 @@
 								},
 								{
 									"label":"(2) Intermediate",
+									"report": [
+										{"type": "build", "value": "fd5c5e43-c394-495f-99dc-f28d02035d1c"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "2 (INTERMEDIATE, UMBILICAL VASCULITIS)"}}
+									],
 									"name":"5a89b6e1-6317-4b27-a93b-93b8728c6039",
 									"description":"<b>With umbilical vasculitis (one or two arteries ± umbilical vein) or umbilical panvasculitis (all vessels):</b> Intramural PMN-umbilical artery or arteries (± umbilical vein)",
 									"input":"radio",
@@ -2298,6 +2339,10 @@
 								},
 								{
 									"label":"(3) Advanced",
+									"report": [
+										{"type": "build", "value": "fd5c5e43-c394-495f-99dc-f28d02035d1c"},
+										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "3 (ADVANCED, NECROTIZING FUNISITIS OR CONCENTRIC UMBILICAL PERIVASCULITIS)"}}
+									],
 									"name":"acd227c3-a0b9-4554-b733-421389103b74",
 									"description":"<b>With (subacute) necrotizing funisitis or with concentric umbilical perivasculitis:</b> PMN ± associated debris in concentric bands-rings-halos around one or more umbilical vessels",
 									"input":"radio",
@@ -2319,6 +2364,10 @@
 							"options":[
 								{
 									"label":"(1-2) Mild-Moderate",
+									"report": [
+										{"type": "build", "value": "fd5c5e43-c394-495f-99dc-f28d02035d1c"},
+										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "1 (MILD-MODERATE)"}}
+									],
 									"name":"f06b3d2c-04c3-414c-97ab-fec848995ea5",
 									"description":"<b>No special terminology required:</b> Not severe as defined below",
 									"input":"radio",
@@ -2330,6 +2379,10 @@
 								},
 								{
 									"label":"(3) Severe",
+									"report": [
+										{"type": "build", "value": "fd5c5e43-c394-495f-99dc-f28d02035d1c"},
+										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "2 (SEVERE)"}}
+									],
 									"name":"7fdafe26-e978-4e03-90c5-c2755966f86a",
 									"description":"<b>With a severe fetal inflammatory response or with intense chorionic (umbilical) vasculitis:</b> Confluemnt PMN (≥10 × 20 cells in extent) between chorion and decidua; ≥3 isolated foci or continuous band</b> Near confluent intramural PMN in chorionic and/or umbilical vessels with attenuation/degeneration of vascular smooth muscle cells",
 									"input":"radio",
@@ -2759,7 +2812,7 @@
 							]
 						},
 						{
-							"label":"Pathcy villous edema",
+							"label":"Patchy villous edema",
 							"name":"2186a958-e31a-489c-adf9-e453242619e8",
 							"description":"",
 							"input":"checkbox",
@@ -2772,7 +2825,7 @@
 					]
 				},
 				{
-					"label":"Findings of segmental complex fetal vascular malperfusion",
+					"label":"Findings of segmental complete fetal vascular malperfusion",
 					"name":"514912e1-b7ae-4941-8f0e-262f8e13bb99",
 					"description":"",
 					"input":false,
