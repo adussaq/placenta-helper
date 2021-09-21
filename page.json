@@ -2194,7 +2194,7 @@
 										{"type": "replace", "value": {"replace": "[#STAGE#]", "replaceStr": "1 (EARLY, ACUTE SUBCHORIONITIS OR CHORIONITIS)"}}
 									],
 									"name":"031213bf-18b2-47e5-a980-c92429712f97",
-									"description":"<b>Acute subchorionitis or chorionitis:</b> PMN in subchorionic fibrin and/or membrane trophoblast",
+									"description":"<b>Acute subchorionitis or chorionitis:</b> Neutrophils in subchorionic fibrin and/or membrane trophoblast",
 									"input":"radio",
 									"select":true,
 									"collapsed":false,
@@ -2595,8 +2595,10 @@
 							"label":"Parenchymal changes consistent with ischemia",
 							"report":[
 								{"type": "text", "value": "PARENCHYMAL CHANGES CONSISTENT WITH ISCHEMIA"},
-								{"type": "format", "value": "indent"},
-								{"type": "format", "value": "outdent", "order": "last"}
+								{"type": "format", "value": "indent"}
+							],
+							"link" : [
+								{"type": "equal", "value": "021430c3-c866-48f4-bc1a-0e9384b129a5"}
 							],
 							"name":"9a5af325-7704-47cd-8683-f9db327a4bd6",
 							"description":"",
@@ -2661,6 +2663,19 @@
 									]
 								}
 							]
+						},
+						{
+							"label": "tobehidden",
+							"report": [
+								{"type": "format", "value": "outdent"}
+							],
+							"name": "021430c3-c866-48f4-bc1a-0e9384b129a5",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"hidden": true,
+							"collapsed": false,
+							"options": []
 						}
 					]
 				},
@@ -2741,36 +2756,6 @@
 							]
 						},
 						{
-							"label":"Fucrate instertion",
-							"report":[
-								{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
-								{"type": "text", "value": "FURCATE INSERTION"}
-							],
-							"name":"642c321e-880b-48cc-912a-b62196ce3c1b",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						},
-						{
-							"label":"Marginal/membranous cord insertion",
-							"report":[
-								{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
-								{"type": "text", "value": "MARGINAL/MEMBRANOUS CORD INSERTION"}
-							],
-							"name":"6896499c-9026-42fe-b9ab-aecc11405a44",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						},
-						{
 							"label":"Narrow umbilical cord insertion (<0.8 cm)",
 							"report":[
 								{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
@@ -2829,6 +2814,74 @@
 							"options":[
 								
 							]
+						},
+						{
+							"label": "Cord insertion",
+							"report": [],
+							"name": "",
+							"description": "",
+							"input": false,
+							"select": false,
+							"hidden": false,
+							"collapsed": false,
+							"options": [
+								{
+									"label":"Clear",
+									"name":"c0ccddd9-7387-4dd2-beb2-cc3d6d51ba80",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Furcate instertion",
+									"report":[
+										{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
+										{"type": "text", "value": "FURCATE INSERTION"}
+									],
+									"name":"642c321e-880b-48cc-912a-b62196ce3c1b",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Marginal cord insertion",
+									"report":[
+										{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
+										{"type": "text", "value": "MARGINAL CORD INSERTION"}
+									],
+									"name":"6896499c-9026-42fe-b9ab-aecc11405a44",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Velamentous cord insertion",
+									"report":[
+										{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
+										{"type": "text", "value": "VELAMENTOUS CORD INSERTION"}
+									],
+									"name":"32b8b838-4a14-4334-b065-2703de7b2429",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								}
+							]
 						}
 					]
 				},
@@ -2836,12 +2889,14 @@
 					"label":"Findings of global partial fetal vascular malperfusion",
 					"report": [
 						{"type": "text", "value": "FINDINGS OF GLOBAL PARTIAL FETAL VASCULAR MALPERFUSION"},
-						{"type": "format", "value": "indent"},
-						{"type": "format", "value": "outdent", "order": "last"}
+						{"type": "format", "value": "indent"}
 					],
 					"name":"e5fcc79a-600d-41e1-a9be-e2a9e03130e1",
 					"description":"",
 					"input":"switch",
+					"link": [
+						{"type": "equal", "value": "a070a99a-4287-45ed-9b2a-45ff2257d825"}
+					],
 					"select":true,
 					"collapsed":false,
 					"options":[
@@ -2930,6 +2985,19 @@
 							]
 						}
 					]
+				},
+				{
+					"label": "tobehidden",
+					"report": [
+						{"type": "format", "value": "outdent"}
+					],
+					"name": "a070a99a-4287-45ed-9b2a-45ff2257d825",
+					"description": "",
+					"input": "checkbox",
+					"select": true,
+					"hidden": true,
+					"collapsed": false,
+					"options": []
 				},
 				{
 					"label":"Findings of segmental complete fetal vascular malperfusion",
@@ -3190,6 +3258,10 @@
 					"options":[
 						{
 							"label":"Low Grade",
+							"report": [
+								{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
+								{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "LOW GRADE"}}
+							],
 							"name":"0e335fc4-1aa7-4a9e-bee6-e84e7d95bcf0",
 							"description":"Low grade is defined as fewer than 10 contiguous villi affected by vilitis in any give foci.",
 							"input":false,
@@ -3197,10 +3269,24 @@
 							"collapsed":false,
 							"options":[
 								{
+									"label": "tobehidden - NONE",
+									"name": "bae57336-b46e-4fb9-999e-829788ee0e66",
+									"description": "",
+									"input": "radio",
+									"select": true,
+									"hidden": true,
+									"collapsed": false,
+									"options": []
+								},
+								{
 									"label":"Ungradeable",
 									"report": [
 										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
 										{"type": "replace", "value": {"replace": "[#GRADE#], [#FOCALITY#]", "replaceStr": "UNGRADEABLE - POSSIBLE LOW GRADE"}}
+									],
+									"link" : [
+										{"type": "on", "value": "c6798bb6-166d-4ee8-bb7c-376cae99b5c0"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
 									],
 									"name":"03a79313-4686-4815-9fdf-cdef782ffc9d",
 									"description":"Only one focus of vilitis.",
@@ -3214,9 +3300,12 @@
 								{
 									"label":"Focal",
 									"report": [
-										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
-										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "LOW GRADE"}},
+										{"type": "build", "value": "0e335fc4-1aa7-4a9e-bee6-e84e7d95bcf0"},
 										{"type": "replace", "value": {"replace": "[#FOCALITY#]", "replaceStr": "FOCAL"}}
+									],
+									"link" : [
+										{"type": "on", "value": "c6798bb6-166d-4ee8-bb7c-376cae99b5c0"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
 									],
 									"name":"5151c5c1-b568-4da8-b21a-e4ed9045aefb",
 									"description":"Vilitis present in at least 2 foci on 1 slide.",
@@ -3230,9 +3319,12 @@
 								{
 									"label":"Multifocal",
 									"report": [
-										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
-										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "LOW GRADE"}},
+										{"type": "build", "value": "0e335fc4-1aa7-4a9e-bee6-e84e7d95bcf0"},
 										{"type": "replace", "value": {"replace": "[#FOCALITY#]", "replaceStr": "MULTIFOCAL"}}
+									],
+									"link" : [
+										{"type": "on", "value": "c6798bb6-166d-4ee8-bb7c-376cae99b5c0"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
 									],
 									"name":"304f9908-c8d8-4843-82a9-60c6db39dc24",
 									"description":"Vilitis present on 2 slides.",
@@ -3248,16 +3340,34 @@
 						{
 							"label":"High Grade",
 							"name":"0a4b096c-4085-4bed-8817-3dc1433eb699",
+							"report": [
+								{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
+								{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "HIGH GRADE"}}
+							],
 							"description":"High grade is defined as any focus of villitis affecting more than 10 contiguous villi.",
 							"input":false,
 							"select":false,
 							"collapsed":false,
 							"options":[
 								{
+									"label": "tobehidden - NONE",
+									"name": "c6798bb6-166d-4ee8-bb7c-376cae99b5c0",
+									"description": "",
+									"input": "radio",
+									"select": true,
+									"hidden": true,
+									"collapsed": false,
+									"options": []
+								},
+								{
 									"label":"Ungradeable",
 									"report": [
 										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
 										{"type": "replace", "value": {"replace": "[#GRADE#], [#FOCALITY#]", "replaceStr": "UNGRADEABLE - POSSIBLE LOW GRADE"}}
+									],
+									"link" : [
+										{"type": "on", "value": "bae57336-b46e-4fb9-999e-829788ee0e66"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
 									],
 									"name":"23ad9a1b-a22b-43f9-b402-9687a7c43eee",
 									"description":"Only one focus of vilitis.",
@@ -3271,10 +3381,13 @@
 								{
 									"label":"Patchy",
 									"name":"02fc6d04-7e69-4bd5-a9a3-cc6528be4fcd",
+									"link" : [
+										{"type": "on", "value": "bae57336-b46e-4fb9-999e-829788ee0e66"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
+									],
 									"report": [
-										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
-										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "HIGH GRADE"}},
-										{"type": "replace", "value": {"replace": "[#FOCALITY#]", "replaceStr": "FOCAL"}}
+										{"type": "build", "value": "0a4b096c-4085-4bed-8817-3dc1433eb699"},
+										{"type": "replace", "value": {"replace": "[#FOCALITY#]", "replaceStr": "PATCHY"}}
 									],
 									"description":"Vilitis present on 2 slides.",
 									"input":"radio",
@@ -3287,11 +3400,14 @@
 								{
 									"label":"Multifocal",
 									"report": [
-										{"type": "build", "value": "acf0aac0-632f-4a39-9b7e-fbb81299f480"},
-										{"type": "replace", "value": {"replace": "[#GRADE#]", "replaceStr": "HIGH GRADE"}},
+										{"type": "build", "value": "0a4b096c-4085-4bed-8817-3dc1433eb699"},
 										{"type": "replace", "value": {"replace": "[#FOCALITY#]", "replaceStr": "MULTIFOCAL"}}
 									],
 									"name":"d8f27665-c8b7-4915-b791-d30cc97ca9db",
+									"link" : [
+										{"type": "on", "value": "bae57336-b46e-4fb9-999e-829788ee0e66"},
+										{"type": "off", "value": "c294cead-1a07-429d-939c-1696f158b258"}
+									],
 									"description":"Greater than 30% of all distal villi involved by vilitis.",
 									"input":"radio",
 									"select":true,

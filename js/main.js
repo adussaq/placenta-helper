@@ -312,10 +312,12 @@
 
 		// get the commands
 		if (obj.hasOwnProperty("report") && obj.report.length > 0) {
-			cmdArr = obj.report.map(function (cmd) {
+			cmdArr = obj.report.map(function (cmd, i) {
 				let retVal = cmd;
+				// cmd.from = id + "--" + i;
 				if (cmd.type === "build") {
 					retVal = {
+						// from: id,
 						type: "build",
 						value: cmd.value,
 						cmds: getCommands(data, cmd.value)
@@ -402,106 +404,34 @@
 			} else {
 				retArr.push(row);
 			}
-			retArr.push({"spec": "end"});
 		});
 		return retArr;
 	};
 
-	const cmdRecurse = function (list) {
-		let outList = [];
-		let found = {};
-		let current;
-		let lasts = {};
-		let recurse = 0;
-
-		console.log("in", JSON.parse(JSON.stringify(list)));
-
-		//merge lists
-		list.forEach(function (item) {
-			if(item.type === "build") {
-				if (!found.hasOwnProperty(item.value)) {
-					outList.push(item);
-					found[item.value] = 1;
-				} else {
-					outList.pop();
-				}
-			} else {
-				outList.push(item);
-			}
-		});
-
-		//flatten on cmds
-		for (let i = 0; i < outList.length; i += 1) {
-			if(outList[i].type === "build") {
-				console.log(outList[i]);
-				let args = [i, 1].concat(outList[i].cmds);
-				i += outList[i].cmds.length - 1;
-				Array.prototype.splice.apply(outList, args);
-				recurse = 1;
-			}
-		}
-
-		if (recurse) {
-			outList = cmdRecurse(outList);
-		}
-
-		console.log("out", JSON.parse(JSON.stringify(outList)));
-		return outList;
-
-		let target = "main";
-		let targetPush = function (val) {
-			if (target === "main") {
-				if (Array.isArray(val)) {
-					retObj.order = retObj.order.concat(val);
-				} else {
-					retObj.order.push(val);
-				}
-			} else {
-				if (Array.isArray(val)) {
-					retObj.builds[target] = retObj.builds[target].concat(val);
-				} else {
-					retObj.builds[target].push(val);
-				}
-			}
+	const cmdRecurse = function (list, builds, key) {
+		//traverse list for builds
+		builds = builds || {
+			'start': []
 		};
-		
-		list.forEach(function (cmd) {
-			if (cmd.type === "build") {
-				// if this is not in builds
-				if (!retObj.builds.hasOwnProperty(cmd.value)) {
-					retObj.builds[cmd.value] = [];
-					targetPush({spec: cmd.value});
+		key = key || 'start';
 
-					//reassign target
-					target = cmd.value;
-
-					// recurse here again
-					if (!BUILT.hasOwnProperty(cmd.value)) {
-						let conv = cmdRecurse(cmd.cmds);
-
-						// add keys to builds
-						// console.log("Adding:\n", JSON.parse(JSON.stringify(conv)), "\nTo:\n", JSON.parse(JSON.stringify(retObj)));
-						Object.keys(conv.builds).forEach(function (id) {
-							if(retObj.builds.hasOwnProperty(id)) {
-								retObj.builds[id] = retObj.builds[id].concat(conv.builds[id]);
-							} else {
-								retObj.builds[id] = conv.builds[id];
-							}
-						});
-
-						// add list to orders
-						targetPush(conv.order);
-
-						BUILT[cmd.value] = 1;
-					}
+		list.forEach(function (item) {
+			if (item.type === "build") {
+				//propogate builds if it does not already exist
+				if (!builds.hasOwnProperty(item.value)) {
+					builds[key].push(item);
+					builds[item.value] = [];
+					cmdRecurse(item.cmds, builds, item.value);
 				}
+
+				//add remaining builds in the correct list
+				key = item.value;
 			} else {
-				//simple just add to list
-				targetPush(cmd);
+				builds[key].push(item);
 			}
 		});
 
-		return retObj;
+		return builds;
 	};
 
 	const clearDups = function (id, arr) {
@@ -522,53 +452,59 @@
 		// 	return {type: "build", name: "0", cmds: cmd};
 		// })));
 
-		let outcommands = cmdRecurse(flattenOne(commands));
+		console.log("start collapse", commands);
 
-		// move through to move down 'last commands'
-		let moveDown = [];
-		for (let i = 0; i < outcommands.length; i += 1) {
-			if (outcommands[i].hasOwnProperty('order') && outcommands[i].order === "last") {
-				moveDown = moveDown.concat(outcommands.splice(i, 1));
+		//let builds = cmdRecurse(flattenOne(commands));
+		let builds = {
+			'start': []
+		};
+
+		commands.forEach(function (list) {
+			cmdRecurse(list, builds);
+		});
+
+		//move builds down as needed
+		Object.keys(builds).forEach(function (key) {
+			let end = [];
+			for (let i = 0; i < builds[key].length; i += 1) {
+				if (builds[key][i].hasOwnProperty('order') && builds[key][i].order === "last") {
+					end = end.concat(builds[key].splice(i, 1));
+					i -= 1;
+				}
+			}
+			builds[key] = builds[key].concat(end);
+		});
+
+		console.log("builds resolved", JSON.parse(JSON.stringify(builds)));
+
+		//resolve complete builds object
+		let outarr = builds.start;
+		for (let i = 0; i < outarr.length; i += 1) {
+			let cmd = outarr[i];
+			if (cmd.type === "build") {
+				let args = [i, 1].concat(builds[cmd.value]);
+				Array.prototype.splice.apply(outarr, args);
 				i -= 1;
-			} else if (outcommands[i].hasOwnProperty('spec') && outcommands[i].spec === "end") {
-				let cmdArr = [i, 1].concat(moveDown);
-				Array.prototype.splice.apply(outcommands, cmdArr);
-				i += moveDown.length - 1;
-				moveDown = [];
 			}
 		}
 
+		// // move through to move down 'last commands'
+		// let moveDown = [];
+		// for (let i = 0; i < outcommands.length; i += 1) {
+		// 	if (outcommands[i].hasOwnProperty('order') && outcommands[i].order === "last") {
+		// 		moveDown = moveDown.concat(outcommands.splice(i, 1));
+		// 		i -= 1;
+		// 	} else if (outcommands[i].hasOwnProperty('spec') && outcommands[i].spec === "end") {
+		// 		let cmdArr = [i, 1].concat(moveDown);
+		// 		Array.prototype.splice.apply(outcommands, cmdArr);
+		// 		i += moveDown.length - 1;
+		// 		moveDown = [];
+		// 	}
+		// }
 
-		// commands.forEach(function (cmdList) {
-		// 	// recurse here 
-		// 	let conv = cmdRecurse(cmdList);
+		console.log(outarr);
 
-		// 	// add keys to builds
-		// 	console.log(
-		// 		"Adding:\n",
-		// 		JSON.parse(JSON.stringify(conv)),
-		// 		"\nTo:\n",
-		// 		JSON.parse(JSON.stringify({builds: builds, order: buildOrder}))
-		// 	);
-
-		// 	Object.keys(conv.builds).forEach(function (id) {
-		// 		if(builds.hasOwnProperty(id)) {
-		// 			buildOrder = clearDups(id, buildOrder);
-		// 			builds[id] = builds[id].concat(conv.builds[id]);
-		// 		} else {
-		// 			builds[id] = conv.builds[id];
-		// 		}
-		// 	});
-
-		// 	// add list to orders
-		// 	buildOrder = buildOrder.concat(conv.order);
-		// });
-
-		// console.log(commands, builds, buildOrder);
-
-		console.log(outcommands);
-
-		return outcommands;
+		return outarr;
 	};
 
 	const buildSpecFindings = function (data, formObj) {
@@ -594,8 +530,7 @@
 		// console.log(commandsCollapsed, "linerized");
 
 		// make the text
-		return executeCommands(commandsCollapsed);
-		
+		return executeCommands(commandsCollapsed);	
 	};
 
 	const respondToChanges = function (data, $form, $addOpts, $response) {
@@ -734,12 +669,46 @@
 		return $('<div>', {class: "opt" + depth, html: item.label});
 	};
 
+	const addLink = function (nameIn) {
+		return function (linkObj) {
+			let id = linkObj.value;
+			let type = linkObj.type;
+			let ret = function () {};
+
+			console.log('adding link?', linkObj, id, type);
+
+			//types -> equal, on
+			if (type === "equal") {
+				ret = function (evt) {
+					console.log('event for link!', evt.target.name, event.target.checked, id, $('body').find('[name="' + id + '"]'));
+					if (event.target.name === nameIn) {
+						$('body').find('[name="' + id + '"]').prop("checked", event.target.checked);
+					}
+				}
+			} else if (type === "on") {
+				ret = function (evt) {
+					if (event.target.name === nameIn && event.target.checked) {
+						$('body').find('[name="' + id + '"]').click();
+					}
+				}
+			} else if (type === "off") {
+				ret = function (evt) {
+					if (event.target.name === nameIn && event.target.checked) {
+						$('body').find('[name="' + id + '"]:checked').prop("checked", false);
+					}
+				}
+			}
+			return ret;
+		}
+	}
+
 	const buildOptions = function (options, depth) {
 		let $ret = $('<div>');
 
 		options.forEach(function (item) {
 			let optRowSettings = {
-				class: "depth-" + depth
+				class: "depth-" + depth,
+				style: ""
 			};
 			let optRowType = "<div>";
 			let optRowAppends = [];
@@ -760,6 +729,11 @@
 				optRowSettings.class += " form-check";
 				optRowAppends.push(buildSwitch(item, depth));
 				item.select = false;
+			}
+
+			//add linked
+			if (item.hasOwnProperty('link') && item.link.length > 0) {
+				optRowFuncs = optRowFuncs.concat(item.link.map(addLink(item.name)));
 			}
 
 			//set up rest
@@ -797,6 +771,11 @@
 			// go deeper as needed
 			if (item.options && item.options.length) {
 				optRowAppends.push(buildOptions(item.options, depth + 1)); 
+			}
+
+			//hide as needed
+			if (item.hasOwnProperty("hidden") && item.hidden) {
+				optRowSettings.style += "display:none; "
 			}
 
 			//build html item and append to starter row
@@ -857,7 +836,7 @@
 
 		// set up type
 		// $("<p>", {class: "h3", html: "Delivery Type"}).appendTo($form);
-		buildRadio("Delivery Type", "surgery", ["Vaginal Delivery", "Cesarian Section"]).appendTo(
+		buildRadio("Delivery Type", "surgery", ["Vaginal Delivery", "Cesarean Section"]).appendTo(
 			$("<div>", {class: "row"}).appendTo($form)
 		);
 
