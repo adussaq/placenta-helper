@@ -266,6 +266,7 @@
 	};
 
 	const filterUUIDNames = function (obj) {
+		//for filtering out names
 		return obj.name.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
 	};
 
@@ -357,8 +358,8 @@
 		return out;
 	};
 
-	const executeCommands = function (arr) {
-		let currentIndent = 1;
+	const executeCommands = function (arr, currentIndent) {
+		currentIndent = currentIndent || 1;
 		let str = "";
 		let comment = "";
 		arr.forEach(function (cmd) {
@@ -507,7 +508,7 @@
 		return outarr;
 	};
 
-	const buildSpecFindings = function (data, formObj) {
+	const buildSpecFindings = function (data, formObj, depth) {
 		let findData = serializeData(data);
 		let commands = [];
 
@@ -530,15 +531,37 @@
 		// console.log(commandsCollapsed, "linerized");
 
 		// make the text
-		return executeCommands(commandsCollapsed);	
+		return executeCommands(commandsCollapsed, depth);	
 	};
 
-	const respondToChanges = function (data, $form, $addOpts, $response) {
+	const respondToChanges = function (data, $form, $addOpts, $response, $headerOpts) {
 		let last = [];
-		let change = function () {
-			let resp = $form.serializeArray();
-			if (!check(last, resp)) {
+		let $gestOpts = [$addOpts];
+		let gest = [""];
 
+		let getResp = function (which) {
+			let ret;
+			let headResp = $headerOpts.serializeArray();
+			let addOpts = $gestOpts.map(function ($formelem) {
+				return $formelem.serializeArray();
+			});
+
+			if (which === 0 || which === 1) {
+				ret = addOpts[which];
+			} else {
+				ret = Array.prototype.concat.apply(headResp, addOpts);
+			}
+
+			return ret;
+		};
+
+
+		let change = function () {
+			// get all form data
+			let resp = getResp();
+
+			//check if there are any changes at all
+			if (!check(last, resp)) {
 				//check if twin status changed
 				let gests = getValue(resp, "gestations");
 				if (gests && gests !== getValue(last, "gestations")) {
@@ -546,25 +569,30 @@
 					if (gests === gestationOptions[0]) {
 						// set up other options
 						addOtherOptions(data, $addOpts);
-					} else if (gests === gestationOptions[1]) {
-						// add twin options
-						addTwinGestationOptions($addOpts);
-						// set up other options
-						$("<h4>", {text: "Twin A"}).appendTo($addOpts);
-						addOtherOptions(data, $addOpts);
-						$("<h4>", {text: "Twin B"}).appendTo($addOpts);
-						addOtherOptions(data, $addOpts);
+						$gestOpts = [$addOpts];
+
 					} else {
+						if (gests === gestationOptions[1]) {
+							gest = ["Twin A", "Twin B"];
+						} else {
+							gest = ["Twin 1", "Twin2"];
+						}
 						// add twin options
 						addTwinGestationOptions($addOpts);
+						
 						// set up other options
-						$("<h4>", {text: "Twin 1"}).appendTo($addOpts);
-						addOtherOptions(data, $addOpts);
-						$("<h4>", {text: "Twin 2"}).appendTo($addOpts);
-						addOtherOptions(data, $addOpts);
+						let $ta = $('<form>').appendTo($addOpts);
+						$("<h4>", {text: gest[0]}).appendTo($ta);
+						addOtherOptions(data, $ta);
+
+						let $tb = $('<form>').appendTo($addOpts);
+						$("<h4>", {text: gest[1]}).appendTo($tb);
+						addOtherOptions(data, $tb);
+
+						$gestOpts = [$ta, $tb];
 					}
 					// re assign the resp so that it doesn't keep the gestation and other options
-					resp = $form.serializeArray();
+					let resp = getResp();
 				}
 
 				// set up area
@@ -574,7 +602,6 @@
 				last = JSON.parse(JSON.stringify(resp));
 
 				// build lines
-				console.log(resp);
 				let $header = buildHeader(getValue(resp, "weeks") * 1, getValue(resp, "days") * 1, getValue(resp, "surgery"));
 				let $line1;
 				if (gests === gestationOptions[0]) {
@@ -596,8 +623,20 @@
 				$response.append($header);
 				$response.append($line1);
 
-				//build lines for specFindings
-				$response.append(buildSpecFindings(data, resp.filter(filterUUIDNames)));
+				//get additional commands from each additional options
+				if (gest.length > 1) {
+					console.log('here with mult');
+					gest.forEach(function (label, ind) {
+						let responseStr = buildSpecFindings(data, getResp(ind).filter(filterUUIDNames), 2);
+						if (responseStr.length > 0) {
+							$response.append("&#9;" + label.toUpperCase() + "\n");
+							$response.append(responseStr)
+						}
+					});
+				} else {
+					console.log('here with single');
+					$response.append(buildSpecFindings(data, resp.filter(filterUUIDNames)));
+				}
 			}
 		};
 		return change;
@@ -794,17 +833,17 @@
 	};
 
 	const addOtherOptions = function (data, $form) {
-		buildInputText("Umbilical Cord", [{
-			name: "ulen",
-			display: "Length (cm)"
-		}, {
-			name: "ucoils",
-			display: "Number of Coils"
-		}]).appendTo($form);
+		// buildInputText("Umbilical Cord", [{
+		// 	name: "ulen",
+		// 	display: "Length (cm)"
+		// }, {
+		// 	name: "ucoils",
+		// 	display: "Number of Coils"
+		// }]).appendTo($form);
 
-		buildRadio("Umbilical Vessels", "uvess", [3, 2, 1]).appendTo(
-			$('<div>', {class: "row"}).appendTo($form)
-		);
+		// buildRadio("Umbilical Vessels", "uvess", [3, 2, 1]).appendTo(
+		// 	$('<div>', {class: "row"}).appendTo($form)
+		// );
 
 		//Break remaining page into header column and content column
 		let $specFinds = $('<div>', {class: "col-sm-9 col-xs-12"});
@@ -821,33 +860,30 @@
 	const buildPage = function (data) {
 		let $main = $('main');
 		let $form = $('<form>').appendTo($main);
+		let $headOpts = $('<form>').appendTo($form);
 
 		console.log(data);
 
 		// Twin gestation options
-		// $("<p>", {class: "h3", html: "Gestational Type"}).appendTo($form);
 		buildRadio("Gestational Number", "gestations", gestationOptions).appendTo(
-			$("<div>", {class: "row"}).appendTo($form)
+			$("<div>", {class: "row"}).appendTo($headOpts)
 		);
 
 		// set up basic options
-		// $("<h3>", {text: "Birth Parameters"}).appendTo($form);
-		setGestationalParams($("<div>", {style: "margin-bottom:10px"}).appendTo($form));
+		setGestationalParams($("<div>", {style: "margin-bottom:10px"}).appendTo($headOpts));
 
 		// set up type
-		// $("<p>", {class: "h3", html: "Delivery Type"}).appendTo($form);
 		buildRadio("Delivery Type", "surgery", ["Vaginal Delivery", "Cesarean Section"]).appendTo(
-			$("<div>", {class: "row"}).appendTo($form)
+			$("<div>", {class: "row"}).appendTo($headOpts)
 		);
 
 		// set up staining
-		// $("<p>", {class: "h3", html: "Delivery Type"}).appendTo($form);
 		buildRadio("Meconium Staining", "mstaining", ["None", "Present"]).appendTo(
-			$("<div>", {class: "row"}).appendTo($form)
+			$("<div>", {class: "row"}).appendTo($headOpts)
 		);
 
 		// add in other options area
-		let $otherOpts = $("<div>").appendTo($form);
+		let $otherOpts = $("<form>", {id: "addOpts:-)"}).appendTo($form);
 
 		//build response area
 		$('<hr>', {class: "col-sm-12"}).appendTo($main);
@@ -863,11 +899,10 @@
 		$response.appendTo($main);
 
 		// set up response to changes
-		let respFunc = respondToChanges(data, $form, $otherOpts, $response);
+		let respFunc = respondToChanges(data, $form, $otherOpts, $response, $headOpts);
 		$form.change(respFunc);
 		$form.keyup(respFunc);
 		respFunc();
-		
 	};
 
 	fetch("./page.json")
