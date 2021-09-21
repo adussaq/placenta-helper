@@ -358,6 +358,7 @@
 	const executeCommands = function (arr) {
 		let currentIndent = 1;
 		let str = "";
+		let comment = "";
 		arr.forEach(function (cmd) {
 			switch (cmd.type) {
 				case "text":
@@ -380,8 +381,16 @@
 					let regex = new RegExp(cmd.value.replace.replace(/([^\w\s])/ig, "\\$1"));
 					str = str.replace(regex, cmd.value.replaceStr);
 					break;
+				case "comment":
+					comment += cmd.value + "\n\n";
+					break;
 			}
 		});
+
+		if (comment.length) {
+			str += '\n<hr class="col-sm-12">COMMENT: <span style="font-weight:normal">' + comment + "</span>";
+		}
+
 		return str;
 	};
 
@@ -573,6 +582,8 @@
 			commands.push(getCommands(findData, idobj.name));
 		});
 
+		console.log(commands);
+
 		// flatten command list
 		let commandsCollapsed = collapseCommands(commands); // recurrsive
 		// return;
@@ -689,7 +700,7 @@
 
 		// if Label is none or parent label is none
 		if (target.attr("label") === "None") {
-			that.parent().find("input").prop('checked', false);
+			that.parent().find('input[type="radio"]').prop('checked', false);
 		} else {
 			that.parent().parent().parent().find("[label='None']").prop('checked', false);
 		}
