@@ -75,25 +75,10 @@
 		return trimester;
 	}
 
-	const line1build = function (formData, data) {
-		let retStr = "&#9;--&#9;";
-		let weight = formData.weight || 0;
-		let age = formData.age || 0;
-
-		console.log("line1", formData);
-
-		if (formData.hasOwnProperty('meconium') && formData.meconium) {
-			retStr += "MECONIUM-STAINED ";
-		}
-
-		if (formData.hasOwnProperty("membrane")) {
-			if (formData.membrane) {
-				retStr += formData.membrane.toUpperCase();
-			} else {
-				retStr += "[### MONOCHORIONIC/DICHORIONIC ###], [### MONOAMNIONIC/DIAMNIONIC ###]";
-			}
-			retStr += " ";
-		}
+	const getPercentile = function (data, weight, age) {
+		weight = weight || 0;
+		age = age || 0;
+		let percentileStr = "";
 
 		if (weight > 0 && age > 0) {
 			let match = data.weight.singleton.find(function (obj) {
@@ -113,63 +98,89 @@
 				}
 				
 				// set percentile sentence
-				let percentileStr = "";
 				if (group === -1) {
 					group = 0;
-					percentileStr += "(LESS THAN " + match.percentiles[group].percentile;
+					percentileStr += "LESS THAN " + match.percentiles[group].percentile;
 					if (match.percentiles[group] === 3) {
 						percentileStr += "RD";
 					} else {
 						percentileStr += "TH";
 					}
-					percentileStr += " PERCENTILE FOR GESTATIONAL AGE)";
 				} else if (group === match.percentiles.length - 1) {
-					percentileStr += "(";
 					if (match.percentiles[group].weight < weight) {
 						percentileStr += "GREATER THAN ";
 					}
-					percentileStr += match.percentiles[group].percentile + "TH PERCENTILE FOR GESTATIONAL AGE)";
+					percentileStr += match.percentiles[group].percentile + "TH";
 				} else {
-					percentileStr += "(" + match.percentiles[group].percentile;
+					percentileStr += match.percentiles[group].percentile;
 					if (match.percentiles[group] === 3) {
 						percentileStr += "RD";
 					} else {
 						percentileStr += "TH";
 					}
-					percentileStr += " PERCENTILE FOR GESTATIONAL AGE)";
 				}
-
-				// set trimester sentence
-				let trimester = getTrimester(age);
-				retStr += trimester + " TRIMESTER PLACENTA, " + weight + " GRAMS " + percentileStr;
-			} else {
-				retStr += getTrimester(age) + " TRIMESTER PLACENTA, " + weight + " GRAMS"
 			}
-		} else {
-			let trimesterStr = "[#]";
-			let weightStr = "[#]";
-			if (age > 0) {
-				trimesterStr = getTrimester(age);
-			}
-			if (weight > 0) {
-				weightStr = weight;
-			}
-			retStr += trimesterStr + " TRIMESTER PLACENTA, " + weightStr + " GRAMS " + "([#] PERCENTILE FOR GESTATIONAL AGE)";
 		}
-		return retStr + "\n";
+		return percentileStr;
+	}
+
+	const line1build = function (formData, data) {
+		let cmdArr = [];
+
+		console.log(formData);
+
+		cmdArr.push({type: "text", value: "[#MS#] [#WEIGHT#] GRAMS ([#PER#] PERCENTILE FOR GESTATIONAL AGE)"});
+
+		// twin gestation
+		if(formData.tgestation) {
+			cmdArr.push({type: "replace", value: {replace: "[#MS#]", replaceStr: "[#MS#] [#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#] TWIN PLACENTA,"}});
+			if (formData.membrane) {
+				cmdArr.push({type: "replace", value: {replace: "[#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#]", replaceStr: formData.membrane.toUpperCase()}});
+			}
+		}
+
+		// meconium staining
+		if (formData.meconium) {
+			cmdArr.push({type: "replace", value: {replace: "[#MS#]", replaceStr: "MECONIUM-STAINED"}});
+		} else {
+			cmdArr.push({type: "replace", value: {replace: "[#MS#] ", replaceStr: ""}});
+		}
+
+		// weight
+		if (formData.weight) {
+			cmdArr.push({type: "replace", value: {replace: "[#WEIGHT#]", replaceStr: formData.weight}});
+		}
+		
+		//percentile
+		if (formData.weight && formData.age) {
+			let perStr = getPercentile(data, formData.weight, formData.age);
+			cmdArr.push({type: "replace", value: {replace: "[#PER#]", replaceStr: perStr}});
+		}
+		
+		return cmdArr;
 	};
 
 	const buildHeader = function (age, days, type) {
-		age = age || "[#]";
-		let dayStr = "";
+		let cmdArr = [];
+
+		cmdArr.push({type: "header", value: "DIAGNOSIS:"})
+		cmdArr.push({type: "header", value: "PLACENTA, [#TRIMESTER#] TRIMESTER, [#WEEKS#] WEEKS, [#DAYS#] DAYS, [#DELIVERY#]"});
+
+		if (age) {
+			cmdArr.push({type: "replace", value: {replace: "[#WEEKS#]", replaceStr: age}});
+			cmdArr.push({type: "replace", value: {replace: "[#TRIMESTER#]", replaceStr: getTrimester(age)}});
+		}
+
 		if (days) {
-			dayStr += days + " DAYS, ";
+			cmdArr.push({type: "replace", value: {replace: "[#DAYS#]", replaceStr: days}});
 		}
-		if (!type) {
-			type = "[#]";
+
+		if (type) {
+			cmdArr.push({type: "replace", value: {replace: "[#DELIVERY#]", replaceStr: type.toUpperCase()}});
 		}
-		let ret = "DIAGNOSIS:\n" + "PLACENTA, " + age + " WEEKS, " + dayStr + type.toUpperCase() + "\n";
-		return ret;
+
+		
+		return cmdArr;
 	};
 
 	const buildInputText = function (label, list) {
@@ -362,13 +373,18 @@
 		currentIndent = currentIndent || 1;
 		let str = "";
 		let comment = "";
+		let tabChar = "&#9;"
 		arr.forEach(function (cmd) {
+			let tab = "";
+			for (let i = 0; i < currentIndent - 1; i += 1) {
+				tab += tabChar;
+			}
 			switch (cmd.type) {
+				case "header":
+					str += tab + cmd.value + "\n";
+					break;
 				case "text":
-					for (let i = 0; i < currentIndent; i += 1) {
-						str += "&#9;";
-					}
-					str += "--&#9;" + cmd.value + "\n";
+					str += tab + tabChar + "--" + tabChar + cmd.value + "\n";
 					break;
 				case "format":
 					switch (cmd.value) {
@@ -503,7 +519,7 @@
 		// 	}
 		// }
 
-		console.log(outarr);
+		console.log("final command array", outarr);
 
 		return outarr;
 	};
@@ -519,7 +535,7 @@
 			commands.push(getCommands(findData, idobj.name));
 		});
 
-		console.log(commands);
+		// console.log(commands);
 
 		// flatten command list
 		let commandsCollapsed = collapseCommands(commands); // recurrsive
@@ -539,7 +555,7 @@
 		let $gestOpts = [$addOpts];
 		let gest = [""];
 
-		let getResp = function (which) {
+		const getResp = function (which) {
 			let ret;
 			let headResp = $headerOpts.serializeArray();
 			let addOpts = $gestOpts.map(function ($formelem) {
@@ -549,12 +565,41 @@
 			if (which === 0 || which === 1) {
 				ret = addOpts[which];
 			} else {
+				headResp = headResp.concat($addOpts.serializeArray()); // for membrane type
 				ret = Array.prototype.concat.apply(headResp, addOpts);
 			}
 
 			return ret;
 		};
 
+		const buildGestationOptions = function (gests) {
+			if (gests === gestationOptions[0]) {
+				// set up other options
+				gest = [""];
+				addOtherOptions(data, $addOpts);
+				$gestOpts = [$addOpts];
+
+			} else {
+				if (gests === gestationOptions[1]) {
+					gest = ["Twin A", "Twin B"];
+				} else {
+					gest = ["Twin 1", "Twin2"];
+				}
+				// add twin options
+				addTwinGestationOptions($addOpts);
+				
+				// set up other options
+				let $ta = $('<form>').appendTo($addOpts);
+				$("<h4>", {text: gest[0]}).appendTo($ta);
+				addOtherOptions(data, $ta);
+
+				let $tb = $('<form>').appendTo($addOpts);
+				$("<h4>", {text: gest[1]}).appendTo($tb);
+				addOtherOptions(data, $tb);
+
+				$gestOpts = [$ta, $tb];
+			}
+		};
 
 		let change = function () {
 			// get all form data
@@ -565,32 +610,13 @@
 				//check if twin status changed
 				let gests = getValue(resp, "gestations");
 				if (gests && gests !== getValue(last, "gestations")) {
+					
+					// clear old additional options
 					$addOpts.empty();
-					if (gests === gestationOptions[0]) {
-						// set up other options
-						addOtherOptions(data, $addOpts);
-						$gestOpts = [$addOpts];
+					
+					// build gestational options interface
+					buildGestationOptions(gests)
 
-					} else {
-						if (gests === gestationOptions[1]) {
-							gest = ["Twin A", "Twin B"];
-						} else {
-							gest = ["Twin 1", "Twin2"];
-						}
-						// add twin options
-						addTwinGestationOptions($addOpts);
-						
-						// set up other options
-						let $ta = $('<form>').appendTo($addOpts);
-						$("<h4>", {text: gest[0]}).appendTo($ta);
-						addOtherOptions(data, $ta);
-
-						let $tb = $('<form>').appendTo($addOpts);
-						$("<h4>", {text: gest[1]}).appendTo($tb);
-						addOtherOptions(data, $tb);
-
-						$gestOpts = [$ta, $tb];
-					}
 					// re assign the resp so that it doesn't keep the gestation and other options
 					let resp = getResp();
 				}
@@ -601,31 +627,28 @@
 				//update 'last'
 				last = JSON.parse(JSON.stringify(resp));
 
-				// build lines
-				let $header = buildHeader(getValue(resp, "weeks") * 1, getValue(resp, "days") * 1, getValue(resp, "surgery"));
-				let $line1;
-				if (gests === gestationOptions[0]) {
-					$line1 = line1build({
-						weight: getValue(resp, "weight") * 1,
-						age: getValue(resp, "weeks") * 1,
-						meconium: getValue(resp, "mstaining") === "Present"
-					}, data);
-				} else {
-					$line1 = line1build({
+				// build header
+				let cmdArr = buildHeader(
+					getValue(resp, "weeks") * 1,
+					getValue(resp, "days") * 1,
+					getValue(resp, "surgery")
+				);
+				
+				// build line 1
+				console.log(resp);
+				cmdArr = cmdArr.concat(line1build({
 						weight: getValue(resp, "weight") * 1,
 						age: getValue(resp, "weeks") * 1,
 						membrane: getValue(resp, "membrane"),
+						tgestation: gests !== gestationOptions[0],
 						meconium: getValue(resp, "mstaining") === "Present"
-					}, data);
-				}
+				}, data));
 
 				//append starter lines
-				$response.append($header);
-				$response.append($line1);
+				$response.append(executeCommands(cmdArr));
 
 				//get additional commands from each additional options
 				if (gest.length > 1) {
-					console.log('here with mult');
 					gest.forEach(function (label, ind) {
 						let responseStr = buildSpecFindings(data, getResp(ind).filter(filterUUIDNames), 2);
 						if (responseStr.length > 0) {
@@ -714,7 +737,7 @@
 			let type = linkObj.type;
 			let ret = function () {};
 
-			console.log('adding link?', linkObj, id, type);
+			// console.log('adding link?', linkObj, id, type);
 
 			//types -> equal, on
 			if (type === "equal") {
