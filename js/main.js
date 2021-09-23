@@ -203,8 +203,43 @@
 
 			if (i === 0) {
 				inputOpts.style = "border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;";
-			}			
-			$('<input>', inputOpts).appendTo($ret);
+			}
+
+			let $inp = $('<input>', inputOpts);
+
+
+			if (input.validation) {
+				// let $holder = $('<span>').appendTo($ret);
+				$inp.appendTo($ret);
+				let $invalid = $('<div>', {class: "invalid-feedback", text: input.validation.text}).appendTo($ret);
+				$inp.keyup(function (evt) {
+					if (!input.validation.func(evt.target.value)) {
+						let $element = $(evt.target);
+						let parentPos = $element.position();
+
+						//calculate offset
+						let offset = parentPos.left  - (
+							$element.css("padding-left").replace("px", "") * 1
+							// $element.css("margin-left").replace("px", "") * 1 + 
+							// $element.css("border-left-width").replace("px", "") * 1
+						);
+						
+						// $invalid.position({
+						// 	top: parentPos.top + $element.height(),
+						// 	left: parentPos.left
+						// });
+						console.log('position', $element, parentPos, offset);
+						// $invalid.position({left: parentPos.left});
+						$invalid.css("margin-left", offset + "px");
+
+						$inp.addClass('is-invalid');
+					} else {
+						$inp.removeClass('is-invalid');
+					}
+				});
+			} else {
+				$inp.appendTo($ret);
+			}
 		});
 		return $ret;
 	};
@@ -260,7 +295,21 @@
 	};
 
 	const setGestationalParams = function ($form) {
-		buildInputText("Gestation", [{name: "weeks", display: "Weeks"}, {name: "days", display: "Days"}]).appendTo($form);
+		buildInputText("Gestation", [
+			{
+				name: "weeks",
+				display: "Weeks"
+			}, {
+				name: "days",
+				display: "Days",
+				validation: {
+					text: "Days must be between 0 and 6.",
+					func: function (val) {
+						return val < 7;
+					}
+				} 
+			}
+		]).appendTo($form);
 		buildInputText("Weight", [{name: "weight", display: "Weight (grams)"}]).appendTo($form);
 	};
 
@@ -371,20 +420,26 @@
 
 	const executeCommands = function (arr, currentIndent) {
 		currentIndent = currentIndent || 1;
+
+		let $ret = $("<div>");
+		let strBreak = randomID();
 		let str = "";
 		let comment = "";
 		let tabChar = "&#9;"
+		let $tabChar = '<span class="mswordtab">' + tabChar + "</span>";
+		let findTabChar = new RegExp(tabChar, "g");
+		let styleString = [];
+
+
 		arr.forEach(function (cmd) {
-			let tab = "";
-			for (let i = 0; i < currentIndent - 1; i += 1) {
-				tab += tabChar;
-			}
 			switch (cmd.type) {
 				case "header":
-					str += tab + cmd.value + "\n";
+					styleString.push("margin-left:" + (currentIndent - 1) + "in;");
+					str += cmd.value + strBreak;
 					break;
 				case "text":
-					str += tab + tabChar + "--" + tabChar + cmd.value + "\n";
+					styleString.push("text-indent:-.5in;margin-left:" + (currentIndent) + "in;");
+					str += "--" + tabChar + cmd.value + strBreak;
 					break;
 				case "format":
 					switch (cmd.value) {
@@ -406,11 +461,27 @@
 			}
 		});
 
+		str.split(strBreak).forEach(function (line, ind) {
+			let lineOpts = {
+				class: "MsoNormal",
+				style: "text-transform:uppercase;font-weight:bold;" + styleString[ind],
+				html: line.replace(findTabChar, $tabChar)
+			};
+			$("<p>", lineOpts).appendTo($ret);
+		});
+
+		// deal with comment
 		if (comment.length) {
-			str += '\n<hr class="col-sm-12">COMMENT: <span style="font-weight:normal">' + comment + "</span>";
+			let $com = $('#commentStringHolder');
+			if ($com.text() === "[#]") {
+				$com.empty();
+			} else {
+				$com.append('</br></br>');
+			}
+			$com.append(comment);
 		}
 
-		return str;
+		return $ret;
 	};
 
 	const flattenOne = function (arr) {
@@ -524,7 +595,7 @@
 		return outarr;
 	};
 
-	const buildSpecFindings = function (data, formObj, depth) {
+	const buildSpecFindings = function (data, formObj) {
 		let findData = serializeData(data);
 		let commands = [];
 
@@ -546,26 +617,33 @@
 		// commandsCollapsed = linearize(commandsCollapsed);
 		// console.log(commandsCollapsed, "linerized");
 
-		// make the text
-		return executeCommands(commandsCollapsed, depth);	
+		// return the commands
+		return commandsCollapsed;	
 	};
 
 	const respondToChanges = function (data, $form, $addOpts, $response, $headerOpts) {
 		let last = [];
 		let $gestOpts = [$addOpts];
 		let gest = [""];
+		let $membraneOption = $('<form>');
 
 		const getResp = function (which) {
 			let ret;
+
+			// header options
 			let headResp = $headerOpts.serializeArray();
+
+			// each gestation option
 			let addOpts = $gestOpts.map(function ($formelem) {
 				return $formelem.serializeArray();
 			});
 
+			//membrane option, just add to header options
+			headResp = headResp.concat($membraneOption.serializeArray());
+
 			if (which === 0 || which === 1) {
 				ret = addOpts[which];
 			} else {
-				headResp = headResp.concat($addOpts.serializeArray()); // for membrane type
 				ret = Array.prototype.concat.apply(headResp, addOpts);
 			}
 
@@ -581,12 +659,13 @@
 
 			} else {
 				if (gests === gestationOptions[1]) {
-					gest = ["Twin A", "Twin B"];
+					gest = ["Twin A placenta", "Twin B placenta"];
 				} else {
-					gest = ["Twin 1", "Twin2"];
+					gest = ["Twin 1 placenta", "Twin 2 placenta"];
 				}
 				// add twin options
-				addTwinGestationOptions($addOpts);
+				$membraneOption.appendTo($addOpts)
+				addTwinGestationOptions($membraneOption);
 				
 				// set up other options
 				let $ta = $('<form>').appendTo($addOpts);
@@ -622,21 +701,21 @@
 				}
 
 				// set up area
-				$response.empty();				
+				$response.empty();
+				$('#commentStringHolder').text("[#]");
 
 				//update 'last'
 				last = JSON.parse(JSON.stringify(resp));
 
 				// build header
-				let cmdArr = buildHeader(
+				let headerCmdArr = buildHeader(
 					getValue(resp, "weeks") * 1,
 					getValue(resp, "days") * 1,
 					getValue(resp, "surgery")
 				);
 				
 				// build line 1
-				console.log(resp);
-				cmdArr = cmdArr.concat(line1build({
+				headerCmdArr = headerCmdArr.concat(line1build({
 						weight: getValue(resp, "weight") * 1,
 						age: getValue(resp, "weeks") * 1,
 						membrane: getValue(resp, "membrane"),
@@ -644,22 +723,34 @@
 						meconium: getValue(resp, "mstaining") === "Present"
 				}, data));
 
-				//append starter lines
-				$response.append(executeCommands(cmdArr));
+				let cmdResponses = [
+					executeCommands(headerCmdArr)
+				];
 
-				//get additional commands from each additional options
 				if (gest.length > 1) {
 					gest.forEach(function (label, ind) {
-						let responseStr = buildSpecFindings(data, getResp(ind).filter(filterUUIDNames), 2);
-						if (responseStr.length > 0) {
-							$response.append("&#9;" + label.toUpperCase() + "\n");
-							$response.append(responseStr)
+						let twinCmdArr = buildSpecFindings(data, getResp(ind).filter(filterUUIDNames));
+
+						if (twinCmdArr.length > 0) {
+							// add in twin a/b ; 1/2
+							twinCmdArr.unshift({type: "header", value: label.toUpperCase()});
+
+							// add in spacing for all below
+							twinCmdArr.unshift({type: "format", value: "indent"});
+
+							// execute the commands
+							cmdResponses.push(executeCommands(twinCmdArr));
 						}
 					});
 				} else {
-					console.log('here with single');
-					$response.append(buildSpecFindings(data, resp.filter(filterUUIDNames)));
+					let specCmdArr = buildSpecFindings(data, resp.filter(filterUUIDNames));
+
+					// execute the commands
+					cmdResponses.push(executeCommands(specCmdArr));
 				}
+
+				// add elements to response
+				$response.append(cmdResponses);
 			}
 		};
 		return change;
@@ -884,6 +975,7 @@
 		let $main = $('main');
 		let $form = $('<form>').appendTo($main);
 		let $headOpts = $('<form>').appendTo($form);
+		let $emptyLine = '<p class="MsoNormal">&nbsp;</p>';
 
 		console.log(data);
 
@@ -910,19 +1002,35 @@
 
 		//build response area
 		$('<hr>', {class: "col-sm-12"}).appendTo($main);
-		let $response = $('<div>', {style: 'white-space: pre-wrap;font-weight: bold;', id: "responseText"})
+		let $response = $('<div>', {class: "msword", id: "responseText"});
 
 		// copy button
-		$("<button>", {class: "btn btn-success", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
-			$('<div>').appendTo($main)
-		);
-		$('<hr>', {class: "col-sm-12"}).appendTo($main);
+		// $("<button>", {class: "btn btn-success", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
+		// 	$('<div>').appendTo($main)
+		// );
+		// $('<hr>', {class: "col-sm-12"}).appendTo($main);
 
 		//add in response area
 		$response.appendTo($main);
+		let $responseText = $('<div>').appendTo($response);
+		
+		//Add in some empty lines
+		$response.append($emptyLine);
+		$response.append($emptyLine);
+
+		//Add in vertical line
+		$response.append('<div style="mso-element:para-border-div;border-top:solid windowtext 2.25pt;padding:1.0pt 0in 0in 0in">' + $emptyLine + '</div>')
+		
+		//Add in comment line
+		$response.append(
+			'<p class="MsoNormal">'
+			+ '<b>COMMENT:</b> '
+			+ '<span id="commentStringHolder">[#]</span>'
+			+ "</p>"
+		);
 
 		// set up response to changes
-		let respFunc = respondToChanges(data, $form, $otherOpts, $response, $headOpts);
+		let respFunc = respondToChanges(data, $form, $otherOpts, $responseText, $headOpts);
 		$form.change(respFunc);
 		$form.keyup(respFunc);
 		respFunc();
