@@ -2846,8 +2846,8 @@
 							],
 							"name":"b6001f18-03df-4f40-bd0a-b42ebf9b6b08",
 							"description":"",
-							"input":false,
-							"select":false,
+							"input":"checkbox",
+							"select":true,
 							"hidden":false,
 							"collapsed":false,
 							"options":[
