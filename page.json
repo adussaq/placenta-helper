@@ -2483,6 +2483,23 @@
 			"description":"",
 			"options":[
 				{
+					"label": "Findings suggestive of maternal vascular malperfusion",
+					"report": [
+						{"type": "text", "value": "FINDINGS SUGGESTIVE OF MATERNAL VASCULAR MALPERFUSION"},
+						{"type": "format", "value": "indent"}
+					],
+					"link" : [
+						{"type": "equal", "value": "021430c3-c866-48f4-bc1a-0e9384b129a5"}
+					],
+					"name": "10588a6e-5df9-4d1f-bc1f-0244622209b9",
+					"description": "",
+					"input": "switch",
+					"select": true,
+					"hidden": false,
+					"collapsed": false,
+					"options": []
+				},
+				{
 					"label":"Gross Findings",
 					"name":"e30b67df-c43d-4895-8961-0b26665fe015",
 					"description":"",
@@ -2593,23 +2610,16 @@
 						},
 						{
 							"label":"Parenchymal changes consistent with ischemia",
-							"report":[
-								{"type": "text", "value": "PARENCHYMAL CHANGES CONSISTENT WITH ISCHEMIA"},
-								{"type": "format", "value": "indent"}
-							],
-							"link" : [
-								{"type": "equal", "value": "021430c3-c866-48f4-bc1a-0e9384b129a5"}
-							],
 							"name":"9a5af325-7704-47cd-8683-f9db327a4bd6",
 							"description":"",
-							"input":"switch",
-							"select":true,
+							"input":false,
+							"select":false,
 							"collapsed":false,
 							"options":[
 								{
 									"label":"Distal villous hypoplasia",
 									"report":[
-										{"type": "text", "value": "DECIDUAL ARTERIOPATHY, SEVERE"}
+										{"type": "text", "value": "DISTAL VILLOUS HYPOPLASIA"}
 									],
 									"name":"81c7e86f-434f-4646-af93-d9ca63d22ebd",
 									"description":"",
@@ -2665,15 +2675,15 @@
 							]
 						},
 						{
-							"label": "tobehidden",
+							"label": "Decidual laminar necrosis",
 							"report": [
-								{"type": "format", "value": "outdent"}
+								{"type": "text", "value": "DECIDUAL LAMINAR NECROSIS"}
 							],
-							"name": "021430c3-c866-48f4-bc1a-0e9384b129a5",
+							"name": "b6001f18-03df-4f40-bd0a-b42ebf9b6b08",
 							"description": "",
-							"input": "checkbox",
-							"select": true,
-							"hidden": true,
+							"input": false,
+							"select": false,
+							"hidden": false,
 							"collapsed": false,
 							"options": []
 						}
@@ -2702,6 +2712,19 @@
 							]
 						}
 					]
+				},
+				{
+					"label": "tobehidden",
+					"report": [
+						{"type": "format", "value": "outdent"}
+					],
+					"name": "021430c3-c866-48f4-bc1a-0e9384b129a5",
+					"description": "",
+					"input": "checkbox",
+					"select": true,
+					"hidden": true,
+					"collapsed": false,
+					"options": []
 				}
 			]
 		},
@@ -2774,7 +2797,7 @@
 							"label":"Clinical history of umbilical cord entanglement (e.g. nucal, body cord)",
 							"report":[
 								{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
-								{"type": "text", "value": "CLINICAL HISTORY OF UMBILICAL CORD ENTAGLMENT (NUCHAL CORD, BODY CORD)"}
+								{"type": "text", "value": "CLINICAL HISTORY OF UMBILICAL CORD ENTAGLMENT"}
 							],
 							"name":"67db2f1e-6b3b-46a2-aff3-facdbdd2aa93",
 							"description":"",
@@ -2804,7 +2827,7 @@
 							"label":"Clinical history of umbilical cord compression (e.g. oligohydramios, submucosal leiyomyoma)",
 							"report":[
 								{"type": "build", "value": "a019f500-eae4-41d6-9f95-8a2d6361f236"},
-								{"type": "text", "value": "CLINICAL HISTORY OF UMBILICAL CORD COMPRESSION (OLIGOHYDRAMNIOS, SUBMUCOSAL LEIOMYOMA)"}
+								{"type": "text", "value": "CLINICAL HISTORY OF UMBILICAL CORD COMPRESSION"}
 							],
 							"name":"3c3137fb-29b4-4e24-9e50-b162757b4172",
 							"description":"",
@@ -2818,7 +2841,7 @@
 						{
 							"label": "Cord insertion",
 							"report": [],
-							"name": "",
+							"name": "8e77754f-8a92-4670-9255-c17f092753c7",
 							"description": "",
 							"input": false,
 							"select": false,
@@ -3458,7 +3481,7 @@
 			]
 		},
 		{
-			"label":"Retroplacental Hemorrhage (Abruption)",
+			"label":"Hemorrhage",
 			"name":"e665ca6e-c83b-4cc7-aaa8-ac292900b82c",
 			"input":"checkbox",
 			"collapsed": true,
@@ -3466,83 +3489,138 @@
 			"description":"",
 			"options":[
 				{
-					"label": "Hemosiderin-laden macrophages, extraplacental membranes",
-					"report":[
-						{"type": "text", "value": "HEMOSIDERIN-LADEN MACROPHAGES, EXTRAPLACENTAL MEMBRANES"}
-					],
-					"name": "2fb41327-d802-4bc2-92cc-7da5d0192c1b",
+					"label": "Retroplacental Hemorrhage (Abruption)",
+					"report": [],
+					"name": "7f3c953f-30d4-4af0-9d91-784e05f304de",
 					"description": "",
-					"input": "checkbox",
-					"select": true,
-					"collapsed": false,
-					"options": []
-				}, {
-					"label": "Hemosiderin-laden macrophages, chorionic plate",
-					"report":[
-						{"type": "text", "value": "HEMOSIDERIN-LADEN MACROPHAGES, CHORIONIC PLATE"}
-					],
-					"name": "4513ad39-5bc6-4ce3-82b0-3b0f77baf983",
-					"description": "",
-					"input": "checkbox",
-					"select": true,
-					"collapsed": false,
-					"options": []
-				}, {
-					"label": "Degenerating blood, retromembranous",
-					"report":[
-						{"type": "text", "value": "DEGENERATING BLOOD, RETROMEMBRANOUS"}
-					],
-					"name": "e825425e-4d44-4694-939f-882973046fd3",
-					"description": "",
-					"input": "checkbox",
-					"select": true,
-					"collapsed": false,
-					"options": []
-				}, {
-					"label": "Degenerating blood, subchorionic",
-					"report":[
-						{"type": "text", "value": "DEGENERATING BLOOD, SUBCHORIONIC"}
-					],
-					"name": "0cc4e375-1e46-4fae-845b-de37bd693b95",
-					"description": "",
-					"input": "checkbox",
-					"select": true,
-					"collapsed": false,
-					"options": []
-				}, {
-					"label": "Degenerating blood, marginal/retroplacental",
-					"report":[
-						{"type": "text", "value": "DEGENERATING BLOOD, MARGINAL/RETROPLACENTAL"}
-					],
-					"name": "30181588-4b6b-48d2-8555-6a6946b9f6f3",
-					"description": "",
-					"input": "checkbox",
-					"select": true,
-					"collapsed": false,
-					"options": []
-				}, {
-					"label": "Comment",
-					"name": "e3c4bf4f-593f-4bef-8bc7-b6828794570a",
-					"description": "",
-					"input": "checkbox",
+					"input": false,
 					"select": false,
+					"hidden": false,
 					"collapsed": false,
-					"options": [
+					"options":[
 						{
-							"label": "Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies.",
-							"name": "ab7f552c-1728-4eb9-97e9-c6447fb98db5",
+							"label": "Hemosiderin-laden macrophages, extraplacental membranes",
 							"report":[
-								{"type": "comment", "value": "Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies."}
+								{"type": "text", "value": "HEMOSIDERIN-LADEN MACROPHAGES, EXTRAPLACENTAL MEMBRANES"}
 							],
+							"name": "2fb41327-d802-4bc2-92cc-7da5d0192c1b",
 							"description": "",
 							"input": "checkbox",
 							"select": true,
 							"collapsed": false,
 							"options": []
+						}, {
+							"label": "Hemosiderin-laden macrophages, chorionic plate",
+							"report":[
+								{"type": "text", "value": "HEMOSIDERIN-LADEN MACROPHAGES, CHORIONIC PLATE"}
+							],
+							"name": "4513ad39-5bc6-4ce3-82b0-3b0f77baf983",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"collapsed": false,
+							"options": []
+						}, {
+							"label": "Degenerating blood, retromembranous",
+							"report":[
+								{"type": "text", "value": "DEGENERATING BLOOD, RETROMEMBRANOUS"}
+							],
+							"name": "e825425e-4d44-4694-939f-882973046fd3",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"collapsed": false,
+							"options": []
+						}, {
+							"label": "Degenerating blood, subchorionic",
+							"report":[
+								{"type": "text", "value": "DEGENERATING BLOOD, SUBCHORIONIC"}
+							],
+							"name": "0cc4e375-1e46-4fae-845b-de37bd693b95",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"collapsed": false,
+							"options": []
+						}, {
+							"label": "Degenerating blood, marginal/retroplacental",
+							"report":[
+								{"type": "text", "value": "DEGENERATING BLOOD, MARGINAL/RETROPLACENTAL"}
+							],
+							"name": "30181588-4b6b-48d2-8555-6a6946b9f6f3",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"collapsed": false,
+							"options": []
+						}, {
+							"label": "Comment",
+							"name": "e3c4bf4f-593f-4bef-8bc7-b6828794570a",
+							"description": "",
+							"input": "checkbox",
+							"select": false,
+							"collapsed": false,
+							"options": [
+								{
+									"label": "Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies.",
+									"name": "ab7f552c-1728-4eb9-97e9-c6447fb98db5",
+									"report":[
+										{"type": "comment", "value": "Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies."}
+									],
+									"description": "",
+									"input": "checkbox",
+									"select": true,
+									"collapsed": false,
+									"options": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"label": "Other",
+					"report": [],
+					"name": "b3664544-7d18-4f08-a042-8c0173cfb8e3",
+					"description": "",
+					"input": false,
+					"select": false,
+					"hidden": false,
+					"collapsed": false,
+					"options": [
+						{
+							"label": "Intervillous hemorrhage",
+							"report": [
+								{"type": "text", "value": "INTERVILLOUS HEMORRHAGE"}
+							],
+							"name": "be436175-39b9-4bfe-9d77-57502c3a1cdb",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"hidden": false,
+							"collapsed": false,
+							"options": []
+						},
+						{
+							"label": "Subchorionic hemorrhage",
+							"report": [
+								{"type": "text", "value": "SUBCHORIONIC HEMORRHAGE"}
+							],
+							"name": "751741b6-8db3-4451-89cc-6afd11a14f4b",
+							"description": "",
+							"input": "checkbox",
+							"select": true,
+							"hidden": false,
+							"collapsed": false,
+							"options": []
 						}
 					]
 				}
+
+
+
+				
 			]
+				
 		}
 	]
 }

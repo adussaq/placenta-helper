@@ -443,11 +443,11 @@
 		arr.forEach(function (cmd) {
 			switch (cmd.type) {
 				case "header":
-					styleString.push("margin-left:" + (currentIndent - 1) + "in;");
+					styleString.push("margin-left:" + ((currentIndent - 1) * 0.5) + "in;");
 					str += cmd.value + strBreak;
 					break;
 				case "text":
-					styleString.push("text-indent:-.5in;margin-left:" + (currentIndent) + "in;");
+					styleString.push("text-indent:-.5in;margin-left:" + (1 + (currentIndent - 1) * 0.5) + "in;");
 					str += "--" + tabChar + cmd.value + strBreak;
 					break;
 				case "format":
@@ -1011,7 +1011,7 @@
 
 		//build response area
 		$('<hr>', {class: "col-sm-12"}).appendTo($main);
-		let $response = $('<div>', {class: "msword", id: "responseText"});
+		let $response = $('<table>', {class: "msword", id: "responseText"});
 
 		// copy button
 		// $("<button>", {class: "btn btn-success", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
