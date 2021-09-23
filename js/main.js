@@ -787,6 +787,7 @@
 		let $gestOpts = [$addOpts];
 		let gest = [""];
 		let $membraneOption = $('<form>');
+		addTwinGestationOptions($membraneOption); // add to $membraneOption
 
 		const getResp = function (which) {
 			let ret;
@@ -826,7 +827,6 @@
 				}
 				// add twin options
 				$membraneOption.appendTo($addOpts)
-				addTwinGestationOptions($membraneOption);
 
 				// set up other options
 				let $ta = $('<form>').appendTo($addOpts);
