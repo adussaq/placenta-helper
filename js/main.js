@@ -13,14 +13,20 @@
 	};
 
 	const buildRadio = function (label, name, options, unchecked) {
-		let $holder = $('<div>', {class: "btn-group mb-3", role: "group"});
+		let $holder = $('<div>', {
+			class: "btn-group mb-3",
+			role: "group"
+		});
 
 		let gid = randomID();
 
 		// let $ret = $('<div>', {class: "input-group mb-3 row"});
 
 		// add label
-		$('<label>', {class: "h3 col-3 col-form-label", text: label}).appendTo($holder);
+		$('<label>', {
+			class: "h3 col-3 col-form-label",
+			text: label
+		}).appendTo($holder);
 
 		options.forEach(function (opt, i) {
 			let valOpts = {
@@ -44,20 +50,22 @@
 					valOpts.checked = "checked";
 				}
 			}
-			
-			let $val = 
-			$holder.append(
-				$('<input>', valOpts)
-			).append(
-				$('<label>', labelOpts)
-			);
+
+			let $val =
+				$holder.append(
+					$('<input>', valOpts)
+				).append(
+					$('<label>', labelOpts)
+				);
 		});
 		return $holder;
 	};
 
 	const addTwinGestationOptions = function ($form) {
-		let $holder = $('<div>', {class: "row"});
-		
+		let $holder = $('<div>', {
+			class: "row"
+		});
+
 		// $('<h3>', {text: "Membrane Type"}).appendTo($form);
 		$holder.appendTo($form);
 
@@ -96,7 +104,7 @@
 				if (group === -2) { // adjust for > last percentile
 					group = match.percentiles.length - 1;
 				}
-				
+
 				// set percentile sentence
 				if (group === -1) {
 					group = 0;
@@ -129,67 +137,141 @@
 
 		console.log(formData);
 
-		cmdArr.push({type: "text", value: "[#MS#] [#WEIGHT#] GRAMS ([#PER#] PERCENTILE FOR GESTATIONAL AGE)"});
+		cmdArr.push({
+			type: "text",
+			value: "[#MS#] [#WEIGHT#] GRAMS ([#PER#] PERCENTILE FOR GESTATIONAL AGE)"
+		});
 
 		// twin gestation
-		if(formData.tgestation) {
-			cmdArr.push({type: "replace", value: {replace: "[#MS#]", replaceStr: "[#MS#] [#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#] TWIN PLACENTA,"}});
+		if (formData.tgestation) {
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#MS#]",
+					replaceStr: "[#MS#] [#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#] TWIN PLACENTA,"
+				}
+			});
 			if (formData.membrane) {
-				cmdArr.push({type: "replace", value: {replace: "[#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#]", replaceStr: formData.membrane.toUpperCase()}});
+				cmdArr.push({
+					type: "replace",
+					value: {
+						replace: "[#MONOCHORIONIC/DICHORIONIC#], [#MONOAMNIONIC/DIAMNIONIC#]",
+						replaceStr: formData.membrane.toUpperCase()
+					}
+				});
 			}
 		}
 
 		// meconium staining
 		if (formData.meconium) {
-			cmdArr.push({type: "replace", value: {replace: "[#MS#]", replaceStr: "MECONIUM-STAINED"}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#MS#]",
+					replaceStr: "MECONIUM-STAINED"
+				}
+			});
 		} else {
-			cmdArr.push({type: "replace", value: {replace: "[#MS#] ", replaceStr: ""}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#MS#] ",
+					replaceStr: ""
+				}
+			});
 		}
 
 		// weight
 		if (formData.weight) {
-			cmdArr.push({type: "replace", value: {replace: "[#WEIGHT#]", replaceStr: formData.weight}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#WEIGHT#]",
+					replaceStr: formData.weight
+				}
+			});
 		}
-		
+
 		//percentile
 		if (formData.weight && formData.age) {
 			let perStr = getPercentile(data, formData.weight, formData.age);
-			cmdArr.push({type: "replace", value: {replace: "[#PER#]", replaceStr: perStr}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#PER#]",
+					replaceStr: perStr
+				}
+			});
 		}
-		
+
 		return cmdArr;
 	};
 
 	const buildHeader = function (age, days, type) {
 		let cmdArr = [];
 
-		cmdArr.push({type: "header", value: "DIAGNOSIS:"})
-		cmdArr.push({type: "header", value: "PLACENTA, [#TRIMESTER#] TRIMESTER, [#WEEKS#] WEEKS, [#DAYS#] DAYS, [#DELIVERY#]"});
+		cmdArr.push({
+			type: "header",
+			value: "DIAGNOSIS:"
+		})
+		cmdArr.push({
+			type: "header",
+			value: "PLACENTA, [#TRIMESTER#] TRIMESTER, [#WEEKS#] WEEKS, [#DAYS#] DAYS, [#DELIVERY#]"
+		});
 
 		if (age) {
-			cmdArr.push({type: "replace", value: {replace: "[#WEEKS#]", replaceStr: age}});
-			cmdArr.push({type: "replace", value: {replace: "[#TRIMESTER#]", replaceStr: getTrimester(age)}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#WEEKS#]",
+					replaceStr: age
+				}
+			});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#TRIMESTER#]",
+					replaceStr: getTrimester(age)
+				}
+			});
 		}
 
 		if (days) {
-			cmdArr.push({type: "replace", value: {replace: "[#DAYS#]", replaceStr: days}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#DAYS#]",
+					replaceStr: days
+				}
+			});
 		}
 
 		if (type) {
-			cmdArr.push({type: "replace", value: {replace: "[#DELIVERY#]", replaceStr: type.toUpperCase()}});
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#DELIVERY#]",
+					replaceStr: type.toUpperCase()
+				}
+			});
 		}
 
-		
+
 		return cmdArr;
 	};
 
 	const buildInputText = function (label, list) {
 		let id = randomID();
 
-		let $ret = $('<div>', {class: "input-group mb-3"});
+		let $ret = $('<div>', {
+			class: "input-group mb-3"
+		});
 
 		// add label
-		$('<label>', { class: "h3 col-3 col-form-label", text: label}).appendTo($ret);
+		$('<label>', {
+			class: "h3 col-3 col-form-label",
+			text: label
+		}).appendTo($ret);
 		// let $inpHold = $('<div>', {id: id, class: "input-group mb-3"}).appendTo($ret);
 
 		list.forEach(function (input, i) {
@@ -211,19 +293,22 @@
 			if (input.validation) {
 				// let $holder = $('<span>').appendTo($ret);
 				$inp.appendTo($ret);
-				let $invalid = $('<div>', {class: "invalid-feedback", text: input.validation.text}).appendTo($ret);
+				let $invalid = $('<div>', {
+					class: "invalid-feedback",
+					text: input.validation.text
+				}).appendTo($ret);
 				$inp.keyup(function (evt) {
 					if (!input.validation.func(evt.target.value)) {
 						let $element = $(evt.target);
 						let parentPos = $element.position();
 
 						//calculate offset
-						let offset = parentPos.left  - (
+						let offset = parentPos.left - (
 							$element.css("padding-left").replace("px", "") * 1
 							// $element.css("margin-left").replace("px", "") * 1 + 
 							// $element.css("border-left-width").replace("px", "") * 1
 						);
-						
+
 						// $invalid.position({
 						// 	top: parentPos.top + $element.height(),
 						// 	left: parentPos.left
@@ -268,7 +353,7 @@
 		let aws = true;
 		if (arr1.length === arr2.length) {
 			arr1.forEach(function (obj1, i) {
-				if(!objCmp(obj1, arr2[i])) {
+				if (!objCmp(obj1, arr2[i])) {
 					aws = false;
 				}
 			})
@@ -280,8 +365,8 @@
 
 	const getValue = function (arr, name) {
 		//get the value in an array of form objects {name: "" ,value: ""}
-		let ret = false;
-		
+		let ret = undefined;
+
 		let found = arr.find(function (obj) {
 			return obj.name === name;
 		});
@@ -295,33 +380,34 @@
 	};
 
 	const setGestationalParams = function ($form) {
-		buildInputText("Gestation", [
-			{
-				name: "weeks",
-				display: "Weeks"
-			}, {
-				name: "days",
-				display: "Days",
-				validation: {
-					text: "Days must be between 0 and 6.",
-					func: function (val) {
-						return val < 7;
-					}
-				} 
+		buildInputText("Gestation", [{
+			name: "weeks",
+			display: "Weeks"
+		}, {
+			name: "days",
+			display: "Days",
+			validation: {
+				text: "Days must be between 0 and 6.",
+				func: function (val) {
+					return val < 7;
+				}
 			}
-		]).appendTo($form);
-		buildInputText("Weight", [{name: "weight", display: "Weight (grams)"}]).appendTo($form);
+		}]).appendTo($form);
+		buildInputText("Weight", [{
+			name: "weight",
+			display: "Weight (grams)"
+		}]).appendTo($form);
 	};
 
 	const copyFunction = function ($textArea) {
 		return function (evt) {
 
 			navigator.clipboard.write([
-		        new ClipboardItem({
-		            "text/plain": $textArea.text(),
-		            "text/html": $textArea.html()
-		        }),
-		    ]);
+				new ClipboardItem({
+					"text/plain": $textArea.text(),
+					"text/html": $textArea.html()
+				}),
+			]);
 
 			// const copyText = $textArea.text();
 			// const textArea = document.createElement('textarea');
@@ -442,31 +528,31 @@
 
 		arr.forEach(function (cmd) {
 			switch (cmd.type) {
-				case "header":
-					styleString.push("margin-left:" + ((currentIndent - 1) * 0.5) + "in;");
-					str += cmd.value + strBreak;
+			case "header":
+				styleString.push("margin-left:" + ((currentIndent - 1) * 0.5) + "in;");
+				str += cmd.value + strBreak;
+				break;
+			case "text":
+				styleString.push("text-indent:-.5in;margin-left:" + (1 + (currentIndent - 1) * 0.5) + "in;");
+				str += "--" + tabChar + cmd.value + strBreak;
+				break;
+			case "format":
+				switch (cmd.value) {
+				case "indent":
+					currentIndent += 1;
 					break;
-				case "text":
-					styleString.push("text-indent:-.5in;margin-left:" + (1 + (currentIndent - 1) * 0.5) + "in;");
-					str += "--" + tabChar + cmd.value + strBreak;
+				case "outdent":
+					currentIndent -= 1;
 					break;
-				case "format":
-					switch (cmd.value) {
-						case "indent":
-							currentIndent += 1;
-							break;
-						case "outdent":
-							currentIndent -= 1;
-							break;
-					}
-					break;
-				case "replace":
-					let regex = new RegExp(cmd.value.replace.replace(/([^\w\s])/ig, "\\$1"));
-					str = str.replace(regex, cmd.value.replaceStr);
-					break;
-				case "comment":
-					comment += cmd.value + "\n\n";
-					break;
+				}
+				break;
+			case "replace":
+				let regex = new RegExp(cmd.value.replace.replace(/([^\w\s])/ig, "\\$1"));
+				str = str.replace(regex, cmd.value.replaceStr);
+				break;
+			case "comment":
+				comment += cmd.value + "\n\n";
+				break;
 			}
 		});
 
@@ -534,11 +620,77 @@
 	const clearDups = function (id, arr) {
 		let out = [];
 		arr.forEach(function (row) {
-			if(!row.hasOwnProperty('spec') && row.spec !== id) {
+			if (!row.hasOwnProperty('spec') && row.spec !== id) {
 				out.push(row);
 			}
 		});
 		return out;
+	};
+
+	const getUmbilicalCmds = function (resp) {
+		let cmdArr = [];
+		let ulength = getValue(resp, "ulen");
+		let ucoils = getValue(resp, "ucoils");
+		let uvessels = getValue(resp, "uvess");
+
+		let umbFinds = getValue(resp, "8d1bbb1d-435c-4612-9777-391758591e11") ||
+			getValue(resp, "5a89b6e1-6317-4b27-a93b-93b8728c6039") ||
+			getValue(resp, "acd227c3-a0b9-4554-b733-421389103b74") ||
+			"none";
+
+		let starter = "";
+
+		console.log("length, coils", ulength, ucoils);
+
+		if ((ulength || ucoils === 0) && (ucoils || ucoils === 0)) {
+			let ratio = ucoils / ulength;
+			if (ratio < 0.1) {
+				starter += "HYPOCOILED ";
+			} else if (ratio > 0.3) {
+				starter += "HYPERCOILED ";
+			}
+		}
+
+		console.log(uvessels);
+
+		switch (uvessels) {
+		case "1":
+			starter += "ONE";
+			break;
+		case "2":
+			starter += "TWO";
+			break;
+		case "3":
+			starter += "THREE";
+			break;
+		}
+
+		cmdArr.push({
+			type: "replace",
+			value: {
+				replace: "[#N#]",
+				replaceStr: starter
+			}
+		});
+
+		if (umbFinds === "none") {
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[### NO ABNORMALITIES ###]",
+					replaceStr: "NO SIGNIFICANT HISTOLOGIC ABNORMALITY"
+				}
+			});
+		} else {
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[### NO ABNORMALITIES ###]",
+					replaceStr: "WITH INFLAMMATION AS DESCRIBED ABOVE"
+				}
+			});
+		}
+		return cmdArr;
 	};
 
 	const collapseCommands = function (commands) {
@@ -627,7 +779,7 @@
 		// console.log(commandsCollapsed, "linerized");
 
 		// return the commands
-		return commandsCollapsed;	
+		return commandsCollapsed;
 	};
 
 	const respondToChanges = function (data, $form, $addOpts, $response, $headerOpts) {
@@ -675,14 +827,18 @@
 				// add twin options
 				$membraneOption.appendTo($addOpts)
 				addTwinGestationOptions($membraneOption);
-				
+
 				// set up other options
 				let $ta = $('<form>').appendTo($addOpts);
-				$("<h4>", {text: gest[0]}).appendTo($ta);
+				$("<h4>", {
+					text: gest[0]
+				}).appendTo($ta);
 				addOtherOptions(data, $ta);
 
 				let $tb = $('<form>').appendTo($addOpts);
-				$("<h4>", {text: gest[1]}).appendTo($tb);
+				$("<h4>", {
+					text: gest[1]
+				}).appendTo($tb);
 				addOtherOptions(data, $tb);
 
 				$gestOpts = [$ta, $tb];
@@ -698,10 +854,10 @@
 				//check if twin status changed
 				let gests = getValue(resp, "gestations");
 				if (gests && gests !== getValue(last, "gestations")) {
-					
+
 					// clear old additional options
 					$addOpts.empty();
-					
+
 					// build gestational options interface
 					buildGestationOptions(gests)
 
@@ -722,41 +878,57 @@
 					getValue(resp, "days") * 1,
 					getValue(resp, "surgery")
 				);
-				
+
 				// build line 1
 				headerCmdArr = headerCmdArr.concat(line1build({
-						weight: getValue(resp, "weight") * 1,
-						age: getValue(resp, "weeks") * 1,
-						membrane: getValue(resp, "membrane"),
-						tgestation: gests !== gestationOptions[0],
-						meconium: getValue(resp, "mstaining") === "Present"
+					weight: getValue(resp, "weight") * 1,
+					age: getValue(resp, "weeks") * 1,
+					membrane: getValue(resp, "membrane"),
+					tgestation: gests !== gestationOptions[0],
+					meconium: getValue(resp, "mstaining") === "Present"
 				}, data));
 
 				let cmdResponses = [
 					executeCommands(headerCmdArr)
 				];
 
-				if (gest.length > 1) {
-					gest.forEach(function (label, ind) {
-						let twinCmdArr = buildSpecFindings(data, getResp(ind).filter(filterUUIDNames));
 
-						if (twinCmdArr.length > 0) {
-							// add in twin a/b ; 1/2
-							twinCmdArr.unshift({type: "header", value: label.toUpperCase()});
+				gest.forEach(function (label, ind) {
+					let cmdArr = [];
+					let finalResp = getResp();
+					if (gest.length > 1) {
+						finalResp = getResp(ind);
+						cmdArr.push({
+							type: "format",
+							value: "indent"
+						});
+						cmdArr.push({
+							type: "header",
+							value: label.toUpperCase()
+						});
+						cmdArr = cmdArr.concat(buildSpecFindings(data, finalResp.filter(filterUUIDNames)));
+					} else {
+						cmdArr = buildSpecFindings(data, finalResp.filter(filterUUIDNames));
+					}
 
-							// add in spacing for all below
-							twinCmdArr.unshift({type: "format", value: "indent"});
-
-							// execute the commands
-							cmdResponses.push(executeCommands(twinCmdArr));
-						}
+					cmdArr.push({
+						type: "text",
+						value: "AMNIOTIC MEMBRANES WITH [###]"
 					});
-				} else {
-					let specCmdArr = buildSpecFindings(data, resp.filter(filterUUIDNames));
+					cmdArr.push({
+						type: "text",
+						value: "TERMINAL VILLI [### APPROPRIATE FOR GESTATIONAL AGE ###]"
+					});
+					cmdArr.push({
+						type: "text",
+						value: "[#N#]-VESSEL UMBILICAL CORD WITH [### NO ABNORMALITIES ###]"
+					});
 
-					// execute the commands
-					cmdResponses.push(executeCommands(specCmdArr));
-				}
+					cmdArr = cmdArr.concat(getUmbilicalCmds(finalResp));
+
+					cmdResponses.push(executeCommands(cmdArr));
+				});
+
 
 				// add elements to response
 				$response.append(cmdResponses);
@@ -770,7 +942,7 @@
 		// let id = randomID();
 		return $('<button>', {
 			class: "btn btn-outline-primary",
-			type: "button", 
+			type: "button",
 			"data-bs-toggle": "collapse",
 			"data-bs-target": "#" + tid,
 			"aria-expanded": "false",
@@ -801,16 +973,18 @@
 		} else {
 			that.parent().parent().parent().find("[label='None']").prop('checked', false);
 		}
-		
+
 		//turn sister elements off
 		that.parent().children('.form-check').find('input').prop('checked', false);
-		
+
 		//turn target element on
 		target.prop('checked', true);
 	};
 
 	const buildSwitch = function (item, depth) {
-		let $switch = $('<div>', {class: "form-check form-switch opt" + depth});
+		let $switch = $('<div>', {
+			class: "form-check form-switch opt" + depth
+		});
 		let tid = randomID();
 		$('<input>', {
 			class: "form-check-input",
@@ -828,7 +1002,10 @@
 	};
 
 	const basicLabel = function (item, depth) {
-		return $('<div>', {class: "opt" + depth, html: item.label});
+		return $('<div>', {
+			class: "opt" + depth,
+			html: item.label
+		});
 	};
 
 	const addLink = function (nameIn) {
@@ -927,12 +1104,14 @@
 
 			// add description
 			if (item.description && item.description.length) {
-				optRowAppends.push($('<p>', {html: item.description}));
+				optRowAppends.push($('<p>', {
+					html: item.description
+				}));
 			}
 
 			// go deeper as needed
 			if (item.options && item.options.length) {
-				optRowAppends.push(buildOptions(item.options, depth + 1)); 
+				optRowAppends.push(buildOptions(item.options, depth + 1));
 			}
 
 			//hide as needed
@@ -956,28 +1135,40 @@
 	};
 
 	const addOtherOptions = function (data, $form) {
-		// buildInputText("Umbilical Cord", [{
-		// 	name: "ulen",
-		// 	display: "Length (cm)"
-		// }, {
-		// 	name: "ucoils",
-		// 	display: "Number of Coils"
-		// }]).appendTo($form);
+		buildInputText("Umbilical Cord", [{
+			name: "ulen",
+			display: "Length (cm)"
+		}, {
+			name: "ucoils",
+			display: "Number of Coils"
+		}]).appendTo($form);
 
-		// buildRadio("Umbilical Vessels", "uvess", [3, 2, 1]).appendTo(
-		// 	$('<div>', {class: "row"}).appendTo($form)
-		// );
+		buildRadio("Umbilical Vessels", "uvess", [3, 2, 1]).appendTo(
+			$('<div>', {
+				class: "row"
+			}).appendTo($form)
+		);
 
 		//Break remaining page into header column and content column
-		let $specFinds = $('<div>', {class: "col-sm-9 col-xs-12"});
-		$('<div>', {class: "row"}).append(
-			$('<label>', {class: "h3 col-sm-3 col-xs-12 col-form-label", text: "Special Findings"})
+		let $specFinds = $('<div>', {
+			class: "col-sm-9 col-xs-12"
+		});
+		$('<div>', {
+			class: "row"
+		}).append(
+			$('<label>', {
+				class: "h3 col-sm-3 col-xs-12 col-form-label",
+				text: "Special Findings"
+			})
 		).append(
 			$specFinds
 		).appendTo($form);
 
 		//Start building options
-		buildOptions(data.options, 0).appendTo($('<div>', {class: "container", style: "padding-left:6px;padding-right:6px;"}).appendTo($specFinds));
+		buildOptions(data.options, 0).appendTo($('<div>', {
+			class: "container",
+			style: "padding-left:6px;padding-right:6px;"
+		}).appendTo($specFinds));
 	};
 
 	const buildPage = function (data) {
@@ -990,28 +1181,43 @@
 
 		// Twin gestation options
 		buildRadio("Gestational Number", "gestations", gestationOptions).appendTo(
-			$("<div>", {class: "row"}).appendTo($headOpts)
+			$("<div>", {
+				class: "row"
+			}).appendTo($headOpts)
 		);
 
 		// set up basic options
-		setGestationalParams($("<div>", {style: "margin-bottom:10px"}).appendTo($headOpts));
+		setGestationalParams($("<div>", {
+			style: "margin-bottom:10px"
+		}).appendTo($headOpts));
 
 		// set up type
 		buildRadio("Delivery Type", "surgery", ["Vaginal Delivery", "Cesarean Section"]).appendTo(
-			$("<div>", {class: "row"}).appendTo($headOpts)
+			$("<div>", {
+				class: "row"
+			}).appendTo($headOpts)
 		);
 
 		// set up staining
 		buildRadio("Meconium Staining", "mstaining", ["None", "Present"]).appendTo(
-			$("<div>", {class: "row"}).appendTo($headOpts)
+			$("<div>", {
+				class: "row"
+			}).appendTo($headOpts)
 		);
 
 		// add in other options area
-		let $otherOpts = $("<form>", {id: "addOpts:-)"}).appendTo($form);
+		let $otherOpts = $("<form>", {
+			id: "addOpts:-)"
+		}).appendTo($form);
 
 		//build response area
-		$('<hr>', {class: "col-sm-12"}).appendTo($main);
-		let $response = $('<table>', {class: "msword", id: "responseText"});
+		$('<hr>', {
+			class: "col-sm-12"
+		}).appendTo($main);
+		let $response = $('<table>', {
+			class: "msword",
+			id: "responseText"
+		});
 
 		// copy button
 		// $("<button>", {class: "btn btn-success", text: "Copy Diagnosis"}).click(copyFunction($response)).appendTo(
@@ -1022,20 +1228,20 @@
 		//add in response area
 		$response.appendTo($main);
 		let $responseText = $('<div>').appendTo($response);
-		
+
 		//Add in some empty lines
 		$response.append($emptyLine);
 		$response.append($emptyLine);
 
 		//Add in vertical line
 		$response.append('<td style="width:100%;display:block;"><div style="mso-element:para-border-div; border-top:solid windowtext 2.25pt;"><p class="p" style="margin:0in 0in 0in 0in; padding:0in 0in 0in 0in; mso-border-top-alt:solid windowtext 2.25pt; mso-padding-alt:0in 0in 0in 0in">&nbsp;</p></div></td>');
-		
+
 		//Add in comment line
 		$response.append(
-			'<p class="MsoNormal">'
-			+ '<b>COMMENT:</b> '
-			+ '<span id="commentStringHolder">[#]</span>'
-			+ "</p>"
+			'<p class="MsoNormal">' +
+			'<b>COMMENT:</b> ' +
+			'<span id="commentStringHolder">[#]</span>' +
+			"</p>"
 		);
 
 		// set up response to changes
