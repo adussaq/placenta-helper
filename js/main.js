@@ -315,13 +315,22 @@
 
 	const copyFunction = function ($textArea) {
 		return function (evt) {
-			const copyText = $textArea.text();
-			const textArea = document.createElement('textarea');
-			textArea.textContent = copyText;
-			textArea.style = "position: absolute;left: -100%;font-weight: bold;";
-			document.body.append(textArea);
-			textArea.select();
-			document.execCommand("copy");		
+
+			navigator.clipboard.write([
+		        new ClipboardItem({
+		            "text/plain": $textArea.text(),
+		            "text/html": $textArea.html()
+		        }),
+		    ]);
+
+			// const copyText = $textArea.text();
+			// const textArea = document.createElement('textarea');
+			// textArea.textContent = copyText;
+			// textArea.style = "position: absolute;left: -100%;font-weight: bold;";
+			// document.body.append(textArea);
+			// textArea.select();
+			// document.execCommand("copy");
+
 		};
 	};
 
