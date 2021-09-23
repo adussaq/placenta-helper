@@ -1028,7 +1028,7 @@
 		$response.append($emptyLine);
 
 		//Add in vertical line
-		$response.append('<div style="mso-element:para-border-div; border-top:solid windowtext 2.25pt;"><p class="p" style="margin:0in 0in 0in 0in; padding:0in 0in 0in 0in; mso-border-top-alt:solid windowtext 2.25pt; mso-padding-alt:0in 0in 0in 0in">&nbsp;</p></div>')
+		$response.append('<td style="width:100%;display:block;"><div style="mso-element:para-border-div; border-top:solid windowtext 2.25pt;"><p class="p" style="margin:0in 0in 0in 0in; padding:0in 0in 0in 0in; mso-border-top-alt:solid windowtext 2.25pt; mso-padding-alt:0in 0in 0in 0in">&nbsp;</p></div></td>');
 		
 		//Add in comment line
 		$response.append(
