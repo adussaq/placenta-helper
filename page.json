@@ -2704,6 +2704,24 @@
 					"collapsed":false,
 					"options":[
 						{
+							"label":"Decidual laminar necrosis",
+							"report":[
+								{
+									"type":"text",
+									"value":"DECIDUAL LAMINAR NECROSIS"
+								}
+							],
+							"name":"b6001f18-03df-4f40-bd0a-b42ebf9b6b08",
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"hidden":false,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
 							"label":"Decidual arteriopathy",
 							"name":"28999839-68e5-4b67-82fb-01f2ed4ed026",
 							"description":"",
@@ -2834,24 +2852,6 @@
 										
 									]
 								}
-							]
-						},
-						{
-							"label":"Decidual laminar necrosis",
-							"report":[
-								{
-									"type":"text",
-									"value":"DECIDUAL LAMINAR NECROSIS"
-								}
-							],
-							"name":"b6001f18-03df-4f40-bd0a-b42ebf9b6b08",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"hidden":false,
-							"collapsed":false,
-							"options":[
-								
 							]
 						}
 					]
