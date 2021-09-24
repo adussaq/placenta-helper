@@ -201,6 +201,8 @@
 						percentileStr += "-" + addEnding(match.percentiles[group + 1].percentile);
 					}
 
+					percentileStr += " PERCENTILE";
+
 					// add LFGA/SFGA
 					if (percentile < 10 || (percentile === 10 && lessThan)) {
 						cmdArr.push({type: 'text', value: "SMALL FOR GESTATIONAL AGE"});
@@ -225,7 +227,7 @@
 				cmdArr.push({
 					type: "replace",
 					value: {
-						replace: "[#PER#]",
+						replace: "[#PER#] PERCENTILE",
 						replaceStr: percentileStr
 					}
 				});
