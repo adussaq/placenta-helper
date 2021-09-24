@@ -125,13 +125,21 @@
 		return trimester;
 	}
 
-	const getPercentile = function (data, weight, age) {
+	const getPercentile = function (data, weight, age, twin) {
 		weight = weight || 0;
 		age = age || 0;
 		let percentileStr = "";
+		let cmdArr = [];
+		let lessThan = false;
+		let greaterThan = false;
+		let objSearch = data.weight.singleton;
 
-		if (weight > 0 && age > 0) {
-			let match = data.weight.singleton.find(function (obj) {
+		if (twin) {
+			objSearch = data.weight.twin;
+		}
+		
+		if (weight > 0 && age > 9) {
+			let match = objSearch.find(function (obj) {
 				return obj.weeks === age;
 			});
 			if (match) {
@@ -142,36 +150,80 @@
 					}
 				});
 
-				// adjust group number
+				// adjust group number 
 				if (group === -2) { // adjust for > last percentile
 					group = match.percentiles.length - 1;
+					if (weight > match.percentiles[group].weight) {
+						greaterThan = true;
+					}
+				}
+				if (group === -1) { // adjust for < first percentile
+					group = 0;
+					lessThan = true;
 				}
 
-				// set percentile sentence
-				if (group === -1) {
-					group = 0;
-					percentileStr += "LESS THAN " + match.percentiles[group].percentile;
-					if (match.percentiles[group] === 3) {
-						percentileStr += "RD";
-					} else {
-						percentileStr += "TH";
-					}
-				} else if (group === match.percentiles.length - 1) {
-					if (match.percentiles[group].weight < weight) {
+				// get percentile
+				let percentile = match.percentiles[group].percentile;
+
+				// generate text
+				if (age > 20 || twin) { // For > 20 weeks for singletons
+					// add greater than/less than 
+					if (greaterThan) {
 						percentileStr += "GREATER THAN ";
+					} else if (lessThan) {
+						percentileStr += "LESS THAN ";
 					}
-					percentileStr += match.percentiles[group].percentile + "TH";
-				} else {
-					percentileStr += match.percentiles[group].percentile;
-					if (match.percentiles[group] === 3) {
-						percentileStr += "RD";
-					} else {
-						percentileStr += "TH";
+					
+					// add percentile to string
+					percentileStr += percentile;
+
+					// add st/nd/rd/th
+					switch (percentileStr[percentileStr.length -1]) {
+						case "1":
+							percentileStr += "ST";
+							break;
+						case "2":
+							percentileStr += "ND";
+							break;
+						case "3":
+							percentileStr += "RD";
+							break;
+						default:
+							percentileStr += "TH";
+							break;
+					}
+
+					// add LFGA/SFGA
+					if (percentile < 10 || (percentile === 10 && lessThan)) {
+						cmdArr.push({type: 'text', value: "SMALL FOR GESTATIONAL AGE"});
+					} else if (percentile > 90 || (percentile === 90 && greaterThan)) {
+						cmdArr.push({type: 'text', value: "LARGE FOR GESTATIONAL AGE"});
+					}
+				} else { // for <= 20 weeks for singleton
+
+					//Less complicated analysis, just is it within the 95% confidence interval
+					if (percentile < 5 || (percentile === 5 && lessThan)) {
+						cmdArr.push({type: 'text', value: "SMALL FOR GESTATIONAL AGE"});
+						percentileStr += "BELOW 95 PERCENT CONFIDENCE INTERVAL";
+					} else if (percentile > 95 || (percentile === 95 && greaterThan)) {
+						cmdArr.push({type: 'text', value: "LARGE FOR GESTATIONAL AGE"});
+						percentileStr += "ABOVE 95 PERCENT CONFIDENCE INTERVAL";
+					} else  {
+						percentileStr += "WITHIN 95 PERCENT CONFIDENCE INTERVAL";
 					}
 				}
+				
+				// add replace to the string
+				cmdArr.push({
+					type: "replace",
+					value: {
+						replace: "[#PER#]",
+						replaceStr: percentileStr
+					}
+				});
 			}
 		}
-		return percentileStr;
+		return cmdArr;
 	}
 
 	const line1build = function (formData, data) {
@@ -236,14 +288,7 @@
 
 		//percentile
 		if (formData.weight && formData.age) {
-			let perStr = getPercentile(data, formData.weight, formData.age);
-			cmdArr.push({
-				type: "replace",
-				value: {
-					replace: "[#PER#]",
-					replaceStr: perStr
-				}
-			});
+			cmdArr = cmdArr.concat(getPercentile(data, formData.weight, formData.age, formData.tgestation));
 		}
 
 		return cmdArr;

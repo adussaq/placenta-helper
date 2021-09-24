@@ -1,6 +1,6 @@
 {
 	"weight":{
-		"singleton":[
+		"singleton": [
 			{
 				"ref":{
 					"n":2,
@@ -11,40 +11,8 @@
 				"weeks":10,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":0.8
-					},
-					{
-						"percentile":5,
-						"weight":0.9
-					},
-					{
-						"percentile":10,
-						"weight":1.1
-					},
-					{
-						"percentile":25,
-						"weight":1.3
-					},
-					{
-						"percentile":50,
-						"weight":1.6
-					},
-					{
-						"percentile":75,
-						"weight":1.9
-					},
-					{
-						"percentile":90,
-						"weight":2.1
-					},
-					{
 						"percentile":95,
-						"weight":2.3
-					},
-					{
-						"percentile":97,
-						"weight":2.4
+						"weight":3.7
 					}
 				]
 			},
@@ -58,40 +26,12 @@
 				"weeks":11,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":7.7
-					},
-					{
 						"percentile":5,
-						"weight":8.6
-					},
-					{
-						"percentile":10,
-						"weight":10.1
-					},
-					{
-						"percentile":25,
-						"weight":12.5
-					},
-					{
-						"percentile":50,
-						"weight":15.2
-					},
-					{
-						"percentile":75,
-						"weight":17.9
-					},
-					{
-						"percentile":90,
-						"weight":20.3
+						"weight":13.3
 					},
 					{
 						"percentile":95,
-						"weight":21.8
-					},
-					{
-						"percentile":97,
-						"weight":22.7
+						"weight":17
 					}
 				]
 			},
@@ -105,40 +45,12 @@
 				"weeks":12,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":20.4
-					},
-					{
 						"percentile":5,
-						"weight":21.4
-					},
-					{
-						"percentile":10,
-						"weight":23.1
-					},
-					{
-						"percentile":25,
-						"weight":25.8
-					},
-					{
-						"percentile":50,
-						"weight":28.8
-					},
-					{
-						"percentile":75,
-						"weight":31.8
-					},
-					{
-						"percentile":90,
-						"weight":34.5
+						"weight":27.2
 					},
 					{
 						"percentile":95,
-						"weight":36.2
-					},
-					{
-						"percentile":97,
-						"weight":37.2
+						"weight":30.4
 					}
 				]
 			},
@@ -152,40 +64,12 @@
 				"weeks":13,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":35.6
-					},
-					{
 						"percentile":5,
-						"weight":36.4
-					},
-					{
-						"percentile":10,
-						"weight":37.7
-					},
-					{
-						"percentile":25,
-						"weight":39.8
-					},
-					{
-						"percentile":50,
-						"weight":42.2
-					},
-					{
-						"percentile":75,
-						"weight":44.6
-					},
-					{
-						"percentile":90,
-						"weight":46.7
+						"weight":41.1
 					},
 					{
 						"percentile":95,
-						"weight":48
-					},
-					{
-						"percentile":97,
-						"weight":48.8
+						"weight":43.8
 					}
 				]
 			},
@@ -199,40 +83,12 @@
 				"weeks":14,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":48
-					},
-					{
 						"percentile":5,
-						"weight":49
-					},
-					{
-						"percentile":10,
-						"weight":50.5
-					},
-					{
-						"percentile":25,
-						"weight":53.2
-					},
-					{
-						"percentile":50,
-						"weight":56.1
-					},
-					{
-						"percentile":75,
-						"weight":59
-					},
-					{
-						"percentile":90,
-						"weight":61.7
+						"weight":54.8
 					},
 					{
 						"percentile":95,
-						"weight":63.2
-					},
-					{
-						"percentile":97,
-						"weight":64.2
+						"weight":57.3
 					}
 				]
 			},
@@ -246,40 +102,12 @@
 				"weeks":15,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":60.2
-					},
-					{
 						"percentile":5,
-						"weight":61.4
-					},
-					{
-						"percentile":10,
-						"weight":63.2
-					},
-					{
-						"percentile":25,
-						"weight":66.3
-					},
-					{
-						"percentile":50,
-						"weight":69.7
-					},
-					{
-						"percentile":75,
-						"weight":73.1
-					},
-					{
-						"percentile":90,
-						"weight":76.2
+						"weight":68.4
 					},
 					{
 						"percentile":95,
-						"weight":78
-					},
-					{
-						"percentile":97,
-						"weight":79.2
+						"weight":71
 					}
 				]
 			},
@@ -293,40 +121,12 @@
 				"weeks":16,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":74.5
-					},
-					{
 						"percentile":5,
-						"weight":75.6
-					},
-					{
-						"percentile":10,
-						"weight":77.3
-					},
-					{
-						"percentile":25,
-						"weight":80.1
-					},
-					{
-						"percentile":50,
-						"weight":83.3
-					},
-					{
-						"percentile":75,
-						"weight":86.5
-					},
-					{
-						"percentile":90,
-						"weight":89.3
+						"weight":81.8
 					},
 					{
 						"percentile":95,
-						"weight":91
-					},
-					{
-						"percentile":97,
-						"weight":92.1
+						"weight":84.4
 					}
 				]
 			},
@@ -340,40 +140,12 @@
 				"weeks":17,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":86.8
-					},
-					{
 						"percentile":5,
-						"weight":88.1
-					},
-					{
-						"percentile":10,
-						"weight":90
-					},
-					{
-						"percentile":25,
-						"weight":93.3
-					},
-					{
-						"percentile":50,
-						"weight":96.9
-					},
-					{
-						"percentile":75,
-						"weight":100.5
-					},
-					{
-						"percentile":90,
-						"weight":103.8
+						"weight":95.2
 					},
 					{
 						"percentile":95,
-						"weight":105.7
-					},
-					{
-						"percentile":97,
-						"weight":107
+						"weight":98.6
 					}
 				]
 			},
@@ -387,40 +159,12 @@
 				"weeks":18,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":99.3
-					},
-					{
 						"percentile":5,
-						"weight":100.7
-					},
-					{
-						"percentile":10,
-						"weight":102.9
-					},
-					{
-						"percentile":25,
-						"weight":106.5
-					},
-					{
-						"percentile":50,
-						"weight":110.5
-					},
-					{
-						"percentile":75,
-						"weight":114.5
-					},
-					{
-						"percentile":90,
-						"weight":118.1
+						"weight":108.5
 					},
 					{
 						"percentile":95,
-						"weight":120.3
-					},
-					{
-						"percentile":97,
-						"weight":121.7
+						"weight":112.5
 					}
 				]
 			},
@@ -434,40 +178,12 @@
 				"weeks":19,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":108.9
-					},
-					{
 						"percentile":5,
-						"weight":110.8
-					},
-					{
-						"percentile":10,
-						"weight":113.8
-					},
-					{
-						"percentile":25,
-						"weight":118.7
-					},
-					{
-						"percentile":50,
-						"weight":124.2
-					},
-					{
-						"percentile":75,
-						"weight":129.7
-					},
-					{
-						"percentile":90,
-						"weight":134.6
+						"weight":121.8
 					},
 					{
 						"percentile":95,
-						"weight":137.6
-					},
-					{
-						"percentile":97,
-						"weight":139.5
+						"weight":126.5
 					}
 				]
 			},
@@ -481,40 +197,12 @@
 				"weeks":20,
 				"percentiles":[
 					{
-						"percentile":3,
-						"weight":131.3
-					},
-					{
 						"percentile":5,
-						"weight":132.1
-					},
-					{
-						"percentile":10,
-						"weight":133.4
-					},
-					{
-						"percentile":25,
-						"weight":135.5
-					},
-					{
-						"percentile":50,
-						"weight":137.8
-					},
-					{
-						"percentile":75,
-						"weight":140.1
-					},
-					{
-						"percentile":90,
-						"weight":142.2
+						"weight":135
 					},
 					{
 						"percentile":95,
-						"weight":143.5
-					},
-					{
-						"percentile":97,
-						"weight":144.3
+						"weight":140.5
 					}
 				]
 			},
@@ -981,7 +669,7 @@
 					},
 					{
 						"percentile":50,
-						"weight":218
+						"weight":318
 					},
 					{
 						"percentile":75,
