@@ -125,6 +125,25 @@
 		return trimester;
 	}
 
+	const addEnding = function (num) {
+		let str = num.toString();
+		switch (str[str.length -1]) {
+			case "1":
+				str += "ST";
+				break;
+			case "2":
+				str += "ND";
+				break;
+			case "3":
+				str += "RD";
+				break;
+			default:
+				str += "TH";
+				break;
+		}
+		return str;
+	};
+
 	const getPercentile = function (data, weight, age, twin) {
 		weight = weight || 0;
 		age = age || 0;
@@ -154,7 +173,7 @@
 				if (group === -2) { // adjust for > last percentile
 					group = match.percentiles.length - 1;
 					if (weight > match.percentiles[group].weight) {
-						greaterThan = true;
+						greaterThan = true; // false if "==" for less than 21 weeks
 					}
 				}
 				if (group === -1) { // adjust for < first percentile
@@ -168,29 +187,18 @@
 				// generate text
 				if (age > 20 || twin) { // For > 20 weeks for singletons
 					// add greater than/less than 
-					if (greaterThan) {
+					if (greaterThan || group === match.percentiles.length - 1) {
+						greaterThan = true; // updated here
 						percentileStr += "GREATER THAN ";
 					} else if (lessThan) {
 						percentileStr += "LESS THAN ";
 					}
 					
 					// add percentile to string
-					percentileStr += percentile;
+					percentileStr += addEnding(percentile);
 
-					// add st/nd/rd/th
-					switch (percentileStr[percentileStr.length -1]) {
-						case "1":
-							percentileStr += "ST";
-							break;
-						case "2":
-							percentileStr += "ND";
-							break;
-						case "3":
-							percentileStr += "RD";
-							break;
-						default:
-							percentileStr += "TH";
-							break;
+					if (!lessThan && !greaterThan) {
+						percentileStr += "-" + addEnding(match.percentiles[group + 1].percentile);
 					}
 
 					// add LFGA/SFGA
