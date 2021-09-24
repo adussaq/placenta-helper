@@ -12,7 +12,43 @@
 		return "ID" + Math.random().toString().replace(/0\./, "");
 	};
 
-	const buildRadio = function (label, name, options, unchecked) {
+	const MEMB_INFO = {
+		"name": "membrane",
+		"image": {
+			"title": "Twin Placenta",
+			"images": [
+				{
+					"title": "Diamniotic-monochorionic twin placenta",
+					"description": "Two amnion layers in contact and no middle chorion layer"
+				}, 
+				{
+					"title": "Diamniotic-dichorionic twin placenta",
+					"description": "Two amnion layers separated by a chorion layer"
+				}
+			]
+		}
+	};
+
+	const MEC_INFO = {
+		"name": "meconium",
+		"image": {
+			"title": "Meconium Staining",
+			"images": [
+				{
+					"title": "Amniocyte necrosis",
+					"description": "Demonstrated by black arrow."
+				},
+				{
+					"title": "Meconium laden macrophage",
+					"description": "Demonstrated by black arrow."
+				}
+			]
+		}
+	};
+
+	const $INFOSTR = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>';
+
+	const buildRadio = function (label, name, options, unchecked, imageinfo) {
 		let $holder = $('<div>', {
 			class: "btn-group mb-3",
 			role: "group"
@@ -23,10 +59,16 @@
 		// let $ret = $('<div>', {class: "input-group mb-3 row"});
 
 		// add label
-		$('<label>', {
+		let $label = $('<label>', {
 			class: "h3 col-3 col-form-label",
 			text: label
-		}).appendTo($holder);
+		});
+
+		if (imageinfo) {
+			createInfo(imageinfo).appendTo($label);
+		}
+
+		$label.appendTo($holder);
 
 		options.forEach(function (opt, i) {
 			let valOpts = {
@@ -69,7 +111,7 @@
 		// $('<h3>', {text: "Membrane Type"}).appendTo($form);
 		$holder.appendTo($form);
 
-		buildRadio("Membrane Type", "membrane", ["Monochorionic Monoamniotic", "Monochorionic Diamniotic", "Dichorionic Diamniotic"], true).appendTo($holder);
+		buildRadio("Membrane Type", "membrane", ["Monochorionic Monoamniotic", "Monochorionic Diamniotic", "Dichorionic Diamniotic"], true, MEMB_INFO).appendTo($holder);
 		// $('<h4>', {text: "Amniosity"}).appendTo($form);
 	};
 
@@ -993,11 +1035,18 @@
 			name: item.name,
 			id: tid
 		}).appendTo($switch);
-		$("<label>", {
+
+		let $label = $("<label>", {
 			class: "form-check-label",
 			for: tid,
 			html: item.label
-		}).appendTo($switch);
+		});
+		if (item.image) {
+			let $info = createInfo(item);
+			$label.append($info);
+		}
+		$label.appendTo($switch);
+
 		return $switch;
 	};
 
@@ -1040,6 +1089,38 @@
 			return ret;
 		}
 	}
+
+	const createInfo = function (item) {
+		let $info = $("<a>", {html: $INFOSTR, style: "margin-left: 5px;", tabindex: "0", "title": item.image.title});
+		let content = item.image.images.map(function (img, ind) {
+			let $body = $("<div>");
+			$("<div>", {class: "h6", html: img.title}).appendTo($body);
+			$("<p>", {html: img.description}).appendTo($body);
+			$("<img>", {class: "img-pop", src: "./img/" + item.name + "/" + ind + ".png", width: "90%"}).appendTo($body);
+			return $body.html();
+		}).join("");
+
+		let placement = "bottom";
+
+		if ($(window).width() > 900) {
+			placement = "right";
+		}
+
+		$info.popover({
+			placement: placement,
+			trigger: 'focus',
+			content: content,
+			html: true,
+			template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body">body text</div></div>'
+		});
+		// let $info = $("<span>",{href: "", html: $INFOSTR, style: "margin-left: 5px;"});
+		$info.click(function (evt) {
+			evt.preventDefault();
+			// <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+			console.log(JSON.stringify(item.image));
+		});
+		return $info;
+	};
 
 	const buildOptions = function (options, depth) {
 		let $ret = $('<div>');
@@ -1092,14 +1173,24 @@
 						name: item.name,
 						id: tid
 					}));
-					optRowAppends.push($("<label>", {
+					let $label = $("<label>", {
 						class: "form-check-label",
 						for: tid,
 						html: item.label
-					}));
+					});
+					if (item.image) {
+						let $info = createInfo(item)
+						$label.append($info);
+					}
+					optRowAppends.push($label);
 				}
 			} else if (!item.collapsed && input !== "switch") { // basic label
-				optRowAppends.push(basicLabel(item, depth));
+				let $label = basicLabel(item, depth);
+				if (item.image) {
+					let $info = createInfo(item);
+					$label.append($info);
+				}
+				optRowAppends.push($label);
 			}
 
 			// add description
@@ -1199,7 +1290,7 @@
 		);
 
 		// set up staining
-		buildRadio("Meconium Staining", "mstaining", ["None", "Present"]).appendTo(
+		buildRadio("Meconium Staining", "mstaining", ["None", "Present"], false, MEC_INFO).appendTo(
 			$("<div>", {
 				class: "row"
 			}).appendTo($headOpts)

@@ -2219,6 +2219,15 @@
 										}
 									],
 									"name":"031213bf-18b2-47e5-a980-c92429712f97",
+									"image": {
+										"title": "Maternal Inflammatory Response",
+										"images": [
+											{
+												"title": "Stage 1 Early",
+												"description": "Neutrophils (arrow) are present in the subchorionic fibrin adjacent to the intervillous space."
+											}
+										]
+									},
 									"description":"<b>Acute subchorionitis or chorionitis:</b> Neutrophils in subchorionic fibrin and/or membrane trophoblast",
 									"input":"radio",
 									"select":true,
@@ -2243,6 +2252,15 @@
 										}
 									],
 									"name":"7a562d51-fb19-422d-b13f-5b38d2934c48",
+									"image": {
+										"title": "Maternal Inflammatory Response",
+										"images": [
+											{
+												"title": "Stage 2 Intermediate",
+												"description": "Neutrophils are present in the chorionic and amnionic regions of the placental membranes."
+											}
+										]
+									},
 									"description":"<b>Acute chorioamnionitis:</b> Diffuse-patchy PMN in the fibrous chorion and/or amnion",
 									"input":"radio",
 									"select":true,
@@ -2267,6 +2285,15 @@
 										}
 									],
 									"name":"3569cdc9-e5d8-4ec1-acfe-437c7f2713d4",
+									"image": {
+										"title": "Maternal Inflammatory Response",
+										"images": [
+											{
+												"title": "Stage 3 Advanced",
+												"description": "Confluent neutrophils present throughout the placental membranes with associated amnion basement membrane thickening and amniocyte necrosis."
+											}
+										]
+									},
 									"description":"<b>Necrotizing chorioamnionitis:</b> PMN karyorrhexis, amniocyte necrosis, and/or amnion basement membrane thickening/hypereosinophilia",
 									"input":"radio",
 									"select":true,
@@ -2286,7 +2313,7 @@
 							"collapsed":false,
 							"options":[
 								{
-									"label":"(1-2) Mild-Moderate",
+									"label":"(1) Mild-Moderate",
 									"report":[
 										{
 											"type":"build",
@@ -2310,7 +2337,7 @@
 									]
 								},
 								{
-									"label":"(3) Severe",
+									"label":"(2) Severe",
 									"report":[
 										{
 											"type":"build",
@@ -2325,6 +2352,15 @@
 										}
 									],
 									"name":"748c659c-ea45-42c0-8f01-fb7717b70746",
+									"image": {
+										"title": "Maternal Inflammatory Response",
+										"images": [
+											{
+												"title": "Severe",
+												"description": "Severe acute chorioamnionitis with formation of confluent neutrophil collections (i.e. microabscesses)."
+											}
+										]
+									},
 									"description":"<b>Severe acute chorioamnionitis or with subchorionic microabscesses:</b> Confluemnt PMN (≥10 × 20 cells in extent) between chorion and decidua; ≥3 isolated foci or continuous band</b> Diffuse-patchy PMN in the fibrous chorion and/or amnion",
 									"input":"radio",
 									"select":true,
@@ -2390,6 +2426,19 @@
 										}
 									],
 									"name":"8d1bbb1d-435c-4612-9777-391758591e11",
+									"image": {
+										"title": "Fetal Inflammatory Response",
+										"images": [
+											{
+												"title": "Grade 1 Early",
+												"description": "Acute chorionic vasculitis: Within the chorionic plate, neutrophils (arrow) are in transit from the chorionic plate vessel towards the amniotic surface at the top of the photo."
+											}, {
+												"title": "Grade 1 Early",
+												"description": "Umbilical phlebitis: Within the umbilical cord neutrophils (arrow) travel through the vessel wall towards Wharton’s jelly."
+											}
+
+										]
+									},
 									"description":"<b>With chorionic vasculitis or umbilical phlebitis:</b> Intramural PMN-chorionic vessels and/or umbilical vein",
 									"input":"radio",
 									"select":true,
@@ -2414,6 +2463,15 @@
 										}
 									],
 									"name":"5a89b6e1-6317-4b27-a93b-93b8728c6039",
+									"image": {
+										"title": "Fetal Inflammatory Response",
+										"images": [
+											{
+												"title": "Grade 2 Intermediate",
+												"description": "Umbilical arteritis: Neutrophils infiltrate the wall of an umbilical artery."
+											}
+										]
+									},
 									"description":"<b>With umbilical vasculitis (one or two arteries ± umbilical vein) or umbilical panvasculitis (all vessels):</b> Intramural PMN-umbilical artery or arteries (± umbilical vein)",
 									"input":"radio",
 									"select":true,
@@ -2438,6 +2496,15 @@
 										}
 									],
 									"name":"acd227c3-a0b9-4554-b733-421389103b74",
+									"image": {
+										"title": "Fetal Inflammatory Response",
+										"images": [
+											{
+												"title": "Grade 3 Advanced",
+												"description": "Necrotizing funisitis: Neutrophils have traversed passed the vessel wall and are found in Wharton jelly along with necrotic debris and sometimes calcium (not shown here)."
+											}
+										]
+									},
 									"description":"<b>With (subacute) necrotizing funisitis or with concentric umbilical perivasculitis:</b> PMN ± associated debris in concentric bands-rings-halos around one or more umbilical vessels",
 									"input":"radio",
 									"select":true,
@@ -2457,7 +2524,7 @@
 							"collapsed":false,
 							"options":[
 								{
-									"label":"(1-2) Mild-Moderate",
+									"label":"(1) Mild-Moderate",
 									"report":[
 										{
 											"type":"build",
@@ -2481,7 +2548,7 @@
 									]
 								},
 								{
-									"label":"(3) Severe",
+									"label":"(2) Severe",
 									"report":[
 										{
 											"type":"build",
@@ -2496,6 +2563,15 @@
 										}
 									],
 									"name":"7fdafe26-e978-4e03-90c5-c2755966f86a",
+									"image": {
+										"title": "Fetal Inflammatory Response",
+										"images": [
+											{
+												"title": "Severe",
+												"description": "Near confluent bands of neutrophilic infiltrate within an umbilical vessel with degermation of the vascular smooth muscle cells in the vessel wall."
+											}
+										]
+									},
 									"description":"<b>With a severe fetal inflammatory response or with intense chorionic (umbilical) vasculitis:</b> Confluemnt PMN (≥10 × 20 cells in extent) between chorion and decidua; ≥3 isolated foci or continuous band</b> Near confluent intramural PMN in chorionic and/or umbilical vessels with attenuation/degeneration of vascular smooth muscle cells",
 									"input":"radio",
 									"select":true,
@@ -2677,11 +2753,11 @@
 							]
 						},
 						{
-							"label":"Retroplacental hemorrhage: Specify size, recent or old",
+							"label":"Retroplacental hemorrhage: Specify size, recent or remote",
 							"report":[
 								{
 									"type":"text",
-									"value":"RETROPLACENTAL HEMATOMA [### SIZE, RECENT OR OLD ###]"
+									"value":"RETROPLACENTAL HEMATOMA [### SIZE, RECENT OR REMOTE ###]"
 								}
 							],
 							"name":"f68b9926-6769-46d5-a4b7-558682446524",
@@ -2743,6 +2819,15 @@
 								{
 									"label":"Mild: non-transformation of spiral arterioles",
 									"name":"c272f0ca-2c4b-40ee-bdfd-e8d627656322",
+									"image": {
+										"title": "Decidual Arteriopathy, mild: non-transformation of spiral arterioles",
+										"images": [
+											{
+												"title": "Decidual arteriopathy",
+												"description": "Mural hypertrophy of decidual maternal vessels is demonstrated in the membrane role, but is often best seen in the basal plate."
+											}
+										]
+									},
 									"report":[
 										{
 											"type":"text",
@@ -2766,6 +2851,18 @@
 										}
 									],
 									"name":"679f38e3-cf7b-4d34-9578-d6009c3aae40",
+									"image": {
+										"title": "Fetal Inflammatory Response: Severe",
+										"images": [
+											{
+												"title": "Acute atherosis",
+												"description": "Lipid-laden macrophages are present within the vessel wall in conjunction with fibrinoid necrosis."
+											}, {
+												"title": "Fibrinoid necrosis",
+												"description": "A small maternal artery demonstrating necrotic wall changes."
+											}
+										]
+									},
 									"description":"",
 									"input":"radio",
 									"select":true,
@@ -2793,6 +2890,16 @@
 										}
 									],
 									"name":"81c7e86f-434f-4646-af93-d9ca63d22ebd",
+									"image": {
+										"title": "Distal villous hypoplasia",
+										"images": [
+											{
+												"title": "Low magnification"
+											}, {
+												"title": "High magnification"
+											}
+										]
+									},
 									"description":"",
 									"input":"checkbox",
 									"select":true,
@@ -2813,6 +2920,18 @@
 									"description":"",
 									"input":"checkbox",
 									"select":true,
+									"image": {
+										"title": "Accelerated villous maturation",
+										"images": [
+											{
+												"title": "Accelerated villous maturation",
+												"description": "24 weeks"
+											}, {
+												"title": "Accelerated villous maturation",
+												"description": "39 weeks"
+											}
+										]
+									},
 									"collapsed":false,
 									"options":[
 										
@@ -2827,6 +2946,14 @@
 										}
 									],
 									"name":"ad7265ec-a92f-4f75-831e-daf9dc234678",
+									"image": {
+										"title": "Syncytial Knots",
+										"images": [
+											{
+												"description": "Defined as aggregates of >5 syncytiotrophoblastic nuclei projecting from the villous surface of a villi. Some of the multiple syncytial knots are denoted by arrows."
+											}
+										]
+									},
 									"description":"",
 									"input":"checkbox",
 									"select":true,
@@ -2865,11 +2992,11 @@
 					"collapsed":false,
 					"options":[
 						{
-							"label":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, HELLP syndrome, hypertension, diabetes melitus, and autoimmunity). There can be increased risk for recurrance in future pregnancies.",
+							"label":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, hemolysis, elevated liver enzymes and low platelets HELLP [hemolysis, elevated liver enzymes and low platelets] syndrome, hypertension, diabetes melitus, and autoimmunity). There can be increased risk for recurrance in future pregnancies.",
 							"report":[
 								{
 									"type":"comment",
-									"value":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, HELLP syndrome, hypertension, diabetes melitus, and autoimmunity). There can be increased risk for recurrance in future pregnancies."
+									"value":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, HELLP [hemolysis, elevated liver enzymes and low platelets] syndrome, hypertension, diabetes melitus, and autoimmunity). There can be increased risk for recurrance in future pregnancies."
 								}
 							],
 							"name":"0dec1257-5ffb-45d0-958d-24691ea3843e",
@@ -4037,6 +4164,13 @@
 								}
 							],
 							"name":"e825425e-4d44-4694-939f-882973046fd3",
+							"image": {
+								"title": "Retromembranous blood",
+								"images": [
+									{},
+									{}
+								]
+							},
 							"description":"",
 							"input":"checkbox",
 							"select":true,
