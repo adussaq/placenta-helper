@@ -333,7 +333,9 @@
 			});
 		}
 
-		if (days) {
+		console.log("DAYS!!!", days);
+
+		if (days || days === 0 || days === "0") {
 			cmdArr.push({
 				type: "replace",
 				value: {
@@ -346,7 +348,7 @@
 				type: "replace",
 				value: {
 					replace: "[#DAYS#] DAYS, ",
-					replaceStr: days
+					replaceStr: ""
 				}
 			});
 		}
@@ -979,8 +981,8 @@
 
 				// build header
 				let headerCmdArr = buildHeader(
-					getValue(resp, "weeks") * 1,
-					getValue(resp, "days") * 1,
+					getValue(resp, "weeks"),
+					getValue(resp, "days"),
 					getValue(resp, "surgery")
 				);
 
