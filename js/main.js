@@ -783,7 +783,7 @@
 				type: "replace",
 				value: {
 					replace: "[### NO ABNORMALITIES ###]",
-					replaceStr: "WITH INFLAMMATION AS DESCRIBED ABOVE"
+					replaceStr: "INFLAMMATION AS DESCRIBED ABOVE"
 				}
 			});
 		}
