@@ -341,6 +341,14 @@
 					replaceStr: days
 				}
 			});
+		} else { // remove days component if no days entered
+			cmdArr.push({
+				type: "replace",
+				value: {
+					replace: "[#DAYS#] DAYS, ",
+					replaceStr: days
+				}
+			});
 		}
 
 		if (type) {
