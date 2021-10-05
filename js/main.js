@@ -14,7 +14,7 @@
 
 	const MEMB_INFO = {
 		"name": "membrane",
-		"image": {
+		"info": {
 			"title": "Twin Placenta",
 			"images": [
 				{
@@ -31,7 +31,7 @@
 
 	const MEC_INFO = {
 		"name": "meconium",
-		"image": {
+		"info": {
 			"title": "Meconium Staining",
 			"images": [
 				{
@@ -332,8 +332,6 @@
 				}
 			});
 		}
-
-		console.log("DAYS!!!", days);
 
 		if (days || days === 0 || days === "0") {
 			cmdArr.push({
@@ -1106,7 +1104,7 @@
 			for: tid,
 			html: item.label
 		});
-		if (item.image) {
+		if (item.info) {
 			let $info = createInfo(item);
 			$label.append($info);
 		}
@@ -1141,12 +1139,13 @@
 			} else if (type === "on") {
 				ret = function (evt) {
 					if (event.target.name === nameIn && event.target.checked) {
-						$('body').find('[name="' + id + '"]').click();
+						$('body').find('[name="' + id + '"]:not([checked])').click();
 					}
 				}
 			} else if (type === "off") {
 				ret = function (evt) {
 					if (event.target.name === nameIn && event.target.checked) {
+						$('body').find('[name="' + id + '"]:checked').click();
 						$('body').find('[name="' + id + '"]:checked').prop("checked", false);
 					}
 				}
@@ -1156,14 +1155,29 @@
 	}
 
 	const createInfo = function (item) {
-		let $info = $("<a>", {html: $INFOSTR, style: "margin-left: 5px;", tabindex: "0", "title": item.image.title});
-		let content = item.image.images.map(function (img, ind) {
-			let $body = $("<div>");
-			$("<div>", {class: "h6", html: img.title}).appendTo($body);
-			$("<p>", {html: img.description}).appendTo($body);
-			$("<img>", {class: "img-pop", src: "./img/" + item.name + "/" + ind + ".png", width: "90%"}).appendTo($body);
-			return $body.html();
-		}).join("");
+		console.log(item);
+		let $info = $("<a>", {html: $INFOSTR, style: "margin-left: 5px;", tabindex: "0", "title": item.info.title});
+		let content = "", content2 = "";
+		if (item.info.hasOwnProperty('images')) {
+			content = item.info.images.map(function (img, ind) {
+				let $body = $("<div>");
+				$("<div>", {class: "h6", html: img.title}).appendTo($body);
+				$("<p>", {html: img.description}).appendTo($body);
+				$("<img>", {class: "img-pop", src: "./img/" + item.name + "/" + ind + ".png", width: "90%"}).appendTo($body);
+				return $body.html();
+			}).join("");
+		}
+
+		if (item.info.hasOwnProperty('description')) {
+			content2 = item.info.description.map(function (img, ind) {
+				let $body = $("<div>");
+				$("<div>", {class: "h6", html: img.title}).appendTo($body);
+				$("<p>", {html: img.description}).appendTo($body);
+				return $body.html();
+			}).join("");
+		}
+
+		
 
 		let placement = "bottom";
 
@@ -1174,7 +1188,7 @@
 		$info.popover({
 			placement: placement,
 			trigger: 'focus',
-			content: content,
+			content: content + content2,
 			html: true,
 			template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body">body text</div></div>'
 		});
@@ -1211,9 +1225,11 @@
 
 			//set up switches
 			if (input === "switch") {
+				console.log(item.description);
 				optRowSettings.class += " form-check";
 				optRowAppends.push(buildSwitch(item, depth));
 				item.select = false;
+				console.log(item.description);
 			}
 
 			//add linked
@@ -1243,8 +1259,8 @@
 						for: tid,
 						html: item.label
 					});
-					if (item.image) {
-						let $info = createInfo(item)
+					if (item.info) {
+						let $info = createInfo(item);
 						$label.append($info);
 					}
 					optRowAppends.push($label);
@@ -1407,7 +1423,12 @@
 		respFunc();
 	};
 
-	fetch("./page.json")
+	let pageJSONURL = "./page.json";
+	if (DEV) {
+		pageJSONURL = "./page-dev.json";
+	}
+
+	fetch(pageJSONURL)
 		.then(a => a.json())
 		.then(buildPage);
 }())

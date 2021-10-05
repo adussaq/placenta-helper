@@ -1,6 +1,6 @@
 {
 	"weight":{
-		"singleton": [
+		"singleton":[
 			{
 				"ref":{
 					"n":2,
@@ -1907,12 +1907,12 @@
 										}
 									],
 									"name":"031213bf-18b2-47e5-a980-c92429712f97",
-									"image": {
-										"title": "Maternal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Maternal Inflammatory Response",
+										"images":[
 											{
-												"title": "Stage 1 Early",
-												"description": "Neutrophils (arrow) are present in the subchorionic fibrin adjacent to the intervillous space."
+												"title":"Stage 1 Early",
+												"description":"Neutrophils (arrow) are present in the subchorionic fibrin adjacent to the intervillous space."
 											}
 										]
 									},
@@ -1940,12 +1940,12 @@
 										}
 									],
 									"name":"7a562d51-fb19-422d-b13f-5b38d2934c48",
-									"image": {
-										"title": "Maternal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Maternal Inflammatory Response",
+										"images":[
 											{
-												"title": "Stage 2 Intermediate",
-												"description": "Neutrophils are present in the chorionic and amnionic regions of the placental membranes."
+												"title":"Stage 2 Intermediate",
+												"description":"Neutrophils are present in the chorionic and amnionic regions of the placental membranes."
 											}
 										]
 									},
@@ -1973,12 +1973,12 @@
 										}
 									],
 									"name":"3569cdc9-e5d8-4ec1-acfe-437c7f2713d4",
-									"image": {
-										"title": "Maternal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Maternal Inflammatory Response",
+										"images":[
 											{
-												"title": "Stage 3 Advanced",
-												"description": "Confluent neutrophils present throughout the placental membranes with associated amnion basement membrane thickening and amniocyte necrosis."
+												"title":"Stage 3 Advanced",
+												"description":"Confluent neutrophils present throughout the placental membranes with associated amnion basement membrane thickening and amniocyte necrosis."
 											}
 										]
 									},
@@ -2040,12 +2040,12 @@
 										}
 									],
 									"name":"748c659c-ea45-42c0-8f01-fb7717b70746",
-									"image": {
-										"title": "Maternal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Maternal Inflammatory Response",
+										"images":[
 											{
-												"title": "Severe",
-												"description": "Severe acute chorioamnionitis with formation of confluent neutrophil collections (i.e. microabscesses)."
+												"title":"Severe",
+												"description":"Severe acute chorioamnionitis with formation of confluent neutrophil collections (i.e. microabscesses)."
 											}
 										]
 									},
@@ -2114,17 +2114,17 @@
 										}
 									],
 									"name":"8d1bbb1d-435c-4612-9777-391758591e11",
-									"image": {
-										"title": "Fetal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Fetal Inflammatory Response",
+										"images":[
 											{
-												"title": "Grade 1 Early",
-												"description": "Acute chorionic vasculitis: Within the chorionic plate, neutrophils (arrow) are in transit from the chorionic plate vessel towards the amniotic surface at the top of the photo."
-											}, {
-												"title": "Grade 1 Early",
-												"description": "Umbilical phlebitis: Within the umbilical cord neutrophils (arrow) travel through the vessel wall towards Wharton’s jelly."
+												"title":"Grade 1 Early",
+												"description":"Acute chorionic vasculitis: Within the chorionic plate, neutrophils (arrow) are in transit from the chorionic plate vessel towards the amniotic surface at the top of the photo."
+											},
+											{
+												"title":"Grade 1 Early",
+												"description":"Umbilical phlebitis: Within the umbilical cord neutrophils (arrow) travel through the vessel wall towards Wharton’s jelly."
 											}
-
 										]
 									},
 									"description":"<b>With chorionic vasculitis or umbilical phlebitis:</b> Intramural PMN-chorionic vessels and/or umbilical vein",
@@ -2151,12 +2151,12 @@
 										}
 									],
 									"name":"5a89b6e1-6317-4b27-a93b-93b8728c6039",
-									"image": {
-										"title": "Fetal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Fetal Inflammatory Response",
+										"images":[
 											{
-												"title": "Grade 2 Intermediate",
-												"description": "Umbilical arteritis: Neutrophils infiltrate the wall of an umbilical artery."
+												"title":"Grade 2 Intermediate",
+												"description":"Umbilical arteritis: Neutrophils infiltrate the wall of an umbilical artery."
 											}
 										]
 									},
@@ -2184,12 +2184,12 @@
 										}
 									],
 									"name":"acd227c3-a0b9-4554-b733-421389103b74",
-									"image": {
-										"title": "Fetal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Fetal Inflammatory Response",
+										"images":[
 											{
-												"title": "Grade 3 Advanced",
-												"description": "Necrotizing funisitis: Neutrophils have traversed passed the vessel wall and are found in Wharton jelly along with necrotic debris and sometimes calcium (not shown here)."
+												"title":"Grade 3 Advanced",
+												"description":"Necrotizing funisitis: Neutrophils have traversed passed the vessel wall and are found in Wharton jelly along with necrotic debris and sometimes calcium (not shown here)."
 											}
 										]
 									},
@@ -2251,12 +2251,12 @@
 										}
 									],
 									"name":"7fdafe26-e978-4e03-90c5-c2755966f86a",
-									"image": {
-										"title": "Fetal Inflammatory Response",
-										"images": [
+									"info":{
+										"title":"Fetal Inflammatory Response",
+										"images":[
 											{
-												"title": "Severe",
-												"description": "Near confluent bands of neutrophilic infiltrate within an umbilical vessel with degermation of the vascular smooth muscle cells in the vessel wall."
+												"title":"Severe",
+												"description":"Near confluent bands of neutrophilic infiltrate within an umbilical vessel with degermation of the vascular smooth muscle cells in the vessel wall."
 											}
 										]
 									},
@@ -2424,11 +2424,11 @@
 							]
 						},
 						{
-							"label":"Placental infarct: specify number, percent of disc volume, recent or old",
+							"label":"Placental infarct: specify number, percent of disc volume, recent or remote",
 							"report":[
 								{
 									"type":"text",
-									"value":"PLACENTAL INFARCT: [### NUMBER, X% OF DISC VOLUME, RECENT OR OLD ###]"
+									"value":"PLACENTAL INFARCT: [### NUMBER, X% OF DISC VOLUME, RECENT OR REMOTE ###]"
 								}
 							],
 							"name":"a0fce4ae-f134-4337-bd10-d7585a768d3d",
@@ -2507,12 +2507,12 @@
 								{
 									"label":"Mild: non-transformation of spiral arterioles",
 									"name":"c272f0ca-2c4b-40ee-bdfd-e8d627656322",
-									"image": {
-										"title": "Decidual Arteriopathy, mild: non-transformation of spiral arterioles",
-										"images": [
+									"info":{
+										"title":"Decidual Arteriopathy, mild: non-transformation of spiral arterioles",
+										"images":[
 											{
-												"title": "Decidual arteriopathy",
-												"description": "Mural hypertrophy of decidual maternal vessels is demonstrated in the membrane role, but is often best seen in the basal plate."
+												"title":"Decidual arteriopathy",
+												"description":"Mural hypertrophy of decidual maternal vessels is demonstrated in the membrane role, but is often best seen in the basal plate."
 											}
 										]
 									},
@@ -2539,15 +2539,16 @@
 										}
 									],
 									"name":"679f38e3-cf7b-4d34-9578-d6009c3aae40",
-									"image": {
-										"title": "Fetal Inflammatory Response: Severe",
-										"images": [
+									"info":{
+										"title":"Fetal Inflammatory Response: Severe",
+										"images":[
 											{
-												"title": "Acute atherosis",
-												"description": "Lipid-laden macrophages are present within the vessel wall in conjunction with fibrinoid necrosis."
-											}, {
-												"title": "Fibrinoid necrosis",
-												"description": "A small maternal artery demonstrating necrotic wall changes."
+												"title":"Acute atherosis",
+												"description":"Lipid-laden macrophages are present within the vessel wall in conjunction with fibrinoid necrosis."
+											},
+											{
+												"title":"Fibrinoid necrosis",
+												"description":"A small maternal artery demonstrating necrotic wall changes."
 											}
 										]
 									},
@@ -2578,13 +2579,14 @@
 										}
 									],
 									"name":"81c7e86f-434f-4646-af93-d9ca63d22ebd",
-									"image": {
-										"title": "Distal villous hypoplasia",
-										"images": [
+									"info":{
+										"title":"Distal villous hypoplasia",
+										"images":[
 											{
-												"title": "Low magnification"
-											}, {
-												"title": "High magnification"
+												"title":"Low magnification"
+											},
+											{
+												"title":"High magnification"
 											}
 										]
 									},
@@ -2608,15 +2610,16 @@
 									"description":"",
 									"input":"checkbox",
 									"select":true,
-									"image": {
-										"title": "Accelerated villous maturation",
-										"images": [
+									"info":{
+										"title":"Accelerated villous maturation",
+										"images":[
 											{
-												"title": "Accelerated villous maturation",
-												"description": "24 weeks"
-											}, {
-												"title": "Accelerated villous maturation",
-												"description": "39 weeks"
+												"title":"Accelerated villous maturation",
+												"description":"24 weeks"
+											},
+											{
+												"title":"Accelerated villous maturation",
+												"description":"39 weeks"
 											}
 										]
 									},
@@ -2634,11 +2637,11 @@
 										}
 									],
 									"name":"ad7265ec-a92f-4f75-831e-daf9dc234678",
-									"image": {
-										"title": "Syncytial Knots",
-										"images": [
+									"info":{
+										"title":"Syncytial Knots",
+										"images":[
 											{
-												"description": "Defined as aggregates of >5 syncytiotrophoblastic nuclei projecting from the villous surface of a villi. Some of the multiple syncytial knots are denoted by arrows."
+												"description":"Defined as aggregates of >5 syncytiotrophoblastic nuclei projecting from the villous surface of a villi. Some of the multiple syncytial knots are denoted by arrows."
 											}
 										]
 									},
@@ -2680,7 +2683,7 @@
 					"collapsed":false,
 					"options":[
 						{
-							"label":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, hemolysis, elevated liver enzymes and low platelets HELLP [hemolysis, elevated liver enzymes and low platelets] syndrome, hypertension, diabetes melitus, and autoimmunity). There can be increased risk for recurrence in future pregnancies.",
+							"label":"Pathologic features of maternal vascular malperfusion can be seen in maternal conditions with a component of vascular disease (e.g. pre-eclampsia, hemolysis, elevated liver enzymes and low platelets HELLP [hemolysis, elevated liver enzymes and low platelets] syndrome, hypertension, diabetes melitus, and autoimmunity). There may be increased risk for recurrence in future pregnancies.",
 							"report":[
 								{
 									"type":"comment",
@@ -2720,11 +2723,176 @@
 		},
 		{
 			"label":"Fetal Vascular Malperfusion",
-			"name":"a8abf397-35f8-48d1-b498-cc4ef6666789",
+			"name":"90dabfc7-5850-4564-9550-09f58e43621b",
 			"input":false,
 			"collapsed":true,
-			"description":"",
+			"description":"The lesions described under this umbrella of FVM are likely to be due to obstruction in fetal blood flow that could result from a number of conditions (eg, umbilical cord lesions, hypercoagulability, complications of fetal cardiac dysfunction, such as hypoxia, etc.).",
 			"options":[
+				{
+					"label":"Header Options",
+					"name":"7a6cefb9-cc9c-4afd-9324-fe46ea1ebc53",
+					"description":"",
+					"input":false,
+					"select":false,
+					"collapsed":false,
+					"options":[
+						{
+							"label":"Findings of fetal vascular malperfusion",
+							"description":"Fetal vascular malperfusion may be utilized as a general header or subdivided as segmental and global. It is of note that global fetal vascular malperfusion is very rare.",
+							"link":[
+								{
+									"type":"equal",
+									"value":"484eba9e-d9df-44b6-bd81-2467868cb308"
+								},
+								{
+									"type":"off",
+									"value":"82a903fc-6679-4b62-90e9-ec9083afe6ee"
+								},
+								{
+									"type":"off",
+									"value":"4174243b-ec19-4337-a666-e384f9b6a6cb"
+								}
+							],
+							"report":[
+								{
+									"type":"text",
+									"value":"FINDINGS OF FETAL VASCULAR MALPERFUSION"
+								},
+								{
+									"type":"format",
+									"value":"indent"
+								}
+							],
+							"name":"7c8ef209-efe1-42a0-b9ee-4c57d8b45462",
+							"input":"switch",
+							"select":true,
+							"collapsed":false
+						},
+						{
+							"label":"Findings of segmental fetal vascular malperfusion",
+							"info":{
+								"title":"Findings of segmental fetal vascular malperfusion",
+								"description":[
+									{
+										"title":"",
+										"description":"Findings include: <ul><li>Large fetal vessel vascular thrombi</li><li>Focal stem (or chorionic) vessel obliteration</li><li>Intermediate to large Villous-stromal karyorrhexis</li><li>Intermediate to large Avascular villi</li></ul>"
+									}
+								]
+							},
+							"description":"Segmental fetal vascular indicates thrombotic occlusion of chorionic or stem villous vessels, or stem vessel obliteration—although the distribution of the lesions is segmental, the thrombus or obstruction would be expected to result in complete obstruction to the villi downstream.",
+							"link":[
+								{
+									"type":"equal",
+									"value":"a6bc0226-fdfe-4e09-81cb-741478052c76"
+								},
+								{
+									"type":"off",
+									"value":"4174243b-ec19-4337-a666-e384f9b6a6cb"
+								},
+								{
+									"type":"off",
+									"value":"7c8ef209-efe1-42a0-b9ee-4c57d8b45462"
+								}
+							],
+							"report":[
+								{
+									"type":"text",
+									"value":"FINDINGS OF SEGMENTAL FETAL VASCULAR MALPERFUSION"
+								},
+								{
+									"type":"format",
+									"value":"indent"
+								}
+							],
+							"name":"82a903fc-6679-4b62-90e9-ec9083afe6ee",
+							"input":"switch",
+							"select":true,
+							"collapsed":false
+						},
+						{
+							"label":"Findings of global (partial) fetal vascular malperfusion",
+							"description":"Global (partial) fetal vascular is very rare, and indicates partially obstructed umbilical blood flow with venous ectasia, intramural fibrin deposition in large vessels, and/or small foci (<5 villi per focus) of avascular or karyorrhectic villi—the obstruction is partial or intermittent, but the lesions can be distributed over much of the placenta.",
+							"link":[
+								{
+									"type":"equal",
+									"value":"ee1581e0-ec25-444e-b47a-12c6782dd6cd"
+								},
+								{
+									"type":"off",
+									"value":"82a903fc-6679-4b62-90e9-ec9083afe6ee"
+								},
+								{
+									"type":"off",
+									"value":"7c8ef209-efe1-42a0-b9ee-4c57d8b45462"
+								}
+							],
+							"report":[
+								{
+									"type":"text",
+									"value":"FINDINGS OF GLOBAL FETAL VASCULAR MALPERFUSION"
+								},
+								{
+									"type":"format",
+									"value":"indent"
+								}
+							],
+							"info":{
+								"title":"Findings of global (complete) fetal vascular malperfusion",
+								"description":[
+									{
+										"title":"",
+										"description":"Findings include: <ul><li>Large fetal vessel intramural fibrin deposition</li><li>Vascular ectasia</li><li>Delayed villous maturation</li><li>Patchy villous edema</li><li>Villous-stromal karyorrhexis foci, small foci (2-4 terminal villi)</li><li>Avascular villi foci, small foci (2-4 terminal villi)</li></ul>"
+									}
+								]
+							},
+							"name":"4174243b-ec19-4337-a666-e384f9b6a6cb",
+							"input":"switch",
+							"select":true,
+							"collapsed":false
+						}
+					]
+				},
+				{
+					"label":"Grading",
+					"name":"3a7680c2-a606-4408-8ebb-64ff682028b9",
+					"description":"High-grade fetal vascular malperfusion is manifest by the finding of more than one focus of avascular villi (a cumulative assessment of ≥45 avascular villi over 3 sections examined or an average of >15 villi per section) with or without thrombus, or 2 or more occlusive or nonocclusive thrombi in chorionic plate or major stem villi, or multiple nonocclusive thrombi.",
+					"input":false,
+					"select":false,
+					"collapsed":false,
+					"options":[
+						{
+							"label":"Clear",
+							"name":"4a0d1cae-006b-4f0e-94ae-711045454191",
+							"description":"There is no defined low-grade fetal vascular malperfusion.",
+							"input":"radio",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
+							"label":"High-grade",
+							"name":"5ae08fbd-5944-4d13-874f-b8209f0b9972",
+							"description":"",
+							"input":"radio",
+							"select":true,
+							"collapsed":false,
+							"report":[
+								{
+									"type":"replace",
+									"value":{
+										"replace":"FINDINGS OF",
+										"replaceStr":"FINDINGS OF HIGH-GRADE"
+									}
+								}
+							],
+							"options":[
+								
+							]
+						}
+					]
+				},
 				{
 					"label":"Umbilical cord findings",
 					"report":[
@@ -2742,7 +2910,7 @@
 							"order":"last"
 						}
 					],
-					"name":"a019f500-eae4-41d6-9f95-8a2d6361f236",
+					"name":"7570183f-d1cb-455b-9a9a-95c7d282144e",
 					"description":"",
 					"input":false,
 					"select":false,
@@ -2753,14 +2921,14 @@
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"HYPERCOILED"
 								}
 							],
-							"name":"4850683d-e040-414e-8de5-0c8ff398b7e4",
+							"name":"385e9367-d39f-40c2-af07-9a3e4bd0c336",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -2774,14 +2942,14 @@
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"TRUE KNOT PRESENT"
 								}
 							],
-							"name":"89d441da-e312-4f83-9ad5-859c4f4e20f1",
+							"name":"87488237-d760-4bd9-bec1-ed2a8780e18e",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -2791,19 +2959,19 @@
 							]
 						},
 						{
-							"label":"Narrow umbilical cord insertion (<0.8 cm)",
+							"label":"Narrow umbilical cord diameter (<0.8 cm)",
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"NARROW UMBILICAL CORD DIAMETER (<0.8 CM)"
 								}
 							],
-							"name":"a6d350a8-38a5-42f2-9087-caa22597c92e",
-							"description":"",
+							"name":"bf5a8416-5e8e-404e-8b54-d10f20509a62",
+							"description":"Note that this only applies to term placentas",
 							"input":"checkbox",
 							"select":true,
 							"collapsed":false,
@@ -2816,14 +2984,14 @@
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"CLINICAL HISTORY OF UMBILICAL CORD ENTAGLMENT"
 								}
 							],
-							"name":"67db2f1e-6b3b-46a2-aff3-facdbdd2aa93",
+							"name":"fc433521-d362-427e-bfa6-1eb13b74a22d",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -2837,14 +3005,14 @@
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"CLINICAL HISTORY OF UMBILICAL CORD PROLAPSE"
 								}
 							],
-							"name":"ed4df0a9-e659-410b-8129-7493bc4bb7e9",
+							"name":"5a7592e5-59cf-45d3-9492-a38d2aa37fbc",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -2858,14 +3026,14 @@
 							"report":[
 								{
 									"type":"build",
-									"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+									"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 								},
 								{
 									"type":"text",
 									"value":"CLINICAL HISTORY OF UMBILICAL CORD COMPRESSION"
 								}
 							],
-							"name":"3c3137fb-29b4-4e24-9e50-b162757b4172",
+							"name":"60264162-f8d2-4ce4-ac51-0ce0cee7c9e6",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -2879,7 +3047,7 @@
 							"report":[
 								
 							],
-							"name":"8e77754f-8a92-4670-9255-c17f092753c7",
+							"name":"6a351246-7b0e-45d3-9cab-af05dd9be6a8",
 							"description":"",
 							"input":false,
 							"select":false,
@@ -2888,7 +3056,7 @@
 							"options":[
 								{
 									"label":"Clear",
-									"name":"c0ccddd9-7387-4dd2-beb2-cc3d6d51ba80",
+									"name":"a3ab85a1-1876-4e86-918e-3a7f47400768",
 									"description":"",
 									"input":"radio",
 									"select":true,
@@ -2902,14 +3070,14 @@
 									"report":[
 										{
 											"type":"build",
-											"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+											"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 										},
 										{
 											"type":"text",
 											"value":"FURCATE INSERTION"
 										}
 									],
-									"name":"642c321e-880b-48cc-912a-b62196ce3c1b",
+									"name":"3a4174e2-c3fe-447c-b1ac-814d1b1ed83b",
 									"description":"",
 									"input":"radio",
 									"select":true,
@@ -2923,14 +3091,14 @@
 									"report":[
 										{
 											"type":"build",
-											"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+											"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 										},
 										{
 											"type":"text",
 											"value":"MARGINAL CORD INSERTION"
 										}
 									],
-									"name":"6896499c-9026-42fe-b9ab-aecc11405a44",
+									"name":"b6dc4143-b8c3-4bb4-8d14-0e27c31fbfb8",
 									"description":"",
 									"input":"radio",
 									"select":true,
@@ -2944,14 +3112,14 @@
 									"report":[
 										{
 											"type":"build",
-											"value":"a019f500-eae4-41d6-9f95-8a2d6361f236"
+											"value":"7570183f-d1cb-455b-9a9a-95c7d282144e"
 										},
 										{
 											"type":"text",
 											"value":"VELAMENTOUS CORD INSERTION"
 										}
 									],
-									"name":"32b8b838-4a14-4334-b065-2703de7b2429",
+									"name":"bda2bdb7-e9a7-4861-9f42-508b095c5fd9",
 									"description":"",
 									"input":"radio",
 									"select":true,
@@ -2965,38 +3133,22 @@
 					]
 				},
 				{
-					"label":"Findings of global partial fetal vascular malperfusion",
-					"report":[
-						{
-							"type":"text",
-							"value":"FINDINGS OF GLOBAL PARTIAL FETAL VASCULAR MALPERFUSION"
-						},
-						{
-							"type":"format",
-							"value":"indent"
-						}
-					],
-					"name":"e5fcc79a-600d-41e1-a9be-e2a9e03130e1",
+					"label":"Vascular Findings",
+					"name":"f0d0fb6e-4e72-4f4b-823e-662fd8e7f774",
 					"description":"",
-					"input":"switch",
-					"link":[
-						{
-							"type":"equal",
-							"value":"a070a99a-4287-45ed-9b2a-45ff2257d825"
-						}
-					],
-					"select":true,
+					"input":false,
+					"select":false,
 					"collapsed":false,
 					"options":[
 						{
-							"label":"Villous-stromal karyorrhexis foci, small foci (2-4 terminal villi)",
-							"name":"1eb654f0-30b1-4161-87a7-7f5dfaab2d89",
+							"label":"Vascular ectasia",
 							"report":[
 								{
 									"type":"text",
-									"value":"VILLOUS-STROMAL KARYORRHEXIS (FOCAL)"
+									"value":"VASCULAR ECTASIA"
 								}
 							],
+							"name":"58de4dc7-554a-40b4-8c81-1c78d14f49aa",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3006,14 +3158,14 @@
 							]
 						},
 						{
-							"label":"Avascular villi foci, small foci (2-4 terminal villi)",
+							"label":"Large fetal vessel vascular thrombi",
 							"report":[
 								{
 									"type":"text",
-									"value":"AVASCULAR VILLI (FOCAL)"
+									"value":"LARGE FETAL VESSEL VASCULAR THROMBI"
 								}
 							],
-							"name":"122dd92c-ee6e-4095-be73-ffa5603195fa",
+							"name":"401811f8-e7de-43a9-9d98-a516693b1d26",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3030,7 +3182,7 @@
 									"value":"LARGE FETAL VESSEL INTRAMURAL FIBRIN DEPOSITION"
 								}
 							],
-							"name":"756de8e8-bfeb-4d6f-9342-0db7ba85d992",
+							"name":"a57ef223-e1b4-4329-a9d1-87f7dcd92e03",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3040,14 +3192,14 @@
 							]
 						},
 						{
-							"label":"Vascular ectasia",
+							"label":"Focal stem (or chorionic) vessel obliteration",
 							"report":[
 								{
 									"type":"text",
-									"value":"VASCULAR ECTASIA"
+									"value":"FOCAL STEM OR CHORIONIC VESSEL OBLITERATION"
 								}
 							],
-							"name":"1c0a825c-84e1-476b-a500-b4b3e970a2c6",
+							"name":"8871ba9c-1355-4658-9698-ea2efb6cdf39",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3055,7 +3207,17 @@
 							"options":[
 								
 							]
-						},
+						}
+					]
+				},
+				{
+					"label":"Villous Findings",
+					"name":"499a4976-1e57-42b3-9bfe-c212724f1a38",
+					"description":"",
+					"input":false,
+					"select":false,
+					"collapsed":false,
+					"options":[
 						{
 							"label":"Delayed villous maturation",
 							"report":[
@@ -3064,7 +3226,7 @@
 									"value":"DELAYED VILLOUS MATURATION"
 								}
 							],
-							"name":"75013f20-8e13-4072-94f7-210dce004d62",
+							"name":"dbcf56f0-0d9a-442d-ae30-568bca190b47",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3081,7 +3243,199 @@
 									"value":"PATCHY VILLOUS EDEMA"
 								}
 							],
-							"name":"2186a958-e31a-489c-adf9-e453242619e8",
+							"name":"d9f2dcdf-d072-4c53-930b-53786c1dda14",
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
+							"label":"Villous-stromal karyorrhexis",
+							"name":"7c897040-3dd8-4a42-94a2-6efff6fc7a72",
+							"description":"",
+							"input":false,
+							"select":false,
+							"collapsed":false,
+							"options":[
+								{
+									"label":"None",
+									"name":"c512b373-a9dc-44d6-a26c-152664433984",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Small foci (2-4 terminal villi)",
+									"name":"7f35cfae-7eb4-45eb-8abe-55833735abb2",
+									"report":[
+										{
+											"type":"text",
+											"value":"VILLOUS-STROMAL KARYORRHEXIS (FOCAL)"
+										}
+									],
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Intermediate foci (5-10 terminal villi)",
+									"report":[
+										{
+											"type":"text",
+											"value":"VILLOUS-STROMAL KARYORRHEXIS (INTERMEDIATE)"
+										}
+									],
+									"name":"91261d80-428f-4b63-bafa-8e59098dcb56",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Large foci (>10 terminal villi)",
+									"report":[
+										{
+											"type":"text",
+											"value":"VILLOUS-STROMAL KARYORRHEXIS (LARGE)"
+										}
+									],
+									"name":"dd063327-8a20-47a7-90da-2420f4ab4e84",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								}
+							]
+						},
+						{
+							"label":"Avascular villi",
+							"name":"a7bd6693-2c51-43fa-893c-35f2d45c986e",
+							"description":"",
+							"input":false,
+							"select":false,
+							"collapsed":false,
+							"options":[
+								{
+									"label":"None",
+									"name":"1b22de59-ffd3-4e50-9ec5-4e92d0bc528c",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Avascular villi foci, small foci (3 or more sets of 2-4 terminal villi)",
+									"report":[
+										{
+											"type":"text",
+											"value":"AVASCULAR VILLI (SMALL)"
+										},
+										{
+											"type": "comment",
+											"value": "The clinical significance of small avascular villi is uncertian."
+										}
+									],
+									"name":"6c12079d-8681-455b-828b-ea42aa704be5",
+									"description":"Comment: The clinical significance of small avascular villi is uncertian.",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Intermediate foci (5-10 terminal villi)",
+									"report":[
+										{
+											"type":"text",
+											"value":"AVASCULAR VILLI (INTERMEDIATE)"
+										}
+									],
+									"name":"b39872ee-c433-460b-84df-d37bdd53d2bf",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								},
+								{
+									"label":"Large foci (>10 terminal villi)",
+									"report":[
+										{
+											"type":"text",
+											"value":"AVASCULAR VILLI (LARGE)"
+										}
+									],
+									"name":"0723d49e-b08e-42bb-8834-6c5020744f5c",
+									"description":"",
+									"input":"radio",
+									"select":true,
+									"collapsed":false,
+									"options":[
+										
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"label":"Comment",
+					"name":"1fc2bb23-eddd-4210-a5c2-34d05ad80716",
+					"description":"",
+					"input":false,
+					"select":false,
+					"collapsed":false,
+					"options":[
+						{
+							"label":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
+							"report":[
+								{
+									"type":"comment",
+									"value":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case."
+								}
+							],
+							"name":"2bc8f27b-af19-483f-a381-8c3000bc121c",
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
+							"label":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
+							"report":[
+								{
+									"type":"comment",
+									"value":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case."
+								}
+							],
+							"name":"7e920994-ee3c-40db-9d78-15fbafd8932b",
 							"description":"",
 							"input":"checkbox",
 							"select":true,
@@ -3100,7 +3454,7 @@
 							"value":"outdent"
 						}
 					],
-					"name":"a070a99a-4287-45ed-9b2a-45ff2257d825",
+					"name":"484eba9e-d9df-44b6-bd81-2467868cb308",
 					"description":"",
 					"input":"checkbox",
 					"select":true,
@@ -3111,226 +3465,49 @@
 					]
 				},
 				{
-					"label":"Findings of segmental complete fetal vascular malperfusion",
+					"label":"tobehidden",
 					"report":[
 						{
-							"type":"text",
-							"value":"FINDINGS OF SEGMENTAL COMPLETE FETAL VASCULAR MALPERFUSION"
-						},
-						{
 							"type":"format",
-							"value":"indent"
-						},
-						{
-							"type":"format",
-							"value":"outdent",
-							"order":"last"
+							"value":"outdent"
 						}
 					],
-					"name":"514912e1-b7ae-4941-8f0e-262f8e13bb99",
+					"name":"a6bc0226-fdfe-4e09-81cb-741478052c76",
 					"description":"",
-					"input":false,
-					"select":false,
+					"input":"checkbox",
+					"select":true,
+					"hidden":true,
 					"collapsed":false,
 					"options":[
-						{
-							"label":"Large fetal vessel vascular thrombi",
-							"report":[
-								{
-									"type":"text",
-									"value":"LARGE FETAL VESSEL VASCULAR THROMBI"
-								}
-							],
-							"name":"bfa2d053-50c5-4843-a20c-fbcd532c7945",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						},
-						{
-							"label":"Focal stem (or chorionic) vessel obliteration",
-							"report":[
-								{
-									"type":"text",
-									"value":"FOCAL STEM OR CHORIONIC VESSEL OBLITERATION"
-								}
-							],
-							"name":"e433654e-1a95-41e6-8fb8-b0cdac7ddad8",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						},
-						{
-							"label":"Villous-stromal karyorrhexis",
-							"name":"2f023cb2-9e72-45a6-bbf9-883d7e8382a7",
-							"description":"",
-							"input":false,
-							"select":false,
-							"collapsed":false,
-							"options":[
-								{
-									"label":"None",
-									"name":"f6937246-87c5-486b-96ae-752a6254a4dd",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								},
-								{
-									"label":"Intermediate foci (5-10 terminal villi)",
-									"report":[
-										{
-											"type":"text",
-											"value":"VILLOUS-STROMAL KARYORRHEXIS (INTERMEDIATE)"
-										}
-									],
-									"name":"5a830b2b-d6c6-4ad7-b021-25dd9c269316",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								},
-								{
-									"label":"Large foci (>10 terminal villi)",
-									"report":[
-										{
-											"type":"text",
-											"value":"VILLOUS-STROMAL KARYORRHEXIS (LARGE)"
-										}
-									],
-									"name":"a9216ac4-4ddc-40de-b6bb-fff7ebab539e",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								}
-							]
-						},
-						{
-							"label":"Avascular villi",
-							"name":"599bf5f1-5357-4594-937c-573b70c264ba",
-							"description":"",
-							"input":false,
-							"select":false,
-							"collapsed":false,
-							"options":[
-								{
-									"label":"None",
-									"name":"e7253acf-9969-4083-af2c-e64b8d624c70",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								},
-								{
-									"label":"Intermediate foci (5-10 terminal villi)",
-									"report":[
-										{
-											"type":"text",
-											"value":"AVASCULAR VILLI (INTERMEDIATE)"
-										}
-									],
-									"name":"00e2ea5d-c753-4b8f-bf3b-2766863a2137",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								},
-								{
-									"label":"Large foci (>10 terminal villi)",
-									"report":[
-										{
-											"type":"text",
-											"value":"AVASCULAR VILLI (LARGE)"
-										}
-									],
-									"name":"3e9866be-df0b-4280-a3aa-5cdf8d11d8ea",
-									"description":"",
-									"input":"radio",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
-								}
-							]
-						}
+						
 					]
 				},
 				{
-					"label":"Comment",
-					"name":"a333a1a7-193a-4f3f-bb04-04e3e0c57c74",
+					"label":"tobehidden",
+					"report":[
+						{
+							"type":"format",
+							"value":"outdent"
+						}
+					],
+					"name":"ee1581e0-ec25-444e-b47a-12c6782dd6cd",
 					"description":"",
-					"input":false,
-					"select":false,
+					"input":"checkbox",
+					"select":true,
+					"hidden":true,
 					"collapsed":false,
 					"options":[
-						{
-							"label":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
-							"report":[
-								{
-									"type":"comment",
-									"value":"Umbilical cord obstruction is a common cause of fetal vascular malperfusion, though, the differential diagnosis includes fetal related heritable hypercoagulability, hyperviscosity, and cardiac insufficiency. The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case."
-								}
-							],
-							"name":"7e690ef6-a29c-4322-a003-b4215680e9d1",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						},
-						{
-							"label":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case.",
-							"report":[
-								{
-									"type":"comment",
-									"value":"The differential diagnosis in stillbirth placentas includes passive involutional changes in fetal vessels associated with prolonged demise before delivery. In contrast to antemortem fetal vascular thrombosis, postmortem involution is temporally uniform and global, a pattern that is not present in this case."
-								}
-							],
-							"name":"7968d667-aa4b-4782-ae38-cd4d752bf92e",
-							"description":"",
-							"input":"checkbox",
-							"select":true,
-							"collapsed":false,
-							"options":[
-								
-							]
-						}
+						
 					]
 				}
 			]
 		},
 		{
-			"label":"Villitis of Unknown Etiology",
+			"label":"Chronic Villitis",
 			"report":[
 				{
 					"type":"text",
-					"value":"VILLITIS OF UNKNOWN ETIOLOGY"
+					"value":"CHRONIC VILLITIS"
 				},
 				{
 					"type":"format",
@@ -3469,7 +3646,7 @@
 									]
 								},
 								{
-									"label":"Ungradeable",
+									"label":"Unifocal",
 									"report":[
 										{
 											"type":"build",
@@ -3479,8 +3656,12 @@
 											"type":"replace",
 											"value":{
 												"replace":"[#GRADE#], [#FOCALITY#]",
-												"replaceStr":"UNGRADEABLE - POSSIBLE LOW GRADE"
+												"replaceStr":"LOW GRADE, SINGLE FOCUS (SEE COMMENT)"
 											}
+										},
+										{
+											"type": "comment",
+											"value": "A single focus of low-grade chronic villitis is termed \"ungradeable - possible low-grade\" by the 2016 Amsterdam criteria."
 										}
 									],
 									"link":[
@@ -3606,7 +3787,7 @@
 									]
 								},
 								{
-									"label":"Ungradeable",
+									"label":"Unifocal",
 									"report":[
 										{
 											"type":"build",
@@ -3616,8 +3797,12 @@
 											"type":"replace",
 											"value":{
 												"replace":"[#GRADE#], [#FOCALITY#]",
-												"replaceStr":"UNGRADEABLE - POSSIBLE HIGH GRADE"
+												"replaceStr":"HIGH GRADE, SINGLE FOCUS (SEE COMMENT)"
 											}
+										},
+										{
+											"type": "comment",
+											"value": "A single focus of high-grade chronic villitis is termed \"ungradeable - possible high-grade\" by the 2016 Amsterdam criteria."
 										}
 									],
 									"link":[
@@ -3762,11 +3947,65 @@
 							]
 						}
 					]
+				},
+				{
+					"label":"Comment",
+					"name": "1f8bdfb0-180f-42e4-98fb-ee7e9e2602bb",
+					"options":[
+						{
+							"label": "Cytomegalovirus Immunohistochemsitry",
+							"name": "",
+							"options": [
+								{
+									"label": "Not performed",
+									"name": "1666a7bf-d575-4ee4-b061-45b06f98623b",
+									"select": true,
+									"input": "radio"
+								},
+								{
+									"label": "Negative",
+									"name": "af0aa298-eb52-4f34-ad37-ef1805ac8282",
+									"select": true,
+									"input": "radio",
+									"report": [
+										{
+											"type": "comment",
+											"value": "An immunohistochemical stain for cytomegalovirus (CMV) is negative."
+										}
+									]
+								},
+								{
+									"label": "Positive",
+									"name": "75b34461-9e0f-4b4d-8be8-b7958c94462d",
+									"select": true,
+									"input": "radio",
+									"report": [
+										{
+											"type": "comment",
+											"value": "The placenta is involved by cytomegalovirus (CMV) as confirmed by immunohistochemical staining."
+										}
+									]
+								}
+							]
+						},
+						{
+							"label":"These findings are consistent with villitis of unknown etiology (VUE); if infection is suspected clinically, additional stains can be performed.",
+							"input":"checkbox",
+							"name": "5efea986-3e3f-439b-afb3-4748cfc3954a",
+							"select":true,
+							"report":[
+								{
+									"type":"comment",
+									"value":"These findings are consistent with villitis of unknown etiology (VUE); if infection is suspected clinically, additional stains can be performed."
+								}
+							]
+						}
+					]
 				}
 			]
 		},
 		{
-			"label":"Hemorrhage",
+			"label":"Retroplacental Hemorrhage (Abruption)",
 			"name":"e665ca6e-c83b-4cc7-aaa8-ac292900b82c",
 			"input":"checkbox",
 			"collapsed":true,
@@ -3792,8 +4031,8 @@
 					],
 					"name":"7f3c953f-30d4-4af0-9d91-784e05f304de",
 					"description":"",
-					"input":false,
-					"select":false,
+					"input":"switch",
+					"select":true,
 					"hidden":false,
 					"collapsed":false,
 					"options":[
@@ -3852,11 +4091,15 @@
 								}
 							],
 							"name":"e825425e-4d44-4694-939f-882973046fd3",
-							"image": {
-								"title": "Retromembranous blood",
-								"images": [
-									{},
-									{}
+							"info":{
+								"title":"Retromembranous blood",
+								"images":[
+									{
+										
+									},
+									{
+										
+									}
 								]
 							},
 							"description":"",
@@ -3910,36 +4153,77 @@
 							]
 						},
 						{
-							"label":"Comment",
-							"name":"e3c4bf4f-593f-4bef-8bc7-b6828794570a",
-							"description":"",
+							"label":"Acute abruption suspected clinically",
+							"name":"d486cbd7-ea56-418d-b9b6-c7e803973bb0",
+							"description":"Select this option if there is no histologic evidence of abruption.",
+							"select":true,
 							"input":"checkbox",
-							"select":false,
-							"collapsed":false,
-							"options":[
+							"report":[
 								{
-									"label":"Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies.",
-									"name":"ab7f552c-1728-4eb9-97e9-c6447fb98db5",
-									"report":[
-										{
-											"type":"comment",
-											"value":"Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies."
-										}
-									],
-									"description":"",
-									"input":"checkbox",
-									"select":true,
-									"collapsed":false,
-									"options":[
-										
-									]
+									"type":"text",
+									"value":"ACUTE ABRUPTION SUSPECTED CLINICALLY"
+								}
+							],
+							"link":[
+								{
+									"type":"on",
+									"value":"100be539-53b6-4a39-9ba7-047eb9021ccc"
 								}
 							]
 						}
 					]
 				},
 				{
-					"label":"Other",
+					"label":"Comment",
+					"name":"e3c4bf4f-593f-4bef-8bc7-b6828794570a",
+					"description":"",
+					"input":"checkbox",
+					"select":false,
+					"collapsed":false,
+					"options":[
+						{
+							"label":"Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies.",
+							"name":"ab7f552c-1728-4eb9-97e9-c6447fb98db5",
+							"report":[
+								{
+									"type":"comment",
+									"value":"Retroplacental hemorrhage is the pathologic correlate of chronic abruption, and is associated with preterm delivery, chronic/persistent vaginal bleeding, and oligohydramnios. The etiology is unknown, but is likely due to premature marginal placental separation. There is no apparent risk for recurrence in future pregnancies."
+								}
+							],
+							"description":"",
+							"input":"checkbox",
+							"select":true,
+							"collapsed":false,
+							"options":[
+								
+							]
+						},
+						{
+							"label":"We do not see gross or microscopic features of acute abruption. However, pathologic findings are not always present, and this is best a clinical diagnosis.",
+							"name":"100be539-53b6-4a39-9ba7-047eb9021ccc",
+							"select":true,
+							"input":"checkbox",
+							"report":[
+								{
+									"type":"comment",
+									"value":"We do not see gross or microscopic features of acute abruption. However, pathologic findings are not always present, and this is best a clinical diagnosis."
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"label":"Miscellaneous",
+			"name":"3979282a-8c7d-4ff8-8498-2d069f5978a4",
+			"input":false,
+			"select":false,
+			"description":"",
+			"collapsed":true,
+			"options":[
+				{
+					"label":"Miscellaneous hemorrhage",
 					"report":[
 						
 					],
@@ -3984,6 +4268,111 @@
 							"collapsed":false,
 							"options":[
 								
+							]
+						}
+					]
+				},
+				{
+					"label":"COVID",
+					"name":"664c2f1c-6be5-4b62-b85e-64c226e26cb0",
+					"input":false,
+					"select":false,
+					"description":"",
+					"collapsed":false,
+					"options":[
+						{
+							"label":"Negative",
+							"name":"82b6f069-2ae9-45c1-bb65-bcdc586f3f66",
+							"input":"checkbox",
+							"select":true,
+							"description":"",
+							"report":[
+								{
+									"type":"text",
+									"value":"SARS-COV IMMUNOHISTOCHEMISTRY AND SARS-COV2 IN SITU HYBRIDIZATION NEGATIVE (SEE COMMENT)"
+								}
+							],
+							"link":[
+								{
+									"type":"on",
+									"value":"ff0eca95-4e41-4e4c-a930-7ff2426e79b3"
+								}
+							]
+						},
+						{
+							"label":"Comment",
+							"name": "15fbe130-bb2e-473b-b813-edefe9180ee7",
+							"options":[
+								{
+									"name":"ff0eca95-4e41-4e4c-a930-7ff2426e79b3",
+									"input":"checkbox",
+									"select":true,
+									"label":"Immunohistochemical stains for SARS-CoV nucleocapsid protein (sinobiological T62, polyclonal) and ISH for SARS-CoV2 spike protein (RNAscope) are negative.",
+									"report":[
+										{
+											"type":"comment",
+											"value":"Immunohistochemical stains for SARS-CoV nucleocapsid protein (sinobiological T62, polyclonal) and ISH for SARS-CoV2 spike protein (RNAscope) are negative."
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"label":"Interuterine Fetal Demise",
+					"name":"c5b362e8-453c-4140-aa5c-e6bbf38059c5",
+					"options":[
+						{
+							"label":"Interuterine Fetal Demise Case",
+							"input":"checkbox",
+							"select":true,
+							"name":"56f64769-3750-44a9-a7aa-a7bb6d7ef4c9",
+							"report":[
+								{
+									"type":"text",
+									"value":"INTERUTERINE FETAL DEMISE"
+								}
+							]
+						},
+						{
+							"label":"Comment",
+							"name":"43cd10f5-0906-4145-9426-b2e6b4b75dd5",
+							"options":[
+								{
+									"label":"Histologic sections of the placenta show post-mortem fetal vascular involutional changes consistent with a demise to delivery interval of greater than 2 days but less than 2 weeks. There are no histopathological features of infection, villitis, abruption, fetal-maternal hemorrhage, or fetal/maternal vascular malperfusion. Overall, we do not see a specific etiology for the demise based on examination of the placental sections.",
+									"input":"checkbox",
+									"name":"2d8ae662-8517-422e-8674-92a683f2c8ed",
+									"select":true,
+									"report":[
+										{
+											"type":"comment",
+											"value":"Histologic sections of the placenta show post-mortem fetal vascular involutional changes consistent with a demise to delivery interval of greater than 2 days but less than 2 weeks. There are no histopathological features of infection, villitis, abruption, fetal-maternal hemorrhage, or fetal/maternal vascular malperfusion. Overall, we do not see a specific etiology for the demise based on examination of the placental sections."
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"label": "Eosinophilic/T-Cell Vasculitis",
+					"options": [
+						{
+							"label": "Fetal chorionic plate vessel with Eosinophilic/T-cell vasculitis",
+							"name": "bf750200-8802-49e1-95ca-a6b2e3d9c097",
+							"description": "(Generates comment.)",
+							"input":"checkbox",
+							"select":true,
+							"report": [
+								{
+									"type": "text",
+									"value": "FETAL CHORIONIC PLATE VESSEL WITH EOSINOPHILIC T-CELL VASCULITIS (SEE COMMENT)"
+								},
+								{
+									"type": "comment",
+									"value": "Histologic sections demonstrate eosinophilic/T-cell vasculitis in one chorionic plate fetal vessel, which is characterized by a mixed inflammatory infiltrate that includes eosinophils. Eosinophilic/T-cell vasculitis probably reflects a delayed hypersensitivity response to an idiopathic stimulus; there are no clearly defined clinical associations, and the clinical significance is unknown."
+								}
 							]
 						}
 					]
