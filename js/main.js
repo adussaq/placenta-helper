@@ -268,18 +268,28 @@
 
 		// meconium staining
 		if (formData.meconium) {
-			cmdArr.push({
-				type: "replace",
-				value: {
-					replace: "[#MS#]",
-					replaceStr: "MECONIUM-STAINED"
-				}
-			});
+			if (!formData.tgestation) {
+				cmdArr.push({
+					type: "replace",
+					value: {
+						replace: "[#MS#]",
+						replaceStr: "MECONIUM-STAINED PLACENTA,"
+					}
+				});
+			} else {
+				cmdArr.push({
+					type: "replace",
+					value: {
+						replace: "[#MS#]",
+						replaceStr: "MECONIUM-STAINED"
+					}
+				});
+			}
 		} else {
 			cmdArr.push({
 				type: "replace",
 				value: {
-					replace: "[#MS#] ",
+					replace: "[#MS#] *",
 					replaceStr: ""
 				}
 			});
