@@ -289,7 +289,7 @@
 			cmdArr.push({
 				type: "replace",
 				value: {
-					replace: "[#MS#] *",
+					replace: "[#MS#]\s*",
 					replaceStr: ""
 				}
 			});
@@ -323,7 +323,7 @@
 		})
 		cmdArr.push({
 			type: "header",
-			value: "PLACENTA, [#TRIMESTER#] TRIMESTER, [#WEEKS#] WEEKS, [#DAYS#] DAYS, [#DELIVERY#]"
+			value: "A. PLACENTA, [#TRIMESTER#] TRIMESTER, [#WEEKS#] WEEKS, [#DAYS#] DAYS, [#DELIVERY#]"
 		});
 
 		if (age) {
@@ -640,6 +640,8 @@
 		let findTabChar = new RegExp(tabChar, "g");
 		let styleString = [];
 
+		console.log('command', JSON.parse(JSON.stringify(arr)));
+
 
 		arr.forEach(function (cmd) {
 			switch (cmd.type) {
@@ -662,7 +664,7 @@
 				}
 				break;
 			case "replace":
-				let regex = new RegExp(cmd.value.replace.replace(/([^\w\s])/ig, "\\$1"));
+				let regex = new RegExp(cmd.value.replace.replace(/([^\w\s\*\+\^\$\\])/ig, "\\$1"));
 				str = str.replace(regex, cmd.value.replaceStr);
 				break;
 			case "comment":
