@@ -674,10 +674,12 @@
 		});
 
 		str.split(strBreak).forEach(function (line, ind) {
+			//change case
+			let thisline = line.toLocaleLowerCase().replace(/^\s*(--&#9;|[a-z]\.\s*)*\s*(\w)/g, (match, a, b) => (a || "").toLocaleUpperCase() + b.toLocaleUpperCase());
 			let lineOpts = {
 				class: "MsoNormal",
 				style: "font-weight:bold;" + styleString[ind],
-				html: line.toLocaleLowerCase().replace(/(\w)/, a => a.toLocaleUpperCase()).replace(findTabChar, $tabChar)
+				html: thisline.replace(findTabChar, $tabChar)
 			};
 			$("<p>", lineOpts).appendTo($ret);
 		});
