@@ -676,8 +676,8 @@
 		str.split(strBreak).forEach(function (line, ind) {
 			let lineOpts = {
 				class: "MsoNormal",
-				style: "text-transform:uppercase;font-weight:bold;" + styleString[ind],
-				html: line.replace(findTabChar, $tabChar)
+				style: "font-weight:bold;" + styleString[ind],
+				html: line.replace(findTabChar, $tabChar).toLocaleLowerCase().replace(/([^\s\-])/, "$1".toLocaleUpperCase())
 			};
 			$("<p>", lineOpts).appendTo($ret);
 		});
