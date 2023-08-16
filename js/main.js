@@ -677,7 +677,7 @@
 			let lineOpts = {
 				class: "MsoNormal",
 				style: "font-weight:bold;" + styleString[ind],
-				html: line.toLocaleLowerCase().replace(/(\w)/, "$1".toLocaleUpperCase()).replace(findTabChar, $tabChar)
+				html: line.toLocaleLowerCase().replace(/(\w)/, a => a.toLocaleUpperCase()).replace(findTabChar, $tabChar)
 			};
 			$("<p>", lineOpts).appendTo($ret);
 		});
